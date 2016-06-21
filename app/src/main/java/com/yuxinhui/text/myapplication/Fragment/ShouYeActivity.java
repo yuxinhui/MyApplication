@@ -1,6 +1,5 @@
 package com.yuxinhui.text.myapplication.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,9 +19,6 @@ import com.yuxinhui.text.myapplication.IndexBannerClick.WeiPanActivity;
 import com.yuxinhui.text.myapplication.KaiHu;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/5/31.
