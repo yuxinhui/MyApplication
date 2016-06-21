@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/guide_close_img"
+        android:background="@mipmap/yindao03"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <ImageButton
+        android:id="@+id/guide_close_btn"
+        android:src="@mipmap/tiyan"
+        android:background="@null"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="370dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

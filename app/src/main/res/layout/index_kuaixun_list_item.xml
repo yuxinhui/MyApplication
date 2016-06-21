@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ImageView
+        android:id="@+id/index_kuaixun_tubiao"
+        android:src="@mipmap/huadongbiao24x64hpx"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp" />
+    <TextView
+        android:id="@+id/kuaixun_clock"
+        android:text="13:13:13"
+        android:layout_toRightOf="@id/index_kuaixun_tubiao"
+        android:layout_marginLeft="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/kuaixun_content"
+        android:textSize="17dp"
+        android:text="更多功能也感觉色粉好难呀全微分不太好听"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kuaixun_clock"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/index_kuaixun_tubiao"/>
+</RelativeLayout>

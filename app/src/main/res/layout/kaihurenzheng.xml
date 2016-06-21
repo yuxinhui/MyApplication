@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@mipmap/kaihurenzhengbg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@mipmap/daohang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/kaihurenzheng_return_img"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/fanhui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/kaihurenzheng_biaoti_img"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/renzheng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:background="@mipmap/kaihurenzhengkuang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/kaihurenzheng_icco_img"
+            android:src="@mipmap/kaihurenzhengicon"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/kaihurenzheng_yanzheng_txt"
+            android:text="手机验证"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/kaihurenzheng_icco_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/kaihurenzheng_shuru_txt"
+            android:hint=" |手机号码"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/kaihurenzhengshurukuang"
+            android:textSize="30px"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/kaihurenzheng_yanzheng_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/kaihurenzheng_wancheng_button"
+            android:background="@mipmap/kaihurenzhengwancheng"
+            android:text="完成"
+            android:layout_toRightOf="@id/kaihurenzheng_shuru_txt"
+            android:layout_marginLeft="8dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp" />
+    </RelativeLayout>
+</LinearLayout>

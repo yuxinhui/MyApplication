@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@mipmap/daohang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/zhucexiangqing_return_img"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/fanhui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/zhucexiangqing_jin_img"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/zhucexiangqinglogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/zhucexiangqing_tijiao_txt"
+            android:layout_centerVertical="true"
+            android:text="提交"
+            android:textColor="#ffffff"
+            android:textSize="30px"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:background="@mipmap/zhucexiangqingbanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_centerInParent="true"
+            android:src="@mipmap/touming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:src="@mipmap/shouzhang05"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <ImageView
+        android:background="@mipmap/ziliaowanshan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/zhucexiangqing_yonghuming_txt"
+        android:background="@mipmap/yonghuming"
+        android:gravity="center"
+        android:paddingLeft="70dp"
+        android:hint="请输入用户名"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/zhucexiangqing_nicheng_txt"
+        android:background="@mipmap/nicheng"
+        android:gravity="center"
+        android:paddingLeft="70dp"
+        android:hint="请输入昵称"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/zhucexiangqing_qqhao_txt"
+        android:background="@mipmap/zhanghao"
+        android:gravity="center"
+        android:paddingLeft="70dp"
+        android:hint="请输入QQ账号"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/zhucexiangqing_xingbie_txt"
+        android:background="@mipmap/xinbie"
+        android:gravity="center"
+        android:paddingLeft="70dp"
+        android:hint="男/女"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/zhucexiangqing_dailishang_txt"
+        android:background="@mipmap/dailishang"
+        android:gravity="center"
+        android:paddingLeft="70dp"
+        android:hint="请选择代理商"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:background="@mipmap/zhucexiangqingbg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
