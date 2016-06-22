@@ -5,12 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.R;
@@ -42,8 +43,9 @@ public class HuiLvActivity extends AppCompatActivity {
     }
 
     private void InitDate() {
+        mHuiLv = new HuiLv();
+        mList = new ArrayList<>();
         getJSONByVolley();
-        Log.i("main",mList.get(1).toString());
     }
 
     private void InitView() {
@@ -59,27 +61,23 @@ public class HuiLvActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         final ProgressDialog progressDialog = ProgressDialog.show(this, "加载汇率", "加载中...");
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        String json = response.toString();
-                        Gson gson  = new Gson();
-                        mHuiLv = gson.fromJson(json,HuiLv.class);
-                        mList = mHuiLv.getData();
-                        Log.i("main","下载成功");
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError arg0) {
-                        Log.i("main","下载失败");
-                    }
-                });
-        requestQueue.add(jsonObjectRequest);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Log.e("TAG",s);
+                Gson gson = new Gson();
+                mHuiLv = gson.fromJson(s, HuiLv.class);
+                mList.addAll(mHuiLv.getData());
+                progressDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                progressDialog.dismiss();
+                Toast.makeText(HuiLvActivity.this,"加载失败",Toast.LENGTH_LONG);
+            }
+        });
+        requestQueue.add(request);
     }
 
 
