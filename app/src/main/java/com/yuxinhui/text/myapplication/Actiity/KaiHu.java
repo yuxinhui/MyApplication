@@ -1,10 +1,13 @@
-package com.yuxinhui.text.myapplication;
+package com.yuxinhui.text.myapplication.Actiity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.yuxinhui.text.myapplication.MainActivity;
+import com.yuxinhui.text.myapplication.R;
 
 /**
  * Created by Administrator on 2016/6/2.

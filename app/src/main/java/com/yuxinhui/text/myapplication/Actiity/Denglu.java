@@ -1,10 +1,12 @@
-package com.yuxinhui.text.myapplication;
+package com.yuxinhui.text.myapplication.Actiity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.yuxinhui.text.myapplication.R;
 
 /**
  * Created by Administrator on 2016/6/1.

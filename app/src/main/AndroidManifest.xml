@@ -34,8 +34,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".YinDaoTu.GuideActivity" />
-        <activity android:name=".Zhuce" />
-        <activity android:name=".KaiHu" />
+        <activity android:name=".Actiity.Zhuce" />
+        <activity android:name=".Actiity.KaiHu" />
         <activity android:name=".IndexBannerClick.KeFuActivity" />
         <activity android:name=".IndexBannerClick.KeBiaoActivity" />
         <activity android:name=".IndexBannerClick.HanDanActivity" />
@@ -43,9 +43,9 @@
         <activity android:name=".IndexBannerClick.GuPiaoActivity" />
         <activity android:name=".IndexBannerClick.HuiLvActivity" />
         <activity android:name=".IndexBannerClick.LaoShiActivity" />
-        <activity android:name=".KaiHuRenZheng" />
-        <activity android:name=".Denglu" />
-        <activity android:name=".ZhuCeXiangQing" />
+        <activity android:name=".Actiity.KaiHuRenZheng" />
+        <activity android:name=".Actiity.Denglu" />
+        <activity android:name=".Actiity.ZhuCeXiangQing" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Actiity.HuiLvActivity"
             >

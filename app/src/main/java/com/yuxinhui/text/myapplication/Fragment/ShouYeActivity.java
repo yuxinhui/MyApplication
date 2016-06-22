@@ -25,7 +25,8 @@ import com.yuxinhui.text.myapplication.IndexBannerClick.KeBiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.KeFuActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.LaoShiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.WeiPanActivity;
-import com.yuxinhui.text.myapplication.KaiHu;
+import com.yuxinhui.text.myapplication.Actiity.KaiHu;
+import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
@@ -49,6 +50,7 @@ public class ShouYeActivity extends Fragment{
     private IndexKuaiXunData indexKuaiXunData;
     private String url="http://114.55.98.142/app/news/";
     private ShouyeKuaiXunAdapter mIndexKuaiXunAdapter;
+    private MainActivity huaitext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +66,7 @@ public class ShouYeActivity extends Fragment{
     }
 
     private void initData() {
+        Log.e("indexKuaiXun",mDataList.get(1).toString());
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
         ProgressDialog dialog = ProgressDialog.show(getContext(), "快讯界面", "加载ing......");
         JsonObjectRequest mJsonObjectRequest=new JsonObjectRequest(
@@ -111,13 +114,7 @@ public class ShouYeActivity extends Fragment{
         zhibo1_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        mIntent=new Intent(getActivity(), ZhiboActivity.class);
-                        startActivity(mIntent);
-                    }
-                }.run();
+               huaitext.setChioceItem(1);
             }
         });
         laoshi_image.setOnClickListener(new View.OnClickListener() {
