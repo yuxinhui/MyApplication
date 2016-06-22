@@ -37,8 +37,8 @@ public class HuiLvActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_huilv);
-        InitDate();
         InitView();
+        InitDate();
     }
 
     private void InitDate() {
@@ -60,7 +60,7 @@ public class HuiLvActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = ProgressDialog.show(this, "加载汇率", "加载中...");
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
+                Request.Method.POST,
                 url,
                 null,
                 new Response.Listener<JSONObject>() {

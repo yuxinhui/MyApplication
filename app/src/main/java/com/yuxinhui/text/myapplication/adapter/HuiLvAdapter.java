@@ -62,7 +62,7 @@ public class HuiLvAdapter extends BaseAdapter{
         holder.cen_price.setText(data.getCen_price());
         holder.jydanwei.setText("100");
         holder.sell_price.setText(data.getSell_price());
-        return null;
+        return convertView;
     }
 
     class ViewHolder{

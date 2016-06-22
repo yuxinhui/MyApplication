@@ -1,54 +1,71 @@
 package com.yuxinhui.text.myapplication.adapter;
 
-import android.app.ListActivity;
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.SimpleAdapter;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yuxinhui.text.myapplication.R;
+import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Created by Administrator on 2016/6/6.
+ * Created by "于志渊"
+ * 时间:"10:47"
+ * 包名:com.yuxinhui.text.myapplication.adapter
+ * 描述:这个类是显示首页快讯页面的ListView的适配器
  */
-public class ShouyeKuaiXunAdapter extends ListActivity {
-    private ImageView index_kuaixun_tubiao;
-    private TextView kuaixun_clock;
-    private TextView kuaixun_content;
+public class ShouyeKuaiXunAdapter extends BaseAdapter {
+    private List<IndexKuaiXunData.DataBean> mDataBeen=new ArrayList<IndexKuaiXunData.DataBean>();
+    private IndexKuaiXunData.DataBean dataBean;
+    private Context context;
+
+    public ShouyeKuaiXunAdapter(List<IndexKuaiXunData.DataBean> mDataBeen, Context context) {
+        this.mDataBeen = mDataBeen;
+        this.context = context;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initView();
-        listAdapter();
+    public int getCount() {
+        return mDataBeen.size();
     }
-    public void listAdapter(){
-        setListAdapter(new SimpleAdapter(this, getData("title"), R.layout.index_kuaixun_list_item,
-                new String[]{"colock", "content"}, new int[]{R.id.kuaixun_clock, R.id.kuaixun_content}));
+
+    @Override
+    public Object getItem(int position) {
+        return mDataBeen.get(position);
     }
-    //初始化控件
-    private void initView() {
-        index_kuaixun_tubiao= (ImageView) findViewById(R.id.index_kuaixun_tubiao);
-        kuaixun_clock= (TextView) findViewById(R.id.kuaixun_clock);
-        kuaixun_content= (TextView) findViewById(R.id.kuaixun_content);
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
     }
-    //构造SimpleAdapter的第二个参数，类型为List<Map<String,String>>
-    private List<Map<String,String>> getData(String title) {
-        List<Map<String,String>> listData=new ArrayList<Map<String,String>>();
-        for (int i=0;i<=5;i++){
-            Map<String, String> map = new HashMap<>();
-            map.put("colock", String.valueOf(kuaixun_clock));
-            map.put("content",String.valueOf(kuaixun_content));
-            listData.add(map);
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHodle viewHodle;
+        if (convertView==null){
+            LayoutInflater inflater=LayoutInflater.from(context);
+            convertView=inflater.inflate(R.layout.index_kuaixun_list_item,null);
         }
-        return listData;
+        viewHodle=new ViewHodle();
+        viewHodle.kuaixun_clock= (TextView) convertView.findViewById(R.id.kuaixun_clock);
+        viewHodle.kuaixun_title= (TextView) convertView.findViewById(R.id.kuaixun_title);
+        dataBean= (IndexKuaiXunData.DataBean) getItem(position);
+        viewHodle.kuaixun_clock.setText(dataBean.getPdate_src());
+        viewHodle.kuaixun_title.setText(dataBean.getFull_title());
+        return convertView;
     }
+
+    private class ViewHodle {
+        private TextView kuaixun_clock,kuaixun_title;
+    }
+
     //初始颜色
-    public void onColor(){
+    /*public void onColor(){
         index_kuaixun_tubiao.setImageResource(R.mipmap.huadongbiao24x64hpx02);
-    }
+    }*/
 }
