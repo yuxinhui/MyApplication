@@ -2,17 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yuxinhui.text.myapplication">
 
+    <uses-sdk android:minSdkVersion="8" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permissionn.RECORD_VIDEO" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-    <uses-feature android:name="android.hardware.camera.flash"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.flash" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="false"
@@ -27,20 +33,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".YinDaoTu.GuideActivity"></activity>
-        <activity android:name=".Zhuce"></activity>
-        <activity android:name=".KaiHu"></activity>
-        <activity android:name=".IndexBannerClick.KeFuActivity"></activity>
-        <activity android:name=".IndexBannerClick.KeBiaoActivity"></activity>
-        <activity android:name=".IndexBannerClick.HanDanActivity"></activity>
-        <activity android:name=".IndexBannerClick.WeiPanActivity"></activity>
-        <activity android:name=".IndexBannerClick.GuPiaoActivity"></activity>
-        <activity android:name=".IndexBannerClick.HuiLvActivity"></activity>
-        <activity android:name=".IndexBannerClick.LaoShiActivity"></activity>
-        <activity android:name=".KaiHuRenZheng"></activity>
-        <activity android:name=".Denglu"></activity>
-        <activity android:name=".ZhuCeXiangQing"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".YinDaoTu.GuideActivity" />
+        <activity android:name=".Zhuce" />
+        <activity android:name=".KaiHu" />
+        <activity android:name=".IndexBannerClick.KeFuActivity" />
+        <activity android:name=".IndexBannerClick.KeBiaoActivity" />
+        <activity android:name=".IndexBannerClick.HanDanActivity" />
+        <activity android:name=".IndexBannerClick.WeiPanActivity" />
+        <activity android:name=".IndexBannerClick.GuPiaoActivity" />
+        <activity android:name=".IndexBannerClick.HuiLvActivity" />
+        <activity android:name=".IndexBannerClick.LaoShiActivity" />
+        <activity android:name=".KaiHuRenZheng" />
+        <activity android:name=".Denglu" />
+        <activity android:name=".ZhuCeXiangQing" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Actiity.HuiLvActivity"
+            >
+
+
+        </activity>
     </application>
-    <uses-sdk android:minSdkVersion="8"></uses-sdk>
+
 </manifest>
