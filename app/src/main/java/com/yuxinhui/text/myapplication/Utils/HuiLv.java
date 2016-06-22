@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016/6/21.
- * 汇率实体类包含序号，时间以及汇率转、转换信息集合。
+ * 汇率实体类包含序号，时间以及汇率转，转换信息集合。
  */
 
 public class HuiLv {

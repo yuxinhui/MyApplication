@@ -1,6 +1,6 @@
 package com.yuxinhui.text.myapplication.Actiity;
 
-import android.app.ProgressDialog;
+/*import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,10 +23,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+*//**
  * create by "徐路路"
  * 主要用于显示汇率页面
- */
+ *//*
 public class HuiLvActivity extends AppCompatActivity {
     HuiLvAdapter mAdapter;
     HuiLv mHuiLv;
@@ -54,9 +54,9 @@ public class HuiLvActivity extends AppCompatActivity {
         mData.setAdapter(mAdapter);
     }
 
-    /**
+    *//**
      * 有错误，需要修改。下载下来的数据为空。回去查阅资料后修改。
-     */
+     *//*
     private void getJSONByVolley() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         final ProgressDialog progressDialog = ProgressDialog.show(this, "加载汇率", "加载中...");
@@ -81,4 +81,4 @@ public class HuiLvActivity extends AppCompatActivity {
     }
 
 
-}
+}*/
