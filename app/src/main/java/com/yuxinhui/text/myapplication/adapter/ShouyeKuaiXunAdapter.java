@@ -49,7 +49,7 @@ public class ShouyeKuaiXunAdapter extends BaseAdapter {
         ViewHodle viewHodle;
         if (convertView==null){
             LayoutInflater inflater=LayoutInflater.from(context);
-            convertView=inflater.inflate(R.layout.index_kuaixun_list_item,null);
+            convertView=inflater.inflate(R.layout.index_kuaixun_item,null);
         }
         viewHodle=new ViewHodle();
         viewHodle.kuaixun_clock= (TextView) convertView.findViewById(R.id.kuaixun_clock);

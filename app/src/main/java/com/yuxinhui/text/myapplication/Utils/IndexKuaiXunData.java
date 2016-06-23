@@ -57,6 +57,15 @@ public class IndexKuaiXunData {
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "IndexKuaiXunData{" +
+                "message='" + message + '\'' +
+                ", status='" + status + '\'' +
+                ", data=" + data +
+                '}';
+    }
+
     public class DataBean {
         private String title;
         private String content;

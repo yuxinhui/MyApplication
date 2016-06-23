@@ -9,16 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
-            android:id="@+id/handan_return_img"
+            android:id="@+id/curriculum_return_img"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:src="@mipmap/fanhui"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
-            android:id="@+id/huilv_biaoti_img"
+            android:id="@+id/cuririculum_biaoti_img"
             android:layout_centerInParent="true"
-            android:src="@mipmap/huilvbiaoti"
+            android:src="@mipmap/curriculum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

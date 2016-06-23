@@ -66,12 +66,12 @@ public class ShouYeActivity extends Fragment{
     }
 
     private void initData() {
-        Log.e("indexKuaiXun",mDataList.get(1).toString());
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
         ProgressDialog dialog = ProgressDialog.show(getContext(), "快讯界面", "加载ing......");
         JsonObjectRequest mJsonObjectRequest=new JsonObjectRequest(
                 Request.Method.POST,
-                url, null,
+                url,
+                null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -79,6 +79,7 @@ public class ShouYeActivity extends Fragment{
                         Gson gson=new Gson();
                         indexKuaiXunData=gson.fromJson(json,indexKuaiXunData.getClass());
                         mDataList=indexKuaiXunData.getData();
+                        Log.i("indexkuaixun","下载成功");
                     }
                 },
                 new Response.ErrorListener() {
@@ -114,7 +115,12 @@ public class ShouYeActivity extends Fragment{
         zhibo1_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               huaitext.setChioceItem(1);
+               new Runnable() {
+                   @Override
+                   public void run() {
+                        huaitext.setChioceItem(1);
+                   }
+               }.run();
             }
         });
         laoshi_image.setOnClickListener(new View.OnClickListener() {
