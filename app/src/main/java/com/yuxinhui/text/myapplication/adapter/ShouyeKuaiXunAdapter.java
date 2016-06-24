@@ -55,7 +55,7 @@ public class ShouyeKuaiXunAdapter extends BaseAdapter {
         viewHodle.kuaixun_title= (TextView) convertView.findViewById(R.id.kuaixun_title);
         dataBean= getItem(position);
         viewHodle.kuaixun_clock.setText(dataBean.getPdate_src());
-        viewHodle.kuaixun_title.setText(dataBean.getFull_title());
+        viewHodle.kuaixun_title.setText(dataBean.getTitle());
         return convertView;
     }
 

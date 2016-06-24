@@ -1,34 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:background="#cccccc">
         <TextView
+            android:id="@+id/teacher_name_one"
+            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="老师好"/>
         <TextView
-            android:id="@+id/start_time"
+            android:id="@+id/start_time_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-
+            android:layout_marginBottom="10dp"
             android:text="9:00"/>
         <TextView
-            android:id="@+id/end_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_toRightOf="@id/start_time_one"
+            android:layout_alignTop="@id/start_time_one"
+            android:text=" - "/>
+        <TextView
+            android:id="@+id/end_time_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="10:00"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/start_time"
-            android:layout_toEndOf="@+id/start_time" />
-    </RelativeLayout>
+            android:layout_marginLeft="5dp"
+            android:layout_alignTop="@+id/start_time_one"
+            android:layout_toRightOf="@+id/start_time_one"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:background="#cccccc"
+            android:layout_marginLeft="1dp">
+            <TextView
+                android:id="@+id/teacher_name_two"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="老师好"/>
+            <TextView
+                android:id="@+id/start_time_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:text="9:00"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/start_time_two"
+                android:layout_alignTop="@id/start_time_two"
+                android:text=" - "/>
+            <TextView
+                android:id="@+id/end_time_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:layout_marginLeft="5dp"
+                android:layout_alignTop="@+id/start_time_two"
+                android:layout_toRightOf="@+id/start_time_two"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:background="#cccccc"
+            android:layout_marginLeft="1dp">
+            <TextView
+                android:id="@+id/teacher_name_three"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="老师好"/>
+            <TextView
+                android:id="@+id/start_time_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:text="9:00"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/start_time_three"
+                android:layout_alignTop="@id/start_time_three"
+                android:text=" - "/>
+            <TextView
+                android:id="@+id/end_time_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:layout_marginLeft="5dp"
+                android:layout_alignTop="@+id/start_time_three"
+                android:layout_toRightOf="@+id/start_time_three"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:background="#cccccc"
+            android:layout_marginLeft="1dp">
+            <TextView
+                android:id="@+id/teacher_name_one_four"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="老师好"/>
+            <TextView
+                android:id="@+id/start_time_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:text="9:00"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/start_time_four"
+                android:layout_alignTop="@id/start_time_four"
+                android:text=" - "/>
+            <TextView
+                android:id="@+id/end_time_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:layout_marginLeft="5dp"
+                android:layout_alignTop="@+id/start_time_four"
+                android:layout_toRightOf="@+id/start_time_four"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:background="#cccccc"
+            android:layout_marginLeft="1dp">
+            <TextView
+                android:id="@+id/teacher_name_five"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="老师好"/>
+            <TextView
+                android:id="@+id/start_time_five"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:text="9:00"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/start_time_five"
+                android:layout_alignTop="@id/start_time_five"
+                android:text=" - "/>
+            <TextView
+                android:id="@+id/end_time_five"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:layout_marginLeft="5dp"
+                android:layout_alignTop="@+id/start_time_five"
+                android:layout_toRightOf="@+id/start_time_five"/>
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
