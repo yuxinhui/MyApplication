@@ -52,7 +52,7 @@ public class TeacherAdapter extends BaseAdapter {
             convertView=inflater.inflate(R.layout.teacher_item,null);
         }
         viewHodle=new ViewHodle();
-        viewHodle.teacher_head= (ImageView) convertView.findViewById(R.id.teacher_head);
+        //viewHodle.teacher_head= (ImageView) convertView.findViewById(R.id.teacher_head);
         viewHodle.teacher_name= (TextView) convertView.findViewById(R.id.teacher_name);
         viewHodle.teacher_context= (TextView) convertView.findViewById(R.id.teacher_context);
         TeachData.DataBean teachData= getItem(position);

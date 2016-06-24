@@ -59,7 +59,7 @@ public class TeachData extends JSONObject{
         this.data = data;
     }
 
-    public  class DataBean {
+    public static class DataBean {
         private String id;
         private String analystName;
         private String content;

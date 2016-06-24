@@ -67,7 +67,7 @@ public class KeBiaoData {
                 '}';
     }
 
-    public class DataBean {
+    public static class DataBean {
         private String id;
         private String startTime;
         private String endTime;
@@ -166,6 +166,23 @@ public class KeBiaoData {
 
         public void setGid(Object gid) {
             this.gid = gid;
+        }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "id='" + id + '\'' +
+                    ", startTime='" + startTime + '\'' +
+                    ", endTime='" + endTime + '\'' +
+                    ", monday='" + monday + '\'' +
+                    ", tuesday='" + tuesday + '\'' +
+                    ", wednesday='" + wednesday + '\'' +
+                    ", thursday='" + thursday + '\'' +
+                    ", friday='" + friday + '\'' +
+                    ", saturday=" + saturday +
+                    ", weekend=" + weekend +
+                    ", gid=" + gid +
+                    '}';
         }
     }
 }

@@ -66,7 +66,7 @@ public class IndexKuaiXunData {
                 '}';
     }
 
-    public class DataBean {
+    public static class DataBean {
         private String title;
         private String content;
         private String img_width;

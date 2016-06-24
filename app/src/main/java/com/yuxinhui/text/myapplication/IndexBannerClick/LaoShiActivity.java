@@ -48,8 +48,30 @@ public class LaoShiActivity extends AppCompatActivity{
     }
 
     private void initData() {
-        getJSONByVeolly();
-        Log.i("teacher", mTeachDatas.get(1).toString());
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        final ProgressDialog progressDialog = ProgressDialog.show(this, "老师界面", "加载ing>>>>");
+        StringRequest mJsonObjectRequest=new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        Gson gson=new Gson();
+                        teachData = gson.fromJson(s, TeachData.class);
+                        ArrayList<TeachData.DataBean> list= (ArrayList<TeachData.DataBean>) teachData.getData();
+                        mTeachDatas.addAll(list);
+                        Log.i("laoshi","加载消息成功");
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.i("laoshi","失败喽，小伙子");
+                        progressDialog.dismiss();
+                    }
+                });
+        requestQueue.add(mJsonObjectRequest);
     }
 
     private void initView() {
@@ -64,29 +86,5 @@ public class LaoShiActivity extends AppCompatActivity{
         teacher_lv= (ListView) findViewById(R.id.teacher_lv);
         teacherAdapter=new TeacherAdapter(mTeachDatas,this);
         teacher_lv.setAdapter(teacherAdapter);
-    }
-
-    public void getJSONByVeolly() {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        final ProgressDialog progressDialog = ProgressDialog.show(this, "老师界面", "加载ing>>>>");
-        StringRequest mJsonObjectRequest=new StringRequest(
-                Request.Method.POST,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        Gson gson=new Gson();
-                        teachData = gson.fromJson(s, TeachData.class);
-                        mTeachDatas.addAll(teachData.getData());
-                        progressDialog.dismiss();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        progressDialog.dismiss();
-                    }
-                });
-        requestQueue.add(mJsonObjectRequest);
     }
 }

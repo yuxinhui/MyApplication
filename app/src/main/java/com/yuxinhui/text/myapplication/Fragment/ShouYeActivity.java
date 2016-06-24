@@ -1,23 +1,14 @@
 package com.yuxinhui.text.myapplication.Fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.Actiity.KaiHu;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HanDanActivity;
@@ -58,15 +49,15 @@ public class ShouYeActivity extends Fragment{
         //初始化控件
         initImage(view);
         imageClick();
-        initData();
-        initView(view);
+        //initData();
+        //initView(view);
         return view;
     }
 
-    private void initData() {
+    /**private void initData() {
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
         final ProgressDialog dialog = ProgressDialog.show(getContext(), "快讯界面", "加载ing......");
-        StringRequest mJsonObjectRequest=new StringRequest(Request.Method.POST,
+        StringRequest mJsonObjectRequest=new StringRequest(Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
                     @Override
@@ -75,11 +66,13 @@ public class ShouYeActivity extends Fragment{
                         indexKuaiXunData = gson.fromJson(s, IndexKuaiXunData.class);
                         mDataList.addAll(indexKuaiXunData.getData());
                         Log.i("indexkuaixun","加载讯息成功");
+                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        Log.i("indexkuaixun","呜呜呜呜呜，加载讯息成功");
                         dialog.dismiss();
                     }
                 });
@@ -90,7 +83,7 @@ public class ShouYeActivity extends Fragment{
         kuaixun_list= (ListView) view.findViewById(R.id.kuaixun_list);
         mIndexKuaiXunAdapter=new ShouyeKuaiXunAdapter(mDataList,getContext());
         kuaixun_list.setAdapter(mIndexKuaiXunAdapter);
-    }
+    }*/
 
     /**导航图片点击*/
     private void imageClick() {
