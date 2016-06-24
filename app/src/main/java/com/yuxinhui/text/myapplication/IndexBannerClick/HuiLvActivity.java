@@ -18,7 +18,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.HuiLvData;
+import com.yuxinhui.text.myapplication.Utils.HuiLvText;
 import com.yuxinhui.text.myapplication.adapter.HuiLvAdapter;
 
 
@@ -26,13 +26,13 @@ import java.util.ArrayList;
 
 /**
  * create by "徐路路"
- * 主要用于显示汇率页面（Adapter有问题）
+ * 主要用于显示汇率页面
  */
 public class HuiLvActivity extends AppCompatActivity {
     private ImageView mImageView;
     HuiLvAdapter mAdapter;
-    HuiLvData mHuiLv;
-    ArrayList<HuiLvData.DataBean> mList;
+    HuiLvText mHuiLv;
+    ArrayList<HuiLvText.DataBean> mList;
     ListView mData;
     String url = "http://cer.nineton.cn/get_bank_rate/BC";
 
@@ -40,7 +40,7 @@ public class HuiLvActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_huilv);
-        mHuiLv = new HuiLvData();
+        mHuiLv = new HuiLvText();
         mList = new ArrayList<>();
         InitDate();
         InitView();
@@ -52,9 +52,10 @@ public class HuiLvActivity extends AppCompatActivity {
     }
 
     private void InitView() {
-        mImageView = (ImageView) findViewById(R.id.huilv_return_img);
+        mImageView = (ImageView) findViewById(R.id.return_img);
         mData = (ListView) findViewById(R.id.data);
         mAdapter = new HuiLvAdapter(mList,this);
+        mData.setDivider(null);
         mData.setAdapter(mAdapter);
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +72,6 @@ public class HuiLvActivity extends AppCompatActivity {
     private void getJSONByVolley() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         final ProgressDialog progressDialog = ProgressDialog.show(this, "加载汇率", "加载中...");
-
-
         StringRequest jsonObjectRequest = new StringRequest(
                 Request.Method.GET,
                 url,
@@ -81,12 +80,12 @@ public class HuiLvActivity extends AppCompatActivity {
                     public void onResponse(String response) {
 //                        Log.e("TAG", response);
                         Gson gson  = new Gson();
-                        mHuiLv = gson.fromJson(response,HuiLvData.class);
+                        mHuiLv = gson.fromJson(response,HuiLvText.class);
 //                        Log.e("TAG",mHuiLv.toString());
-                        ArrayList<HuiLvData.DataBean> list  = (ArrayList<HuiLvData.DataBean>) mHuiLv.getData();
+                        ArrayList<HuiLvText.DataBean> list  = (ArrayList<HuiLvText.DataBean>) mHuiLv.getData();
 //                        Log.e("TAG", list.get(1).toString());
                         mList.addAll(list);
-//                        for(HuiLvData.DataBean db:mList){
+//                        for(HuiLvText.DataBean db:mList){
 //                            Log.e("TAG", db.toString());
 //                        }
 //                        Log.e("TAG","下载成功");
