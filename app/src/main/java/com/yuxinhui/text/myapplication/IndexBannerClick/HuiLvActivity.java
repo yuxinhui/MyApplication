@@ -2,8 +2,8 @@ package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,9 +18,8 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.HuiLvText;
+import com.yuxinhui.text.myapplication.Utils.HuiLvData;
 import com.yuxinhui.text.myapplication.adapter.HuiLvAdapter;
-
 
 import java.util.ArrayList;
 
@@ -31,8 +30,8 @@ import java.util.ArrayList;
 public class HuiLvActivity extends AppCompatActivity {
     private ImageView mImageView;
     HuiLvAdapter mAdapter;
-    HuiLvText mHuiLv;
-    ArrayList<HuiLvText.DataBean> mList;
+    HuiLvData mHuiLv;
+    ArrayList<HuiLvData.DataBean> mList;
     ListView mData;
     String url = "http://cer.nineton.cn/get_bank_rate/BC";
 
@@ -40,7 +39,7 @@ public class HuiLvActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_huilv);
-        mHuiLv = new HuiLvText();
+        mHuiLv = new HuiLvData();
         mList = new ArrayList<>();
         InitDate();
         InitView();
@@ -80,9 +79,9 @@ public class HuiLvActivity extends AppCompatActivity {
                     public void onResponse(String response) {
 //                        Log.e("TAG", response);
                         Gson gson  = new Gson();
-                        mHuiLv = gson.fromJson(response,HuiLvText.class);
+                        mHuiLv = gson.fromJson(response,HuiLvData.class);
 //                        Log.e("TAG",mHuiLv.toString());
-                        ArrayList<HuiLvText.DataBean> list  = (ArrayList<HuiLvText.DataBean>) mHuiLv.getData();
+                        ArrayList<HuiLvData.DataBean> list  = (ArrayList<HuiLvData.DataBean>) mHuiLv.getData();
 //                        Log.e("TAG", list.get(1).toString());
                         mList.addAll(list);
 //                        for(HuiLvText.DataBean db:mList){

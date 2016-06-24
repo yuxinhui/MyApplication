@@ -16,9 +16,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.yuxinhui.text.myapplication.Actiity.KaiHu;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HanDanActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HuiLvActivity;
@@ -26,13 +27,10 @@ import com.yuxinhui.text.myapplication.IndexBannerClick.KeBiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.KeFuActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.LaoShiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.WeiPanActivity;
-import com.yuxinhui.text.myapplication.Actiity.KaiHu;
-import com.yuxinhui.text.myapplication.MainActivity;
+import com.yuxinhui.text.myapplication.IndexBannerClick.ZhiboActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +49,6 @@ public class ShouYeActivity extends Fragment{
     private IndexKuaiXunData indexKuaiXunData;
     private String url="http://114.55.98.142/app/news/";
     private ShouyeKuaiXunAdapter mIndexKuaiXunAdapter;
-    private MainActivity huaitext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,17 +68,15 @@ public class ShouYeActivity extends Fragment{
         indexKuaiXunData = new IndexKuaiXunData();
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
         final ProgressDialog dialog = ProgressDialog.show(getContext(), "快讯界面", "加载ing......");
-        JsonObjectRequest mJsonObjectRequest=new JsonObjectRequest(
+        StringRequest mJsonObjectRequest=new StringRequest(
                 Request.Method.GET,
-                url, null,
-                new Response.Listener<JSONObject>() {
+                url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        String json = jsonObject.toString();
-                        Gson gson=new Gson();
-                        indexKuaiXunData=gson.fromJson(json,indexKuaiXunData.getClass());
-                        ArrayList<IndexKuaiXunData.DataBean> list = (ArrayList<IndexKuaiXunData.DataBean>) indexKuaiXunData.getData();
-                        mDataList.addAll(list);
+                    public void onResponse(String s) {
+                        Gson gson = new Gson();
+                        indexKuaiXunData = gson.fromJson(s, IndexKuaiXunData.class);
+                        mDataList.addAll(indexKuaiXunData.getData());
                         dialog.dismiss();
                     }
                 },
@@ -120,8 +115,13 @@ public class ShouYeActivity extends Fragment{
         zhibo1_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent("zhibo");
-                getActivity().sendBroadcast(intent);
+               new Runnable() {
+                   @Override
+                   public void run() {
+                       mIntent=new Intent(getActivity(), ZhiboActivity.class);
+                       startActivity(mIntent);
+                   }
+               }.run();
             }
         });
         laoshi_image.setOnClickListener(new View.OnClickListener() {
