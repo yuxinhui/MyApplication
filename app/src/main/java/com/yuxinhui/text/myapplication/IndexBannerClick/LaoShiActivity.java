@@ -23,7 +23,6 @@ import com.yuxinhui.text.myapplication.Utils.TeachData;
 import com.yuxinhui.text.myapplication.adapter.TeacherAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by "于志渊"
@@ -34,7 +33,7 @@ import java.util.List;
 public class LaoShiActivity extends AppCompatActivity{
     private ImageView teacher_return_img;
     private TeacherAdapter teacherAdapter;
-    private List<TeachData.DataBean> mTeachDatas=new ArrayList<TeachData.DataBean>();
+    private ArrayList<TeachData.DataBean> mTeachDatas=new ArrayList<TeachData.DataBean>();
     private TeachData teachData=new TeachData();
     private ListView teacher_lv;
     private String url="http://114.55.98.142/analyst/select_app";

@@ -33,7 +33,6 @@ import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by "于志渊"
@@ -45,7 +44,7 @@ public class ShouYeActivity extends Fragment{
     private ImageView kaihu_image,zhibo1_image,laoshi_image,kefu_image,kechengbiao_image,handan_image,weipan_image,gupiao_image,huilv_image;
     private Intent mIntent;
     private ListView kuaixun_list;
-    private List<IndexKuaiXunData.DataBean> mDataList=new ArrayList<IndexKuaiXunData.DataBean>();
+    private ArrayList<IndexKuaiXunData.DataBean> mDataList=new ArrayList<IndexKuaiXunData.DataBean>();
     private IndexKuaiXunData indexKuaiXunData;
     private String url="http://114.55.98.142/app/news/";
     private ShouyeKuaiXunAdapter mIndexKuaiXunAdapter;

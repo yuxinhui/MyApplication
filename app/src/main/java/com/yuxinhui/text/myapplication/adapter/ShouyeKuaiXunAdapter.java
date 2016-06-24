@@ -11,7 +11,6 @@ import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by "于志渊"
@@ -20,11 +19,11 @@ import java.util.List;
  * 描述:这个类是显示首页快讯页面的ListView的适配器
  */
 public class ShouyeKuaiXunAdapter extends BaseAdapter {
-    private List<IndexKuaiXunData.DataBean> mDataBeen=new ArrayList<IndexKuaiXunData.DataBean>();
+    private ArrayList<IndexKuaiXunData.DataBean> mDataBeen=new ArrayList<IndexKuaiXunData.DataBean>();
     private IndexKuaiXunData.DataBean dataBean;
     private Context context;
 
-    public ShouyeKuaiXunAdapter(List<IndexKuaiXunData.DataBean> mDataBeen, Context context) {
+    public ShouyeKuaiXunAdapter(ArrayList<IndexKuaiXunData.DataBean> mDataBeen, Context context) {
         this.mDataBeen = mDataBeen;
         this.context = context;
     }

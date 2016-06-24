@@ -12,7 +12,6 @@ import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.TeachData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by "于志渊"
@@ -21,10 +20,10 @@ import java.util.List;
  * 描述:这个类是显示老师页面的ListView的适配器。
  */
 public class TeacherAdapter extends BaseAdapter {
-    private List<TeachData.DataBean> mTeacherList=new ArrayList<TeachData.DataBean>();
+    private ArrayList<TeachData.DataBean> mTeacherList=new ArrayList<TeachData.DataBean>();
     private Context mContext;
 
-    public TeacherAdapter(List<TeachData.DataBean> mTeacherList, Context mContext) {
+    public TeacherAdapter(ArrayList<TeachData.DataBean> mTeacherList, Context mContext) {
         this.mTeacherList = mTeacherList;
         this.mContext = mContext;
     }
