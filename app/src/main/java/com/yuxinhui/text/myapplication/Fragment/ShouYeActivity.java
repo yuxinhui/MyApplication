@@ -60,8 +60,8 @@ public class ShouYeActivity extends Fragment{
         //初始化控件
         initImage(view);
         imageClick();
-        initView(view);
         initData();
+        initView(view);
         return view;
     }
 

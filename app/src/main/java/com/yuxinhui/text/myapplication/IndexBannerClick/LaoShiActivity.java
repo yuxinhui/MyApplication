@@ -40,9 +40,8 @@ public class LaoShiActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
-        initView();
         initData();
-
+        initView();
     }
 
     private void initData() {

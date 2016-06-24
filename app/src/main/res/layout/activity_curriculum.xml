@@ -22,4 +22,75 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/monday"
+                android:text="星期一"
+                android:gravity="center"
+                android:background="@mipmap/xuanzhong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tuesday"
+                android:text="星期二"
+                android:gravity="center"
+                android:background="@mipmap/weixuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/wednesday"
+                android:text="星期三"
+                android:gravity="center"
+                android:background="@mipmap/weixuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/thursday"
+                android:text="星期四"
+                android:gravity="center"
+                android:background="@mipmap/weixuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/friday"
+                android:text="星期五"
+                android:gravity="center"
+                android:background="@mipmap/weixuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/kebiao_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
 </LinearLayout>
