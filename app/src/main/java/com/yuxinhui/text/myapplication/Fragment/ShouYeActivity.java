@@ -1,15 +1,24 @@
 package com.yuxinhui.text.myapplication.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.yuxinhui.text.myapplication.Actiity.KaiHu;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HanDanActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HuiLvActivity;
@@ -17,10 +26,13 @@ import com.yuxinhui.text.myapplication.IndexBannerClick.KeBiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.KeFuActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.LaoShiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.WeiPanActivity;
+import com.yuxinhui.text.myapplication.Actiity.KaiHu;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +48,7 @@ public class ShouYeActivity extends Fragment{
     private Intent mIntent;
     private ListView kuaixun_list;
     private List<IndexKuaiXunData.DataBean> mDataList=new ArrayList<IndexKuaiXunData.DataBean>();
-    private IndexKuaiXunData indexKuaiXunData=new IndexKuaiXunData();
+    private IndexKuaiXunData indexKuaiXunData;
     private String url="http://114.55.98.142/app/news/";
     private ShouyeKuaiXunAdapter mIndexKuaiXunAdapter;
     private MainActivity huaitext;
@@ -49,33 +61,39 @@ public class ShouYeActivity extends Fragment{
         //初始化控件
         initImage(view);
         imageClick();
-        //initData();
-        //initView(view);
+        initData();
+        initView(view);
         return view;
     }
 
-    /**private void initData() {
+    private void initData() {
+//        Log.e("indexKuaiXun",mDataList.get(1).toString());
+        indexKuaiXunData = new IndexKuaiXunData();
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
         final ProgressDialog dialog = ProgressDialog.show(getContext(), "快讯界面", "加载ing......");
-        StringRequest mJsonObjectRequest=new StringRequest(Request.Method.GET,
-                url,
-                new Response.Listener<String>() {
+        JsonObjectRequest mJsonObjectRequest=new JsonObjectRequest(
+                Request.Method.GET,
+                url, null,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String s) {
+                    public void onResponse(JSONObject jsonObject) {
+                        String json = jsonObject.toString();
                         Gson gson=new Gson();
-                        indexKuaiXunData = gson.fromJson(s, IndexKuaiXunData.class);
-                        mDataList.addAll(indexKuaiXunData.getData());
-                        Log.i("indexkuaixun","加载讯息成功");
+                        indexKuaiXunData=gson.fromJson(json,indexKuaiXunData.getClass());
+                        ArrayList<IndexKuaiXunData.DataBean> list = (ArrayList<IndexKuaiXunData.DataBean>) indexKuaiXunData.getData();
+                        mDataList.addAll(list);
                         dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.i("indexkuaixun","呜呜呜呜呜，加载讯息成功");
+                        Toast.makeText(getActivity(), "下载失败,请检查网络连接", Toast.LENGTH_LONG);
+                        Log.i("indexkuaixun","下载失败哈");
                         dialog.dismiss();
                     }
-                });
+                }
+        );
         requestQueue.add(mJsonObjectRequest);
     }
 
@@ -83,7 +101,7 @@ public class ShouYeActivity extends Fragment{
         kuaixun_list= (ListView) view.findViewById(R.id.kuaixun_list);
         mIndexKuaiXunAdapter=new ShouyeKuaiXunAdapter(mDataList,getContext());
         kuaixun_list.setAdapter(mIndexKuaiXunAdapter);
-    }*/
+    }
 
     /**导航图片点击*/
     private void imageClick() {
@@ -102,12 +120,8 @@ public class ShouYeActivity extends Fragment{
         zhibo1_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               new Runnable() {
-                   @Override
-                   public void run() {
-                        huaitext.setChioceItem(1);
-                   }
-               }.run();
+               Intent intent = new Intent("zhibo");
+                getActivity().sendBroadcast(intent);
             }
         });
         laoshi_image.setOnClickListener(new View.OnClickListener() {
