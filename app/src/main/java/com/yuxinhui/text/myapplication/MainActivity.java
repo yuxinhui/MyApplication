@@ -1,5 +1,9 @@
 package com.yuxinhui.text.myapplication;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -48,13 +52,18 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
     private int Red = 0xFFED0E0E;
     private int Gray=0xFF9B9999;
 
+    ZhiBoRecceiver mReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
+        IntentFilter filter = new IntentFilter("zhibo");
+        mReceiver = new ZhiBoRecceiver();
+        registerReceiver(mReceiver,filter);
         initView();
-        new indexThread();
+        setChioceItem(0);
     }
     //初始化控件
     public void initView(){
@@ -80,20 +89,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
         hangqing_layout.setOnClickListener(this);
     }
 
-    class indexThread implements Runnable{
-        @Override
-        public void run() {
-            while(!Thread.currentThread().isInterrupted()){
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-                //使用postInvalidate可以直接在线程中更新界面
-                index_layout.postInvalidate();
-            }
-        }
-    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -213,5 +209,19 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
         my_image.setImageResource(R.mipmap.iconmy02);
         hangqing_txt.setTextColor(Gray);
         hangqing_image.setImageResource(R.mipmap.hangqingicon);
+    }
+
+    class ZhiBoRecceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            setChioceItem(1);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mReceiver);
+        super.onDestroy();
     }
 }
