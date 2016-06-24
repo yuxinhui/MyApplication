@@ -157,5 +157,21 @@ public class IndexKuaiXunData {
         public void setPdate_src(String pdate_src) {
             this.pdate_src = pdate_src;
         }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "title='" + title + '\'' +
+                    ", content='" + content + '\'' +
+                    ", img_width='" + img_width + '\'' +
+                    ", full_title='" + full_title + '\'' +
+                    ", pdate='" + pdate + '\'' +
+                    ", src='" + src + '\'' +
+                    ", img_length='" + img_length + '\'' +
+                    ", img='" + img + '\'' +
+                    ", url='" + url + '\'' +
+                    ", pdate_src='" + pdate_src + '\'' +
+                    '}';
+        }
     }
 }

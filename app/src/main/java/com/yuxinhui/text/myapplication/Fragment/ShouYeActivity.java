@@ -15,9 +15,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.yuxinhui.text.myapplication.Actiity.KaiHu;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HanDanActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HuiLvActivity;
@@ -25,13 +26,10 @@ import com.yuxinhui.text.myapplication.IndexBannerClick.KeBiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.KeFuActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.LaoShiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.WeiPanActivity;
-import com.yuxinhui.text.myapplication.Actiity.KaiHu;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +45,7 @@ public class ShouYeActivity extends Fragment{
     private Intent mIntent;
     private ListView kuaixun_list;
     private List<IndexKuaiXunData.DataBean> mDataList=new ArrayList<IndexKuaiXunData.DataBean>();
-    private IndexKuaiXunData indexKuaiXunData;
+    private IndexKuaiXunData indexKuaiXunData=new IndexKuaiXunData();
     private String url="http://114.55.98.142/app/news/";
     private ShouyeKuaiXunAdapter mIndexKuaiXunAdapter;
     private MainActivity huaitext;
@@ -67,28 +65,24 @@ public class ShouYeActivity extends Fragment{
 
     private void initData() {
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
-        ProgressDialog dialog = ProgressDialog.show(getContext(), "快讯界面", "加载ing......");
-        JsonObjectRequest mJsonObjectRequest=new JsonObjectRequest(
-                Request.Method.POST,
+        final ProgressDialog dialog = ProgressDialog.show(getContext(), "快讯界面", "加载ing......");
+        StringRequest mJsonObjectRequest=new StringRequest(Request.Method.POST,
                 url,
-                null,
-                new Response.Listener<JSONObject>() {
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        String json = jsonObject.toString();
+                    public void onResponse(String s) {
                         Gson gson=new Gson();
-                        indexKuaiXunData=gson.fromJson(json,indexKuaiXunData.getClass());
-                        mDataList=indexKuaiXunData.getData();
-                        Log.i("indexkuaixun","下载成功");
+                        indexKuaiXunData = gson.fromJson(s, IndexKuaiXunData.class);
+                        mDataList.addAll(indexKuaiXunData.getData());
+                        Log.i("indexkuaixun","加载讯息成功");
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.i("indexkuaixun","下载失败哈");
+                        dialog.dismiss();
                     }
-                }
-        );
+                });
         requestQueue.add(mJsonObjectRequest);
     }
 

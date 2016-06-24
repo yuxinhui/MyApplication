@@ -114,6 +114,18 @@ public class TeachData extends JSONObject{
         public void setGid(Object gid) {
             this.gid = gid;
         }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "id='" + id + '\'' +
+                    ", analystName='" + analystName + '\'' +
+                    ", content='" + content + '\'' +
+                    ", pic='" + pic + '\'' +
+                    ", rid=" + rid +
+                    ", gid=" + gid +
+                    '}';
+        }
     }
 
     @Override

@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
-            android:id="@+id/denglu_return_img"
+            android:id="@+id/huilv_return_img"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:src="@mipmap/fanhui"

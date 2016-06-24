@@ -35,7 +35,7 @@ public class ShouyeKuaiXunAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public IndexKuaiXunData.DataBean getItem(int position) {
         return mDataBeen.get(position);
     }
 
@@ -54,7 +54,7 @@ public class ShouyeKuaiXunAdapter extends BaseAdapter {
         viewHodle=new ViewHodle();
         viewHodle.kuaixun_clock= (TextView) convertView.findViewById(R.id.kuaixun_clock);
         viewHodle.kuaixun_title= (TextView) convertView.findViewById(R.id.kuaixun_title);
-        dataBean= (IndexKuaiXunData.DataBean) getItem(position);
+        dataBean= getItem(position);
         viewHodle.kuaixun_clock.setText(dataBean.getPdate_src());
         viewHodle.kuaixun_title.setText(dataBean.getFull_title());
         return convertView;

@@ -1,24 +1,26 @@
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.TeachData;
 import com.yuxinhui.text.myapplication.adapter.TeacherAdapter;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,10 @@ import java.util.List;
  * 描述:显示老师界面
  */
 public class LaoShiActivity extends AppCompatActivity{
+    private ImageView teacher_return_img;
     private TeacherAdapter teacherAdapter;
     private List<TeachData.DataBean> mTeachDatas=new ArrayList<TeachData.DataBean>();
-    private TeachData teachData;
+    private TeachData teachData=new TeachData();
     private ListView teacher_lv;
     private String url="http://114.55.98.142/analyst/select_app";
 
@@ -50,6 +53,14 @@ public class LaoShiActivity extends AppCompatActivity{
     }
 
     private void initView() {
+        teacher_return_img= (ImageView) findViewById(R.id.teacher_return_img);
+        teacher_return_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent=new Intent(LaoShiActivity.this, MainActivity.class);
+                startActivity(mIntent);
+            }
+        });
         teacher_lv= (ListView) findViewById(R.id.teacher_lv);
         teacherAdapter=new TeacherAdapter(mTeachDatas,this);
         teacher_lv.setAdapter(teacherAdapter);
@@ -58,27 +69,24 @@ public class LaoShiActivity extends AppCompatActivity{
     public void getJSONByVeolly() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         final ProgressDialog progressDialog = ProgressDialog.show(this, "老师界面", "加载ing>>>>");
-        JsonObjectRequest mJsonObjectRequest=new JsonObjectRequest(
+        StringRequest mJsonObjectRequest=new StringRequest(
                 Request.Method.POST,
                 url,
-                null,
-                new Response.Listener<JSONObject>() {
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        String json = jsonObject.toString();
+                    public void onResponse(String s) {
                         Gson gson=new Gson();
-                        teachData=gson.fromJson(json,teachData.getClass());
-                        mTeachDatas=teachData.getData();
-                        Log.i("teacher","下载成功");
+                        teachData = gson.fromJson(s, TeachData.class);
+                        mTeachDatas.addAll(teachData.getData());
+                        progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.i("teacher","下载失败哈");
+                        progressDialog.dismiss();
                     }
-                }
-        );
+                });
         requestQueue.add(mJsonObjectRequest);
     }
 }

@@ -35,7 +35,7 @@ public class TeacherAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public TeachData.DataBean getItem(int position) {
         return mTeacherList.get(position);
     }
 
@@ -55,7 +55,7 @@ public class TeacherAdapter extends BaseAdapter {
         viewHodle.teacher_head= (ImageView) convertView.findViewById(R.id.teacher_head);
         viewHodle.teacher_name= (TextView) convertView.findViewById(R.id.teacher_name);
         viewHodle.teacher_context= (TextView) convertView.findViewById(R.id.teacher_context);
-        TeachData.DataBean teachData= (TeachData.DataBean) getItem(position);
+        TeachData.DataBean teachData= getItem(position);
         //viewHodle.teacher_head.setImageTintList(teachData.getPic());
         viewHodle.teacher_name.setText(teachData.getAnalystName());
         viewHodle.teacher_context.setText(teachData.getContent());

@@ -18,10 +18,10 @@ import java.util.ArrayList;
  */
 
 public class HuiLvAdapter extends BaseAdapter{
-    ArrayList<HuiLvData> mList ;
+    ArrayList<HuiLvData.DataBean> mList ;
     Context mContext;
 
-    public HuiLvAdapter(ArrayList<HuiLvData> list, Context context) {
+    public HuiLvAdapter(ArrayList<HuiLvData.DataBean> list, Context context) {
         this.mList = list;
         this.mContext = context;
     }
@@ -32,7 +32,7 @@ public class HuiLvAdapter extends BaseAdapter{
     }
 
     @Override
-    public HuiLvData getItem(int position) {
+    public HuiLvData.DataBean getItem(int position) {
         return mList.get(position);
     }
 
@@ -55,7 +55,7 @@ public class HuiLvAdapter extends BaseAdapter{
         holder.buy_price1 = (TextView) convertView.findViewById(R.id.buy_price1);
         holder.buy_price2 = (TextView) convertView.findViewById(R.id.buy_price2);
         holder.sell_price = (TextView) convertView.findViewById(R.id.sell_price);
-        HuiLvData data =  getItem(position);
+        HuiLvData.DataBean data =  getItem(position);
         holder.currency.setText(data.getCurrency());
         holder.buy_price1.setText(data.getBuy_price1());
         holder.buy_price2.setText(data.getBuy_price2());
