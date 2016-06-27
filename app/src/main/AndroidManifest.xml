@@ -43,15 +43,16 @@
         <activity android:name=".IndexBannerClick.GuPiaoActivity" />
         <activity android:name=".IndexBannerClick.HuiLvActivity" />
         <activity android:name=".IndexBannerClick.LaoShiActivity" />
+        <activity android:name=".IndexBannerClick.ZhiboActivity"/>
         <activity android:name=".Actiity.KaiHuRenZheng" />
         <activity android:name=".Actiity.Denglu" />
         <activity android:name=".Actiity.ZhuCeXiangQing" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Actiity.HuiLvActivity"
-            >
-
-
-        </activity>
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

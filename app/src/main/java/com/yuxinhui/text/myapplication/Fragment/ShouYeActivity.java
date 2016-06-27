@@ -48,12 +48,12 @@ public class ShouYeActivity extends Fragment{
     private IndexKuaiXunData indexKuaiXunData;
     private String url="http://114.55.98.142/app/news/";
     private ShouyeKuaiXunAdapter mIndexKuaiXunAdapter;
+    private ArrayList<ImageView> list=new ArrayList<ImageView>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.index_fg, container, false);
-        kuaixun_list= (ListView) view.findViewById(R.id.kuaixun_list);
         //初始化控件
         initImage(view);
         imageClick();
@@ -95,6 +95,7 @@ public class ShouYeActivity extends Fragment{
         kuaixun_list= (ListView) view.findViewById(R.id.kuaixun_list);
         mIndexKuaiXunAdapter=new ShouyeKuaiXunAdapter(mDataList,getContext());
         kuaixun_list.setAdapter(mIndexKuaiXunAdapter);
+
     }
 
     /**导航图片点击*/

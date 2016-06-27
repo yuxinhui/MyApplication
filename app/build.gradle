@@ -37,4 +37,5 @@ dependencies {
     compile 'org.xutils:xutils:3.3.34'
     testCompile 'junit:junit:4.12'
     compile files('libs/Volley.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
