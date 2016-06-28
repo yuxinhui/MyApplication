@@ -3,4 +3,147 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:text="@string/hangqing"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:FadingEdge="@null"
+        android:background="#682e2e"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="39dp">
+                <RadioButton
+                    android:id="@+id/radiobt1"
+                    android:textSize="15dp"
+                    android:text="全球外汇"
+                    android:textColor="@color/white"
+                    android:button="@null"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/radiobt2"
+                    android:textSize="15dp"
+                    android:text="现货黄金"
+                    android:textColor="@color/white"
+                    android:button="@null"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/radiobt3"
+                    android:textSize="15dp"
+                    android:text="COMEX"
+                    android:textColor="@color/white"
+                    android:button="@null"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/radiobt4"
+                    android:textSize="15dp"
+                    android:text="上海金"
+                    android:textColor="@color/white"
+                    android:button="@null"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/radiobt5"
+                    android:textSize="15dp"
+                    android:text="伦敦金属"
+                    android:textColor="@color/white"
+                    android:button="@null"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/radiobt6"
+                    android:textSize="15dp"
+                    android:text="天通银"
+                    android:textColor="@color/white"
+                    android:button="@null"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:background="@color/colorPrimary"
+                android:layout_width="60dp"
+                android:layout_height="2dp" />
+        </RelativeLayout>
+    </HorizontalScrollView>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#cccccc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp">
+            <TextView
+                android:text="名称"
+                android:textColor="@color/colorPrimary"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp">
+            <TextView
+                android:text="现价"
+                android:textColor="@color/colorPrimary"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp">
+            <TextView
+                android:text="涨停"
+                android:textColor="@color/colorPrimary"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/hangqing_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
 </LinearLayout>

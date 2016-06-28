@@ -32,14 +32,13 @@ public class BannerGuideAdapter extends PagerAdapter {
     }
 
     @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView(mlist.get(position%mlist.size()));
+    }
+    @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView imageView = mlist.get(position%mlist.size());
         container.addView(imageView);
         return imageView;
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        //container.removeView(mlist.get(position%mlist.size()));
     }
 }

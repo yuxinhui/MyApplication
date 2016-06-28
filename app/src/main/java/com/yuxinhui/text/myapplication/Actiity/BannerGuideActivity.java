@@ -109,12 +109,21 @@ public class BannerGuideActivity extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
             int newPositiion=position%bannerImages.length;
-
+            mLinearLayout.getChildAt(newPositiion).setEnabled(true);
+            mLinearLayout.getChildAt(pointIndex).setEnabled(false);
+            //更新标志位
+            position=newPositiion;
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
 
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        isStop=true;
+        super.onDestroy();
     }
 }
