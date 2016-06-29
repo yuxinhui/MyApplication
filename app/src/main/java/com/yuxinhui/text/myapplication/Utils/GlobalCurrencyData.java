@@ -1,5 +1,7 @@
 package com.yuxinhui.text.myapplication.Utils;
 
+import java.util.List;
+
 /**
  * Created by "于志渊"
  * 时间:"11:17"
@@ -7,6 +9,15 @@ package com.yuxinhui.text.myapplication.Utils;
  * 描述:全球外汇实体类
  */
 public class GlobalCurrencyData {
+    private List<GlobalCurrencyData> datas;
+
+    public List<GlobalCurrencyData> getDatas() {
+        return datas;
+    }
+
+    public void setDatas(List<GlobalCurrencyData> datas) {
+        this.datas = datas;
+    }
 
     /**
      * change : 0.003000021

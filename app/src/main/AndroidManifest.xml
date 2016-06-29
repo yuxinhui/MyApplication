@@ -37,6 +37,7 @@
         <activity android:name=".YinDaoTu.GuideActivity" />
         <activity android:name=".Actiity.Zhuce" />
         <activity android:name=".Actiity.KaiHu" />
+        <activity android:name=".HangQingActivity.GlobalCurrency"/>
         <activity android:name=".IndexBannerClick.KeFuActivity" />
         <activity android:name=".IndexBannerClick.KeBiaoActivity" />
         <activity android:name=".IndexBannerClick.HanDanActivity" />

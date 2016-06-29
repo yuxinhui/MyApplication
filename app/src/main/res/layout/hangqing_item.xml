@@ -58,17 +58,18 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_marginTop="2dp"
+                android:id="@+id/uptime_txt"
                 android:text="更新时间:"
                 android:textSize="10dp"
-                android:layout_toLeftOf="@id/uptime"
-                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_marginTop="2dp"
                 android:id="@+id/uptime"
+                android:layout_toRightOf="@id/uptime_txt"
+                android:text="2016:23:13"
                 android:textSize="10dp"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -78,16 +79,18 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_marginTop="2dp"
+                android:id="@+id/low_txt"
                 android:text="最低价:"
                 android:textSize="10dp"
-                android:layout_toLeftOf="@id/low"
+                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_marginTop="2dp"
                 android:id="@+id/low"
+                android:layout_toRightOf="@id/low_txt"
+                android:text="1.00365"
                 android:textSize="10dp"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -97,16 +100,18 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_marginTop="2dp"
+                android:id="@+id/high_txt"
                 android:text="最高价:"
                 android:textSize="10dp"
-                android:layout_toLeftOf="@id/high"
+                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_marginTop="2dp"
                 android:id="@+id/high"
+                android:layout_toRightOf="@id/high_txt"
+                android:text="2.3654"
                 android:textSize="10dp"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>

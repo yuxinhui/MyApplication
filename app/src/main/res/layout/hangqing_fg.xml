@@ -17,7 +17,6 @@
     </RelativeLayout>
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
-        android:FadingEdge="@null"
         android:background="#682e2e"
         android:scrollbars="none"
         android:layout_width="match_parent"
@@ -30,7 +29,7 @@
                 android:layout_alignParentTop="true"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="39dp">
+                android:layout_height="40dp">
                 <RadioButton
                     android:id="@+id/radiobt1"
                     android:textSize="15dp"
@@ -92,13 +91,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RadioGroup>
-            <ImageView
-                android:id="@+id/img1"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="5dp"
-                android:background="@color/colorPrimary"
-                android:layout_width="60dp"
-                android:layout_height="2dp" />
         </RelativeLayout>
     </HorizontalScrollView>
     <LinearLayout
