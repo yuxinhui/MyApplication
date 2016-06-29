@@ -3,33 +3,30 @@ package com.yuxinhui.text.myapplication.Utils;
 import java.util.List;
 
 /**
- * Created by "于志渊"
- * 时间:"15:43"
- * 包名:com.yuxinhui.text.myapplication.Utils
- * 描述:现货黄金实体类
+ * Created by Administrator on 2016/6/29.
  */
-public class XianHuoHuangJinData {
-    private List<XianHuoHuangJinData> mDatas;
+public class ComexData {
+    private List<ComexData> comexDatas;
 
-    public List<XianHuoHuangJinData> getmDatas() {
-        return mDatas;
+    public List<ComexData> getComexDatas() {
+        return comexDatas;
     }
 
-    public void setmDatas(List<XianHuoHuangJinData> mDatas) {
-        this.mDatas = mDatas;
+    public void setComexDatas(List<ComexData> comexDatas) {
+        this.comexDatas = comexDatas;
     }
 
     /**
-     * change : -498.0
-     * changePercent : -0.00961687
-     * close : 51784.0
-     * code : OSTWGD
-     * high : 51938.0
-     * low : 51207.0
-     * name : 黄金台两
-     * newPrice : 51286.0
-     * open : 51796.0
-     * time : 1467099773000
+     * change : 5.199951
+     * changePercent : 0.0039456342
+     * close : 1317.9
+     * code : IXCMGCA0
+     * high : 1327.0
+     * low : 1313.3
+     * name : 美黄金连续
+     * newPrice : 1323.1
+     * open : 1313.8
+     * time : 1467208123000
      */
 
     private double change;
@@ -121,21 +118,5 @@ public class XianHuoHuangJinData {
 
     public void setTime(long time) {
         this.time = time;
-    }
-
-    @Override
-    public String toString() {
-        return "XianHuoHuangJinData{" +
-                "change=" + change +
-                ", changePercent=" + changePercent +
-                ", close=" + close +
-                ", code='" + code + '\'' +
-                ", high=" + high +
-                ", low=" + low +
-                ", name='" + name + '\'' +
-                ", newPrice=" + newPrice +
-                ", open=" + open +
-                ", time=" + time +
-                '}';
     }
 }

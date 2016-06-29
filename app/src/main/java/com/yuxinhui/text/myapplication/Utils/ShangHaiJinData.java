@@ -1,35 +1,38 @@
 package com.yuxinhui.text.myapplication.Utils;
 
+import android.content.Context;
+
 import java.util.List;
 
 /**
- * Created by "于志渊"
- * 时间:"15:43"
- * 包名:com.yuxinhui.text.myapplication.Utils
- * 描述:现货黄金实体类
+ * 包:com.yuxinhui.text.myapplication.Utils
+ * Create By:"于志渊"
+ * 时间:23:03
+ * 描述:上海金实体类
  */
-public class XianHuoHuangJinData {
-    private List<XianHuoHuangJinData> mDatas;
+public class ShangHaiJinData {
 
-    public List<XianHuoHuangJinData> getmDatas() {
-        return mDatas;
+    private List<ShangHaiJinData> datas;
+
+    public List<ShangHaiJinData> getDatas() {
+        return datas;
     }
 
-    public void setmDatas(List<XianHuoHuangJinData> mDatas) {
-        this.mDatas = mDatas;
+    public void setDatas(List<ShangHaiJinData> datas) {
+        this.datas = datas;
     }
 
     /**
-     * change : -498.0
-     * changePercent : -0.00961687
-     * close : 51784.0
-     * code : OSTWGD
-     * high : 51938.0
-     * low : 51207.0
-     * name : 黄金台两
-     * newPrice : 51286.0
-     * open : 51796.0
-     * time : 1467099773000
+     * change : 0.6000061
+     * changePercent : 0.0021209123
+     * close : 282.9
+     * code : SGAu100g
+     * high : 283.5
+     * low : 282.11
+     * name : 黄金100G
+     * newPrice : 283.5
+     * open : 282.11
+     * time : 1467212329000
      */
 
     private double change;
@@ -121,21 +124,5 @@ public class XianHuoHuangJinData {
 
     public void setTime(long time) {
         this.time = time;
-    }
-
-    @Override
-    public String toString() {
-        return "XianHuoHuangJinData{" +
-                "change=" + change +
-                ", changePercent=" + changePercent +
-                ", close=" + close +
-                ", code='" + code + '\'' +
-                ", high=" + high +
-                ", low=" + low +
-                ", name='" + name + '\'' +
-                ", newPrice=" + newPrice +
-                ", open=" + open +
-                ", time=" + time +
-                '}';
     }
 }
