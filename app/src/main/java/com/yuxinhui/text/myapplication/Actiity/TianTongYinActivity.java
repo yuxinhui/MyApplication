@@ -19,7 +19,6 @@ import com.yuxinhui.text.myapplication.Utils.TianTongYinData;
 import com.yuxinhui.text.myapplication.adapter.TianTongYinAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 包:com.yuxinhui.text.myapplication.Actiity
@@ -51,14 +50,14 @@ public class TianTongYinActivity extends AppCompatActivity {
     private void initData() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         final ProgressDialog dialog=ProgressDialog.show(this,"天通银","加载ing.........");
-        StringRequest request=new StringRequest(Request.Method.POST,
+        StringRequest request=new StringRequest(Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         mData=gson.fromJson(s,TianTongYinData.class);
-                        List<TianTongYinData> list = mData.getDatas();
+                        ArrayList<TianTongYinData> list = (ArrayList<TianTongYinData>) mData.getDatas();
                         mList.addAll(list);
                         dialog.dismiss();
                     }

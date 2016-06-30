@@ -19,7 +19,6 @@ import com.yuxinhui.text.myapplication.Utils.ShangHaiJinData;
 import com.yuxinhui.text.myapplication.adapter.ShangHaiJinAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 包:com.yuxinhui.text.myapplication.Actiity
@@ -51,14 +50,14 @@ public class ShangHaiJinActivity extends AppCompatActivity {
     private void initData() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         final ProgressDialog dialog=ProgressDialog.show(this,"上海金","加载ing.........");
-        StringRequest request=new StringRequest(Request.Method.POST,
+        StringRequest request=new StringRequest(Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         mData=gson.fromJson(s,ShangHaiJinData.class);
-                        List<ShangHaiJinData> list = mData.getDatas();
+                        ArrayList<ShangHaiJinData> list = (ArrayList<ShangHaiJinData>) mData.getDatas();
                         mList.addAll(list);
                         dialog.dismiss();
                     }

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -30,8 +31,8 @@ import java.util.ArrayList;
 public class HuiLvActivity extends AppCompatActivity {
     private ImageView mImageView;
     HuiLvAdapter mAdapter;
-    HuiLvData mHuiLv;
-    ArrayList<HuiLvData.DataBean> mList;
+    HuiLvData mHuiLv=new HuiLvData();
+    ArrayList<HuiLvData.DataBean> mList=new ArrayList<HuiLvData.DataBean>();
     ListView mData;
     String url = "http://cer.nineton.cn/get_bank_rate/BC";
 
@@ -39,8 +40,8 @@ public class HuiLvActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_huilv);
-        mHuiLv = new HuiLvData();
-        mList = new ArrayList<>();
+       /* mHuiLv = new HuiLvData();
+        mList = new ArrayList<>();*/
         InitDate();
         InitView();
     }
@@ -78,17 +79,18 @@ public class HuiLvActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 //                        Log.e("TAG", response);
-                        Gson gson  = new Gson();
-                        mHuiLv = gson.fromJson(response,HuiLvData.class);
+                        Gson gson=new Gson();
+                          mHuiLv = gson.fromJson(response,HuiLvData.class);
 //                        Log.e("TAG",mHuiLv.toString());
-                        ArrayList<HuiLvData.DataBean> list  = (ArrayList<HuiLvData.DataBean>) mHuiLv.getData();
+                          ArrayList<HuiLvData.DataBean> list  = (ArrayList<HuiLvData.DataBean>) mHuiLv.getData();
 //                        Log.e("TAG", list.get(1).toString());
-                        mList.addAll(list);
+                          mList.addAll(list);
 //                        for(HuiLvText.DataBean db:mList){
 //                            Log.e("TAG", db.toString());
 //                        }
-//                        Log.e("TAG","下载成功");
+                        Log.e("TAG","下载成功");
                         progressDialog.dismiss();
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -101,6 +103,4 @@ public class HuiLvActivity extends AppCompatActivity {
                 });
         requestQueue.add(jsonObjectRequest);
     }
-
-
 }

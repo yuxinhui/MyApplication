@@ -51,18 +51,16 @@ public class TeacherAdapter extends BaseAdapter {
             convertView=inflater.inflate(R.layout.teacher_item,null);
         }
         viewHodle=new ViewHodle();
-        //viewHodle.teacher_head= (ImageView) convertView.findViewById(R.id.teacher_head);
-        viewHodle.teacher_name= (TextView) convertView.findViewById(R.id.teacher_name);
+        viewHodle.teacher_head= (ImageView) convertView.findViewById(R.id.teacher_head);
         viewHodle.teacher_context= (TextView) convertView.findViewById(R.id.teacher_context);
         TeachData.DataBean teachData= getItem(position);
-        //viewHodle.teacher_head.setImageTintList(teachData.getPic());
-        viewHodle.teacher_name.setText(teachData.getAnalystName());
+        //viewHodle.teacher_head;
         viewHodle.teacher_context.setText(teachData.getContent());
         return convertView;
     }
     /**存放控件*/
-    public final class ViewHodle{
-        public ImageView teacher_head;
-        public TextView teacher_name,teacher_context;
+    public class ViewHodle{
+        private ImageView teacher_head;
+        public TextView teacher_context;
     }
 }

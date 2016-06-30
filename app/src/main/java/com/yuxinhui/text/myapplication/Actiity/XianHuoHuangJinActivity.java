@@ -19,7 +19,6 @@ import com.yuxinhui.text.myapplication.Utils.XianHuoHuangJinData;
 import com.yuxinhui.text.myapplication.adapter.XianHuoHuangJinAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 包:com.yuxinhui.text.myapplication.Actiity
@@ -52,14 +51,14 @@ public class XianHuoHuangJinActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         final ProgressDialog progressDialog=ProgressDialog.show(this,"现货黄金","加载ing>>>>>>>>");
         StringRequest request=new StringRequest(
-                Request.Method.POST,
+                Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         mData = gson.fromJson(s, XianHuoHuangJinData.class);
-                        List<XianHuoHuangJinData> list = mData.getmDatas();
+                        ArrayList<XianHuoHuangJinData> list = (ArrayList<XianHuoHuangJinData>) mData.getmDatas();
                         mList.addAll(list);
                         progressDialog.dismiss();
                     }

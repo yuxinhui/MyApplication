@@ -20,7 +20,6 @@ import com.yuxinhui.text.myapplication.Utils.GlobalCurrencyData;
 import com.yuxinhui.text.myapplication.adapter.GlobalAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by "于志渊"
@@ -59,7 +58,7 @@ public class GlobalActivity extends AppCompatActivity {
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         mCurrencyData = gson.fromJson(s, GlobalCurrencyData.class);
-                        List<GlobalCurrencyData> list = mCurrencyData.getDatas();
+                        ArrayList<GlobalCurrencyData> list = (ArrayList<GlobalCurrencyData>) mCurrencyData.getDatas();
                         mArrayList.addAll(list);
 
                         progressDialog.dismiss();

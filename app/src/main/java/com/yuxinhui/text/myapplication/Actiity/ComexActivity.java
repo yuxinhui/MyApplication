@@ -19,7 +19,6 @@ import com.yuxinhui.text.myapplication.Utils.ComexData;
 import com.yuxinhui.text.myapplication.adapter.ComexAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 包:com.yuxinhui.text.myapplication.Actiity
@@ -51,14 +50,14 @@ public class ComexActivity extends AppCompatActivity {
     private void initData() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         final ProgressDialog dialog=ProgressDialog.show(this,"COMEX","加载ing.........");
-        StringRequest request=new StringRequest(Request.Method.POST,
+        StringRequest request=new StringRequest(Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         mData=gson.fromJson(s,ComexData.class);
-                        List<ComexData> list = mData.getComexDatas();
+                        ArrayList<ComexData> list = (ArrayList<ComexData>) mData.getComexDatas();
                         mList.addAll(list);
                         dialog.dismiss();
                     }

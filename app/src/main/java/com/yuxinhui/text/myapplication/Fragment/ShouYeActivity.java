@@ -65,8 +65,8 @@ public class ShouYeActivity extends Fragment{
     private void initData() {
 //        Log.e("indexKuaiXun",mDataList.get(1).toString());
         indexKuaiXunData = new IndexKuaiXunData();
-        RequestQueue requestQueue= Volley.newRequestQueue(getContext());
-        final ProgressDialog dialog = ProgressDialog.show(getContext(), "快讯界面", "加载ing......");
+        RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
+        final ProgressDialog dialog = ProgressDialog.show(getActivity(), "快讯界面", "加载ing......");
         StringRequest mJsonObjectRequest=new StringRequest(
                 Request.Method.GET,
                 url,
@@ -75,7 +75,8 @@ public class ShouYeActivity extends Fragment{
                     public void onResponse(String s) {
                         Gson gson = new Gson();
                         indexKuaiXunData = gson.fromJson(s, IndexKuaiXunData.class);
-                        mDataList.addAll(indexKuaiXunData.getData());
+                        ArrayList<IndexKuaiXunData.DataBean> list = (ArrayList<IndexKuaiXunData.DataBean>) indexKuaiXunData.getData();
+                        mDataList.addAll(list);
                         dialog.dismiss();
                     }
                 },
@@ -93,7 +94,8 @@ public class ShouYeActivity extends Fragment{
 
     private void initView(View view) {
         kuaixun_list= (ListView) view.findViewById(R.id.kuaixun_list);
-        mIndexKuaiXunAdapter=new ShouyeKuaiXunAdapter(mDataList,getContext());
+        mIndexKuaiXunAdapter=new ShouyeKuaiXunAdapter(mDataList,getActivity());
+        kuaixun_list.setDivider(null);
         kuaixun_list.setAdapter(mIndexKuaiXunAdapter);
 
     }

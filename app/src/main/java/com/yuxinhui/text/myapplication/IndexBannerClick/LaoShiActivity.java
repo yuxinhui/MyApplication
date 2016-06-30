@@ -57,7 +57,7 @@ public class LaoShiActivity extends AppCompatActivity{
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         teachData = gson.fromJson(s, TeachData.class);
-                        ArrayList<TeachData.DataBean> list= (ArrayList<TeachData.DataBean>) teachData.getData();
+                        ArrayList<TeachData.DataBean> list = (ArrayList<TeachData.DataBean>) teachData.getData();
                         mTeachDatas.addAll(list);
                         Log.i("laoshi","加载消息成功");
                         progressDialog.dismiss();
@@ -83,7 +83,8 @@ public class LaoShiActivity extends AppCompatActivity{
             }
         });
         teacher_lv= (ListView) findViewById(R.id.teacher_lv);
-        teacherAdapter=new TeacherAdapter(mTeachDatas,this);
+        teacherAdapter=new TeacherAdapter(mTeachDatas,LaoShiActivity.this);
+        teacher_lv.setDivider(null);
         teacher_lv.setAdapter(teacherAdapter);
     }
 }
