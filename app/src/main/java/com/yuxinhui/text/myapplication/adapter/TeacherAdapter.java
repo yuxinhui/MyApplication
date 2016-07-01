@@ -1,6 +1,8 @@
 package com.yuxinhui.text.myapplication.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,10 @@ import android.widget.TextView;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.TeachData;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +60,19 @@ public class TeacherAdapter extends BaseAdapter {
         viewHodle.teacher_head= (ImageView) convertView.findViewById(R.id.teacher_head);
         viewHodle.teacher_context= (TextView) convertView.findViewById(R.id.teacher_context);
         TeachData.DataBean teachData= getItem(position);
-        //viewHodle.teacher_head;
+        try {
+            URL image=new URL(teachData.getPic());
+            HttpURLConnection urlConnection = (HttpURLConnection) image.openConnection();
+            if (urlConnection.getResponseCode()==HttpURLConnection.HTTP_OK){
+                Bitmap bitmap = BitmapFactory.decodeStream(urlConnection.getInputStream());
+                viewHodle.teacher_head.setImageBitmap(bitmap);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        viewHodle.teacher_head.
         viewHodle.teacher_context.setText(teachData.getContent());
         return convertView;
     }

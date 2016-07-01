@@ -77,6 +77,7 @@ public class ShouYeActivity extends Fragment{
                         indexKuaiXunData = gson.fromJson(s, IndexKuaiXunData.class);
                         ArrayList<IndexKuaiXunData.DataBean> list = (ArrayList<IndexKuaiXunData.DataBean>) indexKuaiXunData.getData();
                         mDataList.addAll(list);
+                        Log.e("快讯","加载成功");
                         dialog.dismiss();
                     }
                 },

@@ -1,3 +1,4 @@
+
 apply plugin: 'com.android.application'
 
 android {
@@ -34,7 +35,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.google.code.gson:gson:2.7'
     compile 'org.json:json:20160212'
-    compile 'org.xutils:xutils:3.3.34'
     testCompile 'junit:junit:4.12'
     compile files('libs/Volley.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
