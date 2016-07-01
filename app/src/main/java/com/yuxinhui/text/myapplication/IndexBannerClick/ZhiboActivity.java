@@ -1,4 +1,4 @@
-package com.yuxinhui.text.myapplication.IndexBannerClick;
+/*package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.content.Context;
 import android.content.Intent;
@@ -33,9 +33,9 @@ import com.yuxinhui.text.myapplication.R;
 
 import java.util.List;
 
-/**直播视频的activity
+*//**直播视频的activity
  * Created by Administrator on 2016/5/31.
- */
+ *//*
 public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
 
     private GSVideoView mGSzhibo;//视频插件
@@ -417,4 +417,4 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     public void onMicNotify(int i) {
 
     }
-}
+}*/

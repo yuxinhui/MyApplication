@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="30dp">
+    <ImageView
+        android:id="@+id/gupiao_return"
+        android:src="@mipmap/fanhui"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:background="@drawable/rl_bgkuang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/hugu_txt"
+            android:background="@color/white"
+            android:textColor="#f51010"
+            android:text="沪股"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#ffffff"
+            android:text="深股"
+            android:layout_toRightOf="@id/hugu_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/gupiao_select"
+        android:src="@mipmap/sousuo"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:background="@null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <HorizontalScrollView
+        android:id="@+id/stock_hsv"
+        android:scrollbars="none"
+        android:background="#e1dfdf"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="名称"
+                android:textSize="25dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="代码"
+                android:textSize="25dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/amount"
+                android:text="成交额"
+                android:textSize="25dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="跌涨额"
+                android:textSize="25dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="跌涨幅"
+                android:textSize="25dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="卖出"
+                android:textSize="25dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="成交量"
+                android:textSize="25dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="昨收"
+                android:textSize="25dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </HorizontalScrollView>
+    <ListView
+        android:id="@+id/stock_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+</LinearLayout>

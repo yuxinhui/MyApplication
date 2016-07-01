@@ -25,7 +25,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/NoActionBar">
         <activity android:name=".YinDaoTu.YinDaoTuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,7 +45,7 @@
         <activity android:name=".IndexBannerClick.GuPiaoActivity" />
         <activity android:name=".IndexBannerClick.HuiLvActivity" />
         <activity android:name=".IndexBannerClick.LaoShiActivity" />
-        <activity android:name=".IndexBannerClick.ZhiboActivity"/>
+        <!--<activity android:name=".IndexBannerClick.ZhiboActivity"/>-->
         <activity android:name=".Actiity.KaiHuRenZheng" />
         <activity android:name=".Actiity.Denglu" />
         <activity android:name=".Actiity.ZhuCeXiangQing" />

@@ -57,28 +57,14 @@ public class TeacherAdapter extends BaseAdapter {
             convertView=inflater.inflate(R.layout.teacher_item,null);
         }
         viewHodle=new ViewHodle();
-        viewHodle.teacher_head= (ImageView) convertView.findViewById(R.id.teacher_head);
         viewHodle.teacher_context= (TextView) convertView.findViewById(R.id.teacher_context);
         TeachData.DataBean teachData= getItem(position);
-        try {
-            URL image=new URL(teachData.getPic());
-            HttpURLConnection urlConnection = (HttpURLConnection) image.openConnection();
-            if (urlConnection.getResponseCode()==HttpURLConnection.HTTP_OK){
-                Bitmap bitmap = BitmapFactory.decodeStream(urlConnection.getInputStream());
-                viewHodle.teacher_head.setImageBitmap(bitmap);
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 //        viewHodle.teacher_head.
         viewHodle.teacher_context.setText(teachData.getContent());
         return convertView;
     }
     /**存放控件*/
     public class ViewHodle{
-        private ImageView teacher_head;
         public TextView teacher_context;
     }
 }

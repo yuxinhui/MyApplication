@@ -7,6 +7,7 @@
         android:id="@+id/teacher_head"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
+        android:src="@mipmap/laoshi_icon"
         android:layout_width="50dp"
         android:layout_height="50dp" />
     <RelativeLayout

@@ -27,7 +27,7 @@ import com.yuxinhui.text.myapplication.IndexBannerClick.KeBiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.KeFuActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.LaoShiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.WeiPanActivity;
-import com.yuxinhui.text.myapplication.IndexBannerClick.ZhiboActivity;
+//import com.yuxinhui.text.myapplication.IndexBannerClick.ZhiboActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
@@ -121,7 +121,7 @@ public class ShouYeActivity extends Fragment{
                new Runnable() {
                    @Override
                    public void run() {
-                       mIntent=new Intent(getActivity(), ZhiboActivity.class);
+//                       mIntent=new Intent(getActivity(), ZhiboActivity.class);
                        startActivity(mIntent);
                    }
                }.run();
