@@ -36,4 +36,8 @@ public class Denglu extends AppCompatActivity {
         wangjiMM_text= (TextView) findViewById(R.id.wangjiMM_text);
         zhuce_text= (TextView) findViewById(R.id.zhuce_text);
     }
+
+    public boolean login() {
+        return false;
+    }
 }
