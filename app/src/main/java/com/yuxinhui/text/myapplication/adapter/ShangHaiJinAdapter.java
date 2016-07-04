@@ -29,32 +29,42 @@ public class ShangHaiJinAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list.size();
-    }
-
-    @Override
-    public ShangHaiJinData getItem(int position) {
-        return list.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
+        if (list!=null){
+            return list.size();
+        }
         return 0;
     }
 
     @Override
+    public ShangHaiJinData getItem(int position) {
+        if (list!=null){
+            return list.get(position);
+        }
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        viewHodle holder=new viewHodle();
+        viewHodle holder;
         if (convertView==null){
+            holder=new viewHodle();
             LayoutInflater inflater=LayoutInflater.from(context);
             convertView=inflater.inflate(R.layout.hangqing_item,null);
+            holder.name= (TextView) convertView.findViewById(R.id.name);
+            holder.newPrice= (TextView) convertView.findViewById(R.id.newPrice);
+            holder.changePercent= (TextView) convertView.findViewById(R.id.changePercent);
+            holder.time= (TextView) convertView.findViewById(R.id.uptime);
+            holder.low= (TextView) convertView.findViewById(R.id.low);
+            holder.high= (TextView) convertView.findViewById(R.id.high);
+            convertView.setTag(holder);
+        }else {
+            holder= (viewHodle) convertView.getTag();
         }
-        holder.name= (TextView) convertView.findViewById(R.id.name);
-        holder.newPrice= (TextView) convertView.findViewById(R.id.newPrice);
-        holder.changePercent= (TextView) convertView.findViewById(R.id.changePercent);
-        holder.time= (TextView) convertView.findViewById(R.id.uptime);
-        holder.low= (TextView) convertView.findViewById(R.id.low);
-        holder.high= (TextView) convertView.findViewById(R.id.high);
         ShangHaiJinData data = getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");

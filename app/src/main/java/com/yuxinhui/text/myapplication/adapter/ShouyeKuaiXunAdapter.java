@@ -30,29 +30,38 @@ public class ShouyeKuaiXunAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mDataBeen.size();
+        if (mDataBeen!=null){
+            return mDataBeen.size();
+        }
+        return 0;
     }
 
     @Override
     public IndexKuaiXunData.DataBean getItem(int position) {
-        return mDataBeen.get(position);
+        if (mDataBeen!=null){
+            return mDataBeen.get(position);
+        }
+        return null;
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHodle viewHodle;
         if (convertView==null){
+            viewHodle=new ViewHodle();
             LayoutInflater inflater=LayoutInflater.from(context);
             convertView=inflater.inflate(R.layout.index_kuaixun_item,null);
+            viewHodle.kuaixun_clock= (TextView) convertView.findViewById(R.id.kuaixun_clock);
+            viewHodle.kuaixun_title= (TextView) convertView.findViewById(R.id.kuaixun_title);
+            convertView.setTag(viewHodle);
+        }else {
+            viewHodle= (ViewHodle) convertView.getTag();
         }
-        viewHodle=new ViewHodle();
-        viewHodle.kuaixun_clock= (TextView) convertView.findViewById(R.id.kuaixun_clock);
-        viewHodle.kuaixun_title= (TextView) convertView.findViewById(R.id.kuaixun_title);
         dataBean= getItem(position);
         viewHodle.kuaixun_clock.setText(dataBean.getPdate_src());
         viewHodle.kuaixun_title.setText(dataBean.getTitle());

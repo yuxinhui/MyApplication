@@ -29,32 +29,42 @@ public class ComexAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return datas.size();
-    }
-
-    @Override
-    public ComexData getItem(int position) {
-        return datas.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
+        if (datas!=null){
+            return datas.size();
+        }
         return 0;
     }
 
     @Override
+    public ComexData getItem(int position) {
+        if (datas!=null){
+            return datas.get(position);
+        }
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        viewHodle holder=new viewHodle();
+        viewHodle holder;
         if (convertView==null){
+            holder=new viewHodle();
             LayoutInflater inflater=LayoutInflater.from(context);
             convertView=inflater.inflate(R.layout.hangqing_item,null);
+            holder.name= (TextView) convertView.findViewById(R.id.name);
+            holder.newPrice= (TextView) convertView.findViewById(R.id.newPrice);
+            holder.changePercent= (TextView) convertView.findViewById(R.id.changePercent);
+            holder.time= (TextView) convertView.findViewById(R.id.uptime);
+            holder.low= (TextView) convertView.findViewById(R.id.low);
+            holder.high= (TextView) convertView.findViewById(R.id.high);
+            convertView.setTag(holder);
+        }else {
+            holder= (viewHodle) convertView.getTag();
         }
-        holder.name= (TextView) convertView.findViewById(R.id.name);
-        holder.newPrice= (TextView) convertView.findViewById(R.id.newPrice);
-        holder.changePercent= (TextView) convertView.findViewById(R.id.changePercent);
-        holder.time= (TextView) convertView.findViewById(R.id.uptime);
-        holder.low= (TextView) convertView.findViewById(R.id.low);
-        holder.high= (TextView) convertView.findViewById(R.id.high);
         ComexData data = getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");

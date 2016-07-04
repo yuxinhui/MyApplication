@@ -30,31 +30,41 @@ public class XueYuanAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mList.size();
-    }
-
-    @Override
-    public XueYuanData.DataBean.ResultBean getItem(int position) {
-        return mList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
+        if (mList!=null){
+            return mList.size();
+        }
         return 0;
     }
 
     @Override
+    public XueYuanData.DataBean.ResultBean getItem(int position) {
+        if (mList!=null){
+            return mList.get(position);
+        }
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        viewHolder holder=new viewHolder();
+        viewHolder holder;
         if (convertView==null){
+            holder=new viewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView= inflater.inflate(R.layout.xueyuan_item, null);
+            holder.xueyuan_title= (TextView) convertView.findViewById(R.id.xueyuan_title);
+            holder.bofang= (TextView) convertView.findViewById(R.id.bofang);
+            holder.author= (TextView) convertView.findViewById(R.id.author);
+            holder.content= (TextView) convertView.findViewById(R.id.content);
+            holder.xueyuan_time= (TextView) convertView.findViewById(R.id.xueyuan_time);
+            convertView.setTag(holder);
+        }else {
+            holder= (viewHolder) convertView.getTag();
         }
-        holder.xueyuan_title= (TextView) convertView.findViewById(R.id.xueyuan_title);
-        holder.bofang= (TextView) convertView.findViewById(R.id.bofang);
-        holder.author= (TextView) convertView.findViewById(R.id.author);
-        holder.content= (TextView) convertView.findViewById(R.id.content);
-        holder.xueyuan_time= (TextView) convertView.findViewById(R.id.xueyuan_time);
         XueYuanData.DataBean.ResultBean bean = getItem(position);
         holder.bofang.setText(bean.getUrl());
         holder.xueyuan_title.setText(bean.getTitle());

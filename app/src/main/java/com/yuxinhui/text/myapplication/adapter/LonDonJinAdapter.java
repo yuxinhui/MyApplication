@@ -29,32 +29,42 @@ public class LonDonJinAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mList.size();
-    }
-
-    @Override
-    public LondonJinData getItem(int position) {
-        return mList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
+        if (mList!=null){
+            return mList.size();
+        }
         return 0;
     }
 
     @Override
+    public LondonJinData getItem(int position) {
+        if (mList!=null){
+            return mList.get(position);
+        }
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        viewHolder holder=new viewHolder();
+        viewHolder holder;
         if (convertView==null){
+            holder=new viewHolder();
             LayoutInflater inflater=LayoutInflater.from(context);
             convertView=inflater.inflate(R.layout.hangqing_item,null);
+            holder.name= (TextView) convertView.findViewById(R.id.name);
+            holder.newPrice= (TextView) convertView.findViewById(R.id.newPrice);
+            holder.changePercent= (TextView) convertView.findViewById(R.id.changePercent);
+            holder.time= (TextView) convertView.findViewById(R.id.uptime);
+            holder.low= (TextView) convertView.findViewById(R.id.low);
+            holder.high= (TextView) convertView.findViewById(R.id.high);
+            convertView.setTag(holder);
+        }else {
+            holder= (viewHolder) convertView.getTag();
         }
-        holder.name= (TextView) convertView.findViewById(R.id.name);
-        holder.newPrice= (TextView) convertView.findViewById(R.id.newPrice);
-        holder.changePercent= (TextView) convertView.findViewById(R.id.changePercent);
-        holder.time= (TextView) convertView.findViewById(R.id.uptime);
-        holder.low= (TextView) convertView.findViewById(R.id.low);
-        holder.high= (TextView) convertView.findViewById(R.id.high);
         LondonJinData data = getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");

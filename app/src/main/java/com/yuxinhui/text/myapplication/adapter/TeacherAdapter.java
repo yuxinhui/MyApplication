@@ -1,22 +1,15 @@
 package com.yuxinhui.text.myapplication.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.TeachData;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -36,28 +29,37 @@ public class TeacherAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mTeacherList.size();
+        if (mTeacherList!=null){
+            return mTeacherList.size();
+        }
+        return 0;
     }
 
     @Override
     public TeachData.DataBean getItem(int position) {
-        return mTeacherList.get(position);
+        if (mTeacherList!=null){
+            return mTeacherList.get(position);
+        }
+        return null;
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHodle viewHodle;
         if (convertView==null){
+            viewHodle=new ViewHodle();
             LayoutInflater inflater=LayoutInflater.from(mContext);
             convertView=inflater.inflate(R.layout.teacher_item,null);
+            viewHodle.teacher_context= (TextView) convertView.findViewById(R.id.teacher_context);
+            convertView.setTag(viewHodle);
+        }else {
+            viewHodle= (ViewHodle) convertView.getTag();
         }
-        viewHodle=new ViewHodle();
-        viewHodle.teacher_context= (TextView) convertView.findViewById(R.id.teacher_context);
         TeachData.DataBean teachData= getItem(position);
 //        viewHodle.teacher_head.
         viewHodle.teacher_context.setText(teachData.getContent());

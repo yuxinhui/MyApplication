@@ -28,33 +28,42 @@ public class HuiLvAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return mList.size();
+        if (mList!=null){
+            return mList.size();
+        }
+        return 0;
     }
 
     @Override
     public HuiLvData.DataBean getItem(int position) {
-        return mList.get(position);
+        if (mList!=null){
+            return mList.get(position);
+        }
+        return null;
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView==null){
+            holder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(R.layout.item_huilv,null);
+            holder.currency = (TextView) convertView.findViewById(R.id.currency);
+            holder.jydanwei = (TextView) convertView.findViewById(R.id.jydanwei);
+            holder.cen_price = (TextView) convertView.findViewById(R.id.cen_price);
+            holder.buy_price1 = (TextView) convertView.findViewById(R.id.buy_price1);
+            holder.buy_price2 = (TextView) convertView.findViewById(R.id.buy_price2);
+            holder.sell_price = (TextView) convertView.findViewById(R.id.sell_price);
+            convertView.setTag(holder);
+        }else {
+            holder= (ViewHolder) convertView.getTag();
         }
-        holder = new ViewHolder();
-        holder.currency = (TextView) convertView.findViewById(R.id.currency);
-        holder.jydanwei = (TextView) convertView.findViewById(R.id.jydanwei);
-        holder.cen_price = (TextView) convertView.findViewById(R.id.cen_price);
-        holder.buy_price1 = (TextView) convertView.findViewById(R.id.buy_price1);
-        holder.buy_price2 = (TextView) convertView.findViewById(R.id.buy_price2);
-        holder.sell_price = (TextView) convertView.findViewById(R.id.sell_price);
         HuiLvData.DataBean data =  getItem(position);
         holder.currency.setText(data.getCurrency());
         holder.buy_price1.setText(data.getBuy_price1());
