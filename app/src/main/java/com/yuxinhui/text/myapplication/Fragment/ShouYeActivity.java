@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,6 +34,8 @@ import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by "于志渊"
@@ -85,12 +88,20 @@ public class ShouYeActivity extends Fragment{
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         Toast.makeText(getActivity(), "下载失败,请检查网络连接", Toast.LENGTH_LONG);
-                        Log.i("indexkuaixun","下载失败哈");
+                        Log.e("indexkuaixun","下载失败哈");
                         dialog.dismiss();
                     }
                 }
-        );
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+                map.put("title","大庆论金:6.22现货黄金白银原油沥青交易思路及策略");
+                return map;
+            }
+        };
         requestQueue.add(mJsonObjectRequest);
+        mDataList.clear();
     }
 
     private void initView(View view) {

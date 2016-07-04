@@ -58,12 +58,12 @@
             <include layout="@layout/stock_left_title" />
 
             <!--右侧标题父容器水平滚动-->
-            <com.thea.guo.leftrightscrool.view.SyncHorizontalScrollView
+            <com.yuxinhui.text.myapplication.Utils.SyncHorizontalScrollView
                 android:id="@+id/title_horsv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scrollbars="@null" >
+                android:scrollbars="none" >
 
                 <LinearLayout
                     android:id="@+id/right_title_container"
@@ -73,7 +73,7 @@
 
                     <include layout="@layout/stock_right_tab"/>
                 </LinearLayout>
-            </com.thea.guo.leftrightscrool.view.SyncHorizontalScrollView>
+            </com.yuxinhui.text.myapplication.Utils.SyncHorizontalScrollView>
         </LinearLayout>
         <!--此部分是内容部分 用ScrollView实现上下滚动效果-->
     </LinearLayout>
@@ -99,12 +99,12 @@
                 </ListView>
             </LinearLayout>
             <!--右侧父容器实现水平滚动-->
-            <com.thea.guo.leftrightscrool.view.SyncHorizontalScrollView
+            <com.yuxinhui.text.myapplication.Utils.SyncHorizontalScrollView
                 android:id="@+id/content_horsv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scrollbars="@null" >
+                android:scrollbars="none" >
 
                 <LinearLayout
                     android:id="@+id/right_container"
@@ -120,7 +120,7 @@
                     </ListView>
 
                 </LinearLayout>
-            </com.thea.guo.leftrightscrool.view.SyncHorizontalScrollView>
+            </com.yuxinhui.text.myapplication.Utils.SyncHorizontalScrollView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

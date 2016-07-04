@@ -5,30 +5,37 @@
 
     <TextView
         android:text="0"
+        android:textColor="#000000"
         android:id="@+id/right_item_textview0"
         style="@style/stock_right_tab" />
     <TextView
         android:text="1"
+        android:textColor="#000000"
         android:id="@+id/right_item_textview1"
         style="@style/stock_right_tab" />
     <TextView
         android:text="2"
+        android:textColor="#000000"
         android:id="@+id/right_item_textview2"
         style="@style/stock_right_tab" />
     <TextView
         android:text="3"
+        android:textColor="#000000"
         android:id="@+id/right_item_textview3"
         style="@style/stock_right_tab" />
     <TextView
         android:text="4"
+        android:textColor="#000000"
         android:id="@+id/right_item_textview4"
         style="@style/stock_right_tab" />
     <TextView
         android:text="5"
+        android:textColor="#000000"
         android:id="@+id/right_item_textview5"
         style="@style/stock_right_tab" />
     <TextView
         android:text="6"
+        android:textColor="#000000"
         android:id="@+id/right_item_textview6"
         style="@style/stock_right_tab" />
 </LinearLayout>
