@@ -34,7 +34,7 @@ public class GuPiaoActivity extends Activity{
     private StockHuLeftAdapter mHuLeftAdapter;
     private StockHuRightAdapter mHuRightAdapter;
     private GuPiaoHuData.DataBean dataBean1=new GuPiaoHuData.DataBean();
-    private ArrayList<GuPiaoHuData.DataBean.DataBean1> mBean1ArrayList=new ArrayList<GuPiaoHuData.DataBean.DataBean1>();
+    private ArrayList<GuPiaoHuData.DataBean.Bean> mBean1ArrayList=new ArrayList<GuPiaoHuData.DataBean.Bean>();
     private String url="http://114.55.98.142/app/getShareList?name=sh&shpage=1&type=1";
     private LinearLayout leftContainerView;
     private ListView leftListView;
@@ -76,7 +76,7 @@ public class GuPiaoActivity extends Activity{
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         dataBean1 = gson.fromJson(s, GuPiaoHuData.DataBean.class);
-                        ArrayList<GuPiaoHuData.DataBean.DataBean1> data = (ArrayList<GuPiaoHuData.DataBean.DataBean1>) dataBean1.getData();
+                        ArrayList<GuPiaoHuData.DataBean.Bean> data = (ArrayList<GuPiaoHuData.DataBean.Bean>) dataBean1.getData();
                         mBean1ArrayList.addAll(data);
                         Log.e("沪股","加载成功");
                         dialog.dismiss();

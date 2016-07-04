@@ -20,9 +20,9 @@ import java.util.ArrayList;
  */
 public class StockHuRightAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<GuPiaoHuData.DataBean.DataBean1> mList;
+    private ArrayList<GuPiaoHuData.DataBean.Bean> mList;
 
-    public StockHuRightAdapter(Context context, ArrayList<GuPiaoHuData.DataBean.DataBean1> mList) {
+    public StockHuRightAdapter(Context context, ArrayList<GuPiaoHuData.DataBean.Bean> mList) {
         this.context = context;
         this.mList = mList;
     }
@@ -36,7 +36,7 @@ public class StockHuRightAdapter extends BaseAdapter {
     }
 
     @Override
-    public GuPiaoHuData.DataBean.DataBean1 getItem(int position) {
+    public GuPiaoHuData.DataBean.Bean getItem(int position) {
         if (mList!=null){
             return mList.get(position);
         }
@@ -65,7 +65,7 @@ public class StockHuRightAdapter extends BaseAdapter {
         }else {
             holder= (viewHolder) convertView.getTag();
         }
-        GuPiaoHuData.DataBean.DataBean1 bean1=getItem(position);
+        GuPiaoHuData.DataBean.Bean bean1=getItem(position);
         holder.right_item_textview0.setText(bean1.getSymbol());
         holder.right_item_textview1.setText(bean1.getAmount());
         holder.right_item_textview2.setText(bean1.getPricechange());

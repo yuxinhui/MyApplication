@@ -19,10 +19,10 @@ import java.util.ArrayList;
  * 描述:在行情界面显示全球外汇的适配器
  */
 public class GlobalAdapter extends BaseAdapter {
-    private ArrayList<GlobalCurrencyData> mList=new ArrayList<GlobalCurrencyData>();
+    private ArrayList<GlobalCurrencyData.dataBean> mList=new ArrayList<GlobalCurrencyData.dataBean>();
     private Context context;
 
-    public GlobalAdapter(ArrayList<GlobalCurrencyData> mList, Context context) {
+    public GlobalAdapter(ArrayList<GlobalCurrencyData.dataBean> mList, Context context) {
         this.mList = mList;
         this.context = context;
     }
@@ -36,7 +36,7 @@ public class GlobalAdapter extends BaseAdapter {
     }
 
     @Override
-    public GlobalCurrencyData getItem(int position) {
+    public GlobalCurrencyData.dataBean getItem(int position) {
         if (mList!=null){
             return mList.get(position);
         }
@@ -65,7 +65,7 @@ public class GlobalAdapter extends BaseAdapter {
         }else {
             holder= (viewHolder) convertView.getTag();
         }
-        GlobalCurrencyData data=getItem(position);
+        GlobalCurrencyData.dataBean data=getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");
         holder.changePercent.setText(data.getChangePercent()+"");

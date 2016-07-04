@@ -50,7 +50,7 @@ public class GlobalCurrency extends AppCompatActivity implements RadioGroup.OnCh
         mCurrentCheckedRadioLeft = getCurrentCheckedRadioLeft();
     }
     private void iniVariable() {
-        // TODO Auto-generated method stub
+//         TODO Auto-generated method stub
         mViews = new ArrayList<View>();
         mViews.add(getLayoutInflater().inflate(R.layout.activity_firstnull, null));
         mViews.add(getLayoutInflater().inflate(R.layout.activity_globalcurrency, null));
@@ -171,22 +171,22 @@ public class GlobalCurrency extends AppCompatActivity implements RadioGroup.OnCh
     private float getCurrentCheckedRadioLeft() {
         // TODO Auto-generated method stub
         if (mRadioButton1.isChecked()) {
-            //Log.i("zj", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo1));
+            //Log.i("yuxinhui", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo1));
             return getResources().getDimension(R.dimen.rdo1);
         }else if (mRadioButton2.isChecked()) {
-            //Log.i("zj", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo2));
+            //Log.i("yuxinhui", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo2));
             return getResources().getDimension(R.dimen.rdo2);
         }else if (mRadioButton3.isChecked()) {
-            //Log.i("zj", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo3));
+            //Log.i("yuxinhui", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo3));
             return getResources().getDimension(R.dimen.rdo3);
         }else if (mRadioButton4.isChecked()) {
-            //Log.i("zj", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo4));
+            //Log.i("yuxinhui", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo4));
             return getResources().getDimension(R.dimen.rdo4);
         }else if (mRadioButton5.isChecked()) {
-            //Log.i("zj", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo5));
+            //Log.i("yuxinhui", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo5));
             return getResources().getDimension(R.dimen.rdo5);
         }else if (mRadioButton6.isChecked()) {
-            //Log.i("yuxinhui", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo5));
+            //Log.i("yuxinhui", "currentCheckedRadioLeft="+getResources().getDimension(R.dimen.rdo6));
             return getResources().getDimension(R.dimen.rdo6);
         }
         return 0f;
@@ -218,8 +218,7 @@ public class GlobalCurrency extends AppCompatActivity implements RadioGroup.OnCh
     }
     /**
      * ViewPager的适配器
-     * @author zj
-     * 2012-5-24 下午2:26:57
+     * 下午2:26:57
      */
     private class MyPagerAdapter extends PagerAdapter {
 
@@ -274,8 +273,7 @@ public class GlobalCurrency extends AppCompatActivity implements RadioGroup.OnCh
     }
     /**
      * ViewPager的PageChangeListener(页面改变的监听器)
-     * @author zj
-     * 2012-5-24 下午3:14:27
+     * 3:14:27
      */
     private class MyPagerOnPageChangeListener implements ViewPager.OnPageChangeListener {
 

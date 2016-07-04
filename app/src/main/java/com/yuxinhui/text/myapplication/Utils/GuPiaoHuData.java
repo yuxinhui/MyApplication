@@ -73,7 +73,7 @@ public class GuPiaoHuData {
          * ticktime : 11:30:00
          */
 
-        private List<DataBean1> data;
+        private List<Bean> data;
 
         public String getTotalCount() {
             return totalCount;
@@ -99,15 +99,15 @@ public class GuPiaoHuData {
             this.num = num;
         }
 
-        public List<DataBean1> getData() {
+        public List<Bean> getData() {
             return data;
         }
 
-        public void setData(List<DataBean1> data) {
+        public void setData(List<Bean> data) {
             this.data = data;
         }
 
-        public static class DataBean1 {
+        public static class Bean {
             private String symbol;
             private String name;
             private String trade;
@@ -123,6 +123,24 @@ public class GuPiaoHuData {
             private int amount;
             private String code;
             private String ticktime;
+
+            public Bean(String symbol, String name, String trade, String pricechange, String changepercent, String buy, String sell, String settlement, String open, String high, String low, int volume, int amount, String code, String ticktime) {
+                this.symbol = symbol;
+                this.name = name;
+                this.trade = trade;
+                this.pricechange = pricechange;
+                this.changepercent = changepercent;
+                this.buy = buy;
+                this.sell = sell;
+                this.settlement = settlement;
+                this.open = open;
+                this.high = high;
+                this.low = low;
+                this.volume = volume;
+                this.amount = amount;
+                this.code = code;
+                this.ticktime = ticktime;
+            }
 
             public String getSymbol() {
                 return symbol;

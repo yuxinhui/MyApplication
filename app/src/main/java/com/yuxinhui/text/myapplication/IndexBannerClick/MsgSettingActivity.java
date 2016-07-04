@@ -1,3 +1,4 @@
+/*
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.content.Intent;
@@ -81,3 +82,4 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
         }
     }
 }
+*/

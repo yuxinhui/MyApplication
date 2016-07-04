@@ -9,13 +9,13 @@ import java.util.List;
  * 描述:全球外汇实体类
  */
 public class GlobalCurrencyData {
-    private List<GlobalCurrencyData> datas;
+    private List<dataBean> datas;
 
-    public List<GlobalCurrencyData> getDatas() {
+    public List<dataBean> getDatas() {
         return datas;
     }
 
-    public void setDatas(List<GlobalCurrencyData> datas) {
+    public void setDatas(List<dataBean> datas) {
         this.datas = datas;
     }
 
@@ -31,111 +31,112 @@ public class GlobalCurrencyData {
      * open : 1.1022
      * time : 1467083415000
      */
+    public static class dataBean{
+        private double change;
+        private double changePercent;
+        private double close;
+        private String code;
+        private double high;
+        private double low;
+        private String name;
+        private double newPrice;
+        private double open;
+        private long time;
 
-    private double change;
-    private double changePercent;
-    private double close;
-    private String code;
-    private double high;
-    private double low;
-    private String name;
-    private double newPrice;
-    private double open;
-    private long time;
+        public double getChange() {
+            return change;
+        }
 
-    public double getChange() {
-        return change;
-    }
+        public void setChange(double change) {
+            this.change = change;
+        }
 
-    public void setChange(double change) {
-        this.change = change;
-    }
+        public double getChangePercent() {
+            return changePercent;
+        }
 
-    public double getChangePercent() {
-        return changePercent;
-    }
+        public void setChangePercent(double changePercent) {
+            this.changePercent = changePercent;
+        }
 
-    public void setChangePercent(double changePercent) {
-        this.changePercent = changePercent;
-    }
+        public double getClose() {
+            return close;
+        }
 
-    public double getClose() {
-        return close;
-    }
+        public void setClose(double close) {
+            this.close = close;
+        }
 
-    public void setClose(double close) {
-        this.close = close;
-    }
+        public String getCode() {
+            return code;
+        }
 
-    public String getCode() {
-        return code;
-    }
+        public void setCode(String code) {
+            this.code = code;
+        }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+        public double getHigh() {
+            return high;
+        }
 
-    public double getHigh() {
-        return high;
-    }
+        public void setHigh(double high) {
+            this.high = high;
+        }
 
-    public void setHigh(double high) {
-        this.high = high;
-    }
+        public double getLow() {
+            return low;
+        }
 
-    public double getLow() {
-        return low;
-    }
+        public void setLow(double low) {
+            this.low = low;
+        }
 
-    public void setLow(double low) {
-        this.low = low;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        public double getNewPrice() {
+            return newPrice;
+        }
 
-    public double getNewPrice() {
-        return newPrice;
-    }
+        public void setNewPrice(double newPrice) {
+            this.newPrice = newPrice;
+        }
 
-    public void setNewPrice(double newPrice) {
-        this.newPrice = newPrice;
-    }
+        public double getOpen() {
+            return open;
+        }
 
-    public double getOpen() {
-        return open;
-    }
+        public void setOpen(double open) {
+            this.open = open;
+        }
 
-    public void setOpen(double open) {
-        this.open = open;
-    }
+        public long getTime() {
+            return time;
+        }
 
-    public long getTime() {
-        return time;
-    }
+        public void setTime(long time) {
+            this.time = time;
+        }
 
-    public void setTime(long time) {
-        this.time = time;
-    }
-
-    @Override
-    public String toString() {
-        return "GlobalCurrencyData{" +
-                "change=" + change +
-                ", changePercent=" + changePercent +
-                ", close=" + close +
-                ", code='" + code + '\'' +
-                ", high=" + high +
-                ", low=" + low +
-                ", name='" + name + '\'' +
-                ", newPrice=" + newPrice +
-                ", open=" + open +
-                ", time=" + time +
-                '}';
+        @Override
+        public String toString() {
+            return "GlobalCurrencyData{" +
+                    "change=" + change +
+                    ", changePercent=" + changePercent +
+                    ", close=" + close +
+                    ", code='" + code + '\'' +
+                    ", high=" + high +
+                    ", low=" + low +
+                    ", name='" + name + '\'' +
+                    ", newPrice=" + newPrice +
+                    ", open=" + open +
+                    ", time=" + time +
+                    '}';
+        }
     }
 }

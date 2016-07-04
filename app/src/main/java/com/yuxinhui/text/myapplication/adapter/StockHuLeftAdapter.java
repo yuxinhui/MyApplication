@@ -19,10 +19,10 @@ import java.util.List;
  * 描述:沪股票的详情左侧导航栏适配器
  */
 public class StockHuLeftAdapter extends BaseAdapter {
-    private List<GuPiaoHuData.DataBean.DataBean1> mList;
+    private List<GuPiaoHuData.DataBean.Bean> mList;
     private Context context;
 
-    public StockHuLeftAdapter(List<GuPiaoHuData.DataBean.DataBean1> mList, Context context) {
+    public StockHuLeftAdapter(List<GuPiaoHuData.DataBean.Bean> mList, Context context) {
         this.mList = mList;
         this.context = context;
     }
@@ -36,7 +36,7 @@ public class StockHuLeftAdapter extends BaseAdapter {
     }
 
     @Override
-    public GuPiaoHuData.DataBean.DataBean1 getItem(int position) {
+    public GuPiaoHuData.DataBean.Bean getItem(int position) {
         if (mList!=null){
             return mList.get(position);
         }
@@ -59,7 +59,7 @@ public class StockHuLeftAdapter extends BaseAdapter {
         }else {
             holder= (viewHolder) convertView.getTag();
         }
-        GuPiaoHuData.DataBean.DataBean1 bean1=getItem(position);
+        GuPiaoHuData.DataBean.Bean bean1=getItem(position);
         holder.left_container_textview0.setText(bean1.getName());
         return convertView;
     }

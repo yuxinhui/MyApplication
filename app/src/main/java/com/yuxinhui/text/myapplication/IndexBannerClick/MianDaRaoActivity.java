@@ -1,3 +1,4 @@
+/*
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.content.DialogInterface;
@@ -77,3 +78,4 @@ public class MianDaRaoActivity extends AppCompatActivity implements View.OnClick
         }
     }
 }
+*/
