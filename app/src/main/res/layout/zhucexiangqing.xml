@@ -23,11 +23,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/zhucexiangqing_tijiao_txt"
+            android:id="@+id/userinfo_commit"
             android:layout_centerVertical="true"
             android:text="提交"
             android:textColor="#ffffff"
-            android:textSize="30px"
+            android:textSize="20sp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
             android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/zhucexiangqing_yonghuming_txt"
+        android:id="@+id/et_username"
         android:background="@mipmap/yonghuming"
         android:gravity="center"
         android:paddingLeft="70dp"
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/zhucexiangqing_nicheng_txt"
+        android:id="@+id/et_nick"
         android:background="@mipmap/nicheng"
         android:gravity="center"
         android:paddingLeft="70dp"
@@ -69,27 +69,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/zhucexiangqing_qqhao_txt"
+        android:id="@+id/et_qq"
         android:background="@mipmap/zhanghao"
         android:gravity="center"
         android:paddingLeft="70dp"
         android:hint="请输入QQ账号"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <EditText
-        android:id="@+id/zhucexiangqing_xingbie_txt"
+        android:id="@+id/et_sex"
         android:background="@mipmap/xinbie"
         android:gravity="center"
         android:paddingLeft="70dp"
         android:hint="男/女"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/zhucexiangqing_dailishang_txt"
-        android:background="@mipmap/dailishang"
-        android:gravity="center"
-        android:paddingLeft="70dp"
-        android:hint="请选择代理商"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <ImageView
