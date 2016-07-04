@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/zhuce_mingzi_text"
+            android:id="@+id/et_telephone"
             android:textColorHint="#9b9999"
             android:hint="| 注册账户"
             android:background="@null"
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/zhuce_mima_text"
+            android:id="@+id/et_passwrod"
             android:textColorHint="#9b9999"
             android:hint="| 创建密码"
             android:background="@null"
@@ -103,6 +103,17 @@
             android:layout_marginRight="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_validate_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#000601"
+            android:textSize="18sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:layout_centerVertical="true"
+            android:textColor="#fff"
+            />
     </RelativeLayout>
     <ImageView
         android:id="@+id/zhuce_img"
