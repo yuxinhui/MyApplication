@@ -6,45 +6,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yuxinhui.text.myapplication.IndexBannerClick.VersionINfoActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="#f00"
-    >
-    <ImageView
-        android:id="@+id/back_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/fanhui"
-        android:layout_marginLeft="5dp"
-        android:layout_centerVertical="true"
-        />
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="34dp"
-        android:src="@mipmap/tit_version"
-        android:scaleType="fitXY"
-        android:layout_centerInParent="true"
-        />
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#f00"
+        >
+        <ImageView
+            android:id="@+id/back_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/fanhui"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="34dp"
+            android:src="@mipmap/tit_version"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@mipmap/us_banner"
         android:scaleType="fitXY"
         />
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/version_info"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        />
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/version_info"
+            />
+        <TextView
+            android:layout_below="@id/iv_version"
+            android:id="@+id/tv_version_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="        金易汇是安徽金服与鹿头社文化传媒、上海钦龙科技、金十数据、吉林国际商品交易所、福建金雅商品交易会所共同研发的一款移动手机端互联网金融综合类软件。软甲你主要功能有：在线课堂、互动交流、交易指导、股市信息、汇率查询、财经新闻、视频课程等主流功能，为广大投资者提供全面完善的投资理财服务。"
+            />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_version_info"
+            android:layout_alignParentRight="true"
+            android:text="安徽金服  版权所有"
+            />
+    </RelativeLayout>
+
 </LinearLayout>
