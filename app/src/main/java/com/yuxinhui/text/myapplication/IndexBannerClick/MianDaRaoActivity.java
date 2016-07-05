@@ -1,11 +1,8 @@
-/*
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
-import android.content.DialogInterface;
 import android.media.AudioManager;
-import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -78,4 +75,3 @@ public class MianDaRaoActivity extends AppCompatActivity implements View.OnClick
         }
     }
 }
-*/

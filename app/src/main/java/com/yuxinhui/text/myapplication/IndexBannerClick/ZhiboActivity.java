@@ -1,12 +1,9 @@
-/*package com.yuxinhui.text.myapplication.IndexBannerClick;
+package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,26 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gensee.common.ServiceType;
-import com.gensee.entity.ChatMsg;
-import com.gensee.entity.DocInfo;
 import com.gensee.entity.InitParam;
 import com.gensee.entity.UserInfo;
-import com.gensee.media.GSOLPlayer;
-import com.gensee.media.VODPlayer;
 import com.gensee.net.AbsRtAction;
 import com.gensee.player.OnPlayListener;
 import com.gensee.player.Player;
-import com.gensee.utils.GenseeLog;
-import com.gensee.utils.StringUtil;
 import com.gensee.view.GSVideoView;
-import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 
-import java.util.List;
-
-*//**直播视频的activity
+/**直播视频的activity
  * Created by Administrator on 2016/5/31.
- *//*
+ * */
+
 public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
 
     private GSVideoView mGSzhibo;//视频插件
@@ -417,4 +406,4 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     public void onMicNotify(int i) {
 
     }
-}*/
+}

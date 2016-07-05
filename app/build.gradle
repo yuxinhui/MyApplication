@@ -38,4 +38,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/Volley.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile files('libs/gensee_baseplayer.jar')
+    compile files('libs/gensee_vod_ol.jar')
+    compile files('libs/gensee_rtmpplayer.jar')
 }

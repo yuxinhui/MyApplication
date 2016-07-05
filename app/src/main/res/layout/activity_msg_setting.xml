@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_msg_setting"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!--tools:context="com.yuxinhui.text.myapplication.IndexBannerClick.MsgSettingActivity"-->
+    android:layout_height="match_parent"
+    tools:context="com.yuxinhui.text.myapplication.IndexBannerClick.MsgSettingActivity">
 
-    <!--<RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#f00"
@@ -114,5 +114,5 @@
         android:textColor="#FFF"
         android:textSize="20sp"
         android:layout_marginTop="80dp"
-        />-->
+        />
 </LinearLayout>
