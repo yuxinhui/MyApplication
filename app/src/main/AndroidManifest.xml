@@ -49,6 +49,7 @@
         <activity android:name=".YinDaoTu.GuideActivity" />
         <activity android:name=".Actiity.Zhuce" />
         <activity android:name=".Actiity.KaiHu" />
+        <activity android:name=".Actiity.GlobalActivity"/>
         <activity android:name=".IndexBannerClick.KeFuActivity" />
         <activity android:name=".IndexBannerClick.KeBiaoActivity" />
         <activity android:name=".IndexBannerClick.HanDanActivity" />
@@ -60,6 +61,7 @@
         <activity android:name=".Actiity.Denglu" />
         <activity android:name=".Actiity.ZhuCeXiangQing" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".HangQingActivity.GlobalCurrency"/>
         <activity android:name=".IndexBannerClick.ZhiboActivity" />
         <activity android:name=".IndexBannerClick.AboutUsActivity" />
         <activity android:name=".IndexBannerClick.AdviceCommitActivity" />

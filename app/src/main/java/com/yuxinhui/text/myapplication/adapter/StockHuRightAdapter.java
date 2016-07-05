@@ -67,11 +67,11 @@ public class StockHuRightAdapter extends BaseAdapter {
         }
         GuPiaoHuData.DataBean.Bean bean1=getItem(position);
         holder.right_item_textview0.setText(bean1.getSymbol());
-        holder.right_item_textview1.setText(bean1.getAmount());
+        holder.right_item_textview1.setText(bean1.getAmount()+" ");
         holder.right_item_textview2.setText(bean1.getPricechange());
         holder.right_item_textview3.setText(bean1.getChangepercent());
         holder.right_item_textview4.setText(bean1.getSell());
-        holder.right_item_textview5.setText(bean1.getVolume());
+        holder.right_item_textview5.setText(bean1.getVolume()+" ");
         holder.right_item_textview6.setText(bean1.getSettlement());
         return convertView;
     }

@@ -70,4 +70,10 @@ public class YuXinHuiApplication extends Application {
     public static void setInstace(YuXinHuiApplication instace) {
         YuXinHuiApplication.instace = instace;
     }
+
+    public void unLoginclear() {
+        user = null;
+        isLogin = false;
+
+    }
 }

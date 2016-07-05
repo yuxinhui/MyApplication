@@ -62,10 +62,13 @@ public class HuiLvActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HuiLvActivity.this, MainActivity.class);
                 startActivity(intent);
+                finishActivity();
             }
         });
     }
-
+    private void finishActivity(){
+        this.finish();
+    }
     /**
      * 下载有关汇率的数据
      */

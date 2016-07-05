@@ -35,8 +35,8 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     boolean isPlayed = false;
     TextView mtvFullScreen;
     SeekBar msbAudio;
-    AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-    int streamVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);//获取系统当前的媒体音量
+    AudioManager am ;
+    int streamVolume;
 //    String url = "dd020436921d43a79dcf6965415179f8";
     //491a1a7b416043b0987c499690412a11
 
@@ -45,6 +45,8 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhibo);
         Log.e("TAG",isPlayed+"");
+        am= (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        streamVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);//获取系统当前的媒体音量
         initView();
         setOnClick();
     }
@@ -115,7 +117,9 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         msbAudio.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
                 changeAudio(progress);
+
             }
 
             @Override

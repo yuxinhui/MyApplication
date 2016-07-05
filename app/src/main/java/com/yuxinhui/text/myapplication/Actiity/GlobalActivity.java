@@ -72,7 +72,6 @@ public class GlobalActivity extends AppCompatActivity {
                     }
                 }
         );
-        Log.e("全球外汇",mArrayList.get(1).toString());
         requestQueue.add(request);
     }
 }

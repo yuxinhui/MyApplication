@@ -16,7 +16,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
+import com.yuxinhui.text.myapplication.Utils.DialogUtils;
+import com.yuxinhui.text.myapplication.Utils.Message;
 import com.yuxinhui.text.myapplication.Utils.User;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
@@ -34,6 +37,7 @@ public class ZhuCeXiangQing extends AppCompatActivity {
     User user;
     String url = "http://114.55.98.142/user/perfectInfo";
     String nick,userName,QQ, gendar,telephone;
+    Message message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +63,20 @@ public class ZhuCeXiangQing extends AppCompatActivity {
         mtvCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                initData();
                 if(nick==null||nick==""){
-                    metNick.setError("昵称不能为空");
                     metNick.requestFocus();
+                    metNick.setError("昵称不能为空");
                     return;
                 }
                 if(userName==null||userName==""){
-                    metUserName.setError("用户名不能为空");
                     metUserName.requestFocus();
+                    metUserName.setError("用户名不能为空");
                     return;
                 }
                 if (QQ == null || QQ == "") {
-                    metQQ.setError("QQ不能为空");
                     metQQ.requestFocus();
+                    metQQ.setError("QQ不能为空");
                     return;
                 }
                 if(gendar==null||gendar==""){
@@ -103,7 +108,15 @@ public class ZhuCeXiangQing extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-
+                Gson gson = new Gson();
+                message = gson.fromJson(s, Message.class);
+                if(message.getStatus()!="fail"){
+                    YuXinHuiApplication.getInstace().setUser(message.getUser());
+                }else {
+                    DialogUtils.createToasdt(ZhuCeXiangQing.this,message.getMessage());
+                }
+                Intent intent = new Intent(ZhuCeXiangQing.this, MainActivity.class);
+                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override

@@ -70,7 +70,7 @@ public class XueYuanAdapter extends BaseAdapter {
         holder.xueyuan_title.setText(bean.getTitle());
         holder.content.setText(bean.getContent());
         holder.author.setText(bean.getAuthor());
-        holder.xueyuan_time.setText(bean.getTime()+"");
+        holder.xueyuan_time.setText("时间:"+bean.getTime());
         return convertView;
     }
     public class viewHolder{

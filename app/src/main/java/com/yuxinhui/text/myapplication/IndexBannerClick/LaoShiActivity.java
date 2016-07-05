@@ -80,11 +80,15 @@ public class LaoShiActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent mIntent=new Intent(LaoShiActivity.this, MainActivity.class);
                 startActivity(mIntent);
+                finishActivity();
             }
         });
         teacher_lv= (ListView) findViewById(R.id.teacher_lv);
         teacherAdapter=new TeacherAdapter(mTeachDatas,LaoShiActivity.this);
         teacher_lv.setDivider(null);
         teacher_lv.setAdapter(teacherAdapter);
+    }
+    public void finishActivity(){
+        this.finish();
     }
 }

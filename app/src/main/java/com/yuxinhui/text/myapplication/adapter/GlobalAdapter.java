@@ -67,11 +67,11 @@ public class GlobalAdapter extends BaseAdapter {
         }
         GlobalCurrencyData.dataBean data=getItem(position);
         holder.name.setText(data.getName());
-        holder.newPrice.setText(data.getNewPrice()+"");
-        holder.changePercent.setText(data.getChangePercent()+"");
-        holder.time.setText(data.getTime()+"");
-        holder.low.setText(data.getLow()+"");
-        holder.high.setText(data.getHigh()+"");
+        holder.newPrice.setText(data.getNewPrice()+" ");
+        holder.changePercent.setText(data.getChangePercent()+" ");
+        holder.time.setText(data.getTime()+" ");
+        holder.low.setText(data.getLow()+" ");
+        holder.high.setText(data.getHigh()+" ");
         return convertView;
     }
     public class viewHolder{

@@ -80,6 +80,7 @@ public class GlobalCurrency extends AppCompatActivity implements RadioGroup.OnCh
             _AnimationSet.setFillAfter(true);
             _AnimationSet.setDuration(100);
             mRadioButton1.setTextColor(yellow);
+
             /*LayoutParams _LayoutParams1 = new LayoutParams(100, 4);
             _LayoutParams1.setMargins(0, 0, 0, 0);
             _LayoutParams1.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);*/
@@ -297,7 +298,7 @@ public class GlobalCurrency extends AppCompatActivity implements RadioGroup.OnCh
             //Log.i("zj", "position="+position);
 
             if (position == 0) {
-                mViewPager.setCurrentItem(1);
+                mViewPager.setCurrentItem(0);
             }else if (position == 1) {
                 mRadioButton1.performClick();
             }else if (position == 2) {

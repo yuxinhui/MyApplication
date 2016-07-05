@@ -28,7 +28,7 @@ import com.yuxinhui.text.myapplication.IndexBannerClick.KeBiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.KeFuActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.LaoShiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.WeiPanActivity;
-//import com.yuxinhui.text.myapplication.IndexBannerClick.ZhiboActivity;
+import com.yuxinhui.text.myapplication.IndexBannerClick.ZhiboActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
@@ -51,7 +51,6 @@ public class ShouYeActivity extends Fragment{
     private IndexKuaiXunData indexKuaiXunData;
     private String url="http://114.55.98.142/app/news/";
     private ShouyeKuaiXunAdapter mIndexKuaiXunAdapter;
-    private ArrayList<ImageView> list=new ArrayList<ImageView>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,7 +76,7 @@ public class ShouYeActivity extends Fragment{
                     @Override
                     public void onResponse(String s) {
                         Gson gson = new Gson();
-                        indexKuaiXunData = gson.fromJson(s, IndexKuaiXunData.class);
+                        indexKuaiXunData = gson.fromJson(s,IndexKuaiXunData.class);
                         ArrayList<IndexKuaiXunData.DataBean> list = (ArrayList<IndexKuaiXunData.DataBean>) indexKuaiXunData.getData();
                         mDataList.addAll(list);
                         Log.e("快讯","加载成功");
@@ -101,7 +100,6 @@ public class ShouYeActivity extends Fragment{
             }
         };
         requestQueue.add(mJsonObjectRequest);
-        mDataList.clear();
     }
 
     private void initView(View view) {
@@ -132,7 +130,7 @@ public class ShouYeActivity extends Fragment{
                new Runnable() {
                    @Override
                    public void run() {
-//                       mIntent=new Intent(getActivity(), ZhiboActivity.class);
+                       mIntent=new Intent(getActivity(), ZhiboActivity.class);
                        startActivity(mIntent);
                    }
                }.run();

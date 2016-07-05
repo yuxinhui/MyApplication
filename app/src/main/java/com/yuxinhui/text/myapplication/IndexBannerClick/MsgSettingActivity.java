@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.yuxinhui.text.myapplication.Actiity.Denglu;
 import com.yuxinhui.text.myapplication.R;
+import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
 public class MsgSettingActivity extends AppCompatActivity implements View.OnClickListener{
     ImageView mivReturn,mivZhendong,mivAudio;
@@ -17,6 +19,8 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
     Button unLogin;
     boolean isVibrate=true,isRing=true;
     AudioManager am;
+    boolean isLogin;
+    boolean isMiandaorao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,8 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_msg_setting);
         am = (AudioManager) getSystemService(AUDIO_SERVICE);
         am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        isLogin = YuXinHuiApplication.getInstace().isLogin();
+        isMiandaorao = YuXinHuiApplication.getInstace().isOpenMiandarao();
         initView();
         setOnClickLIstener();
     }
@@ -42,6 +48,15 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
         mivAudio = (ImageView) findViewById(R.id.iv_audio_setting);
         miandarao = (RelativeLayout) findViewById(R.id.miandarao);
         unLogin = (Button) findViewById(R.id.un_login);
+        if(isMiandaorao){
+            mivZhendong.setImageResource(R.mipmap.icon_close);
+            mivZhendong.setClickable(false);
+            mivAudio.setImageResource(R.mipmap.icon_close);
+            mivAudio.setClickable(false);
+        }
+        if (isLogin == false) {
+            unLogin.setText("点击登陆");
+        }
     }
 
     @Override
@@ -75,7 +90,13 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
                 startActivity(intent);
                 break;
             case R.id.un_login:
-                unLogin.setText("点击登陆");
+                if(isLogin){
+                    unLogin.setText("点击登陆");
+                    YuXinHuiApplication.getInstace().unLoginclear();
+                }else {
+                    Intent intent1 = new Intent(this, Denglu.class);
+                    startActivity(intent1);
+                }
                 break;
         }
     }

@@ -2,10 +2,14 @@ package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -15,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.GuPiaoHuData;
 import com.yuxinhui.text.myapplication.Utils.SyncHorizontalScrollView;
@@ -43,10 +48,17 @@ public class GuPiaoActivity extends Activity{
     private ListView rightListView;
     private SyncHorizontalScrollView titleHorsv;
     private SyncHorizontalScrollView contentHorsv;
+    RequestQueue requestQueue ;
+    private ImageView gupiao_return;
+    private Intent mIntent;
+    private TextView hugu_txt,shengu_txt;
+    private int red=0XFFED0E0E;
+    private int white=0xFFFFFFFF;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gupiao_activity);
+        requestQueue= Volley.newRequestQueue(this);
         initLeftData();
         initView();
         //设置两个水平控件的联动
@@ -61,12 +73,12 @@ public class GuPiaoActivity extends Activity{
         rightListView.setDivider(null);
         rightListView.setAdapter(mHuRightAdapter);
         StockUtilTools.setListViewHeightBasedOnChildren(rightListView);
+
     }
 
 
 
     private void initLeftData() {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
         final ProgressDialog dialog=ProgressDialog.show(this,"沪股","加载ing");
         StringRequest request=new StringRequest(
                 Request.Method.GET,
@@ -108,5 +120,22 @@ public class GuPiaoActivity extends Activity{
         rightListView= (ListView) findViewById(R.id.right_container_listview);
         titleHorsv= (SyncHorizontalScrollView) findViewById(R.id.title_horsv);
         contentHorsv= (SyncHorizontalScrollView) findViewById(R.id.content_horsv);
+        gupiao_return= (ImageView) findViewById(R.id.gupiao_return);
+        gupiao_return.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIntent=new Intent(GuPiaoActivity.this, MainActivity.class);
+                startActivity(mIntent);
+                finishActivity();
+            }
+        });
+        hugu_txt= (TextView) findViewById(R.id.hugu_txt);
+        shengu_txt= (TextView) findViewById(R.id.shengu_txt);
+    }
+    private void changeStock(){
+
+    }
+    private void finishActivity(){
+        this.finish();
     }
 }

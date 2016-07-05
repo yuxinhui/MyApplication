@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,6 +22,8 @@ import com.yuxinhui.text.myapplication.Utils.XueYuanData;
 import com.yuxinhui.text.myapplication.adapter.XueYuanAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/5/31.
@@ -71,7 +74,17 @@ public class XueyuanActivity extends Fragment {
                         dialog.dismiss();
                     }
                 }
-        );
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+                map.put("title","EIA公布在即");
+                return map;
+            }
+        };
         requestQueue.add(request);
+    }
+    private void finishActivity(){
+        this.finishActivity();
     }
 }
