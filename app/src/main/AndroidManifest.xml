@@ -12,6 +12,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -19,13 +23,22 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_VIDEO" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
+        android:name=".YuXinHuiApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".YinDaoTu.YinDaoTuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,11 +46,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Actiity.BannerGuideActivity"/>
         <activity android:name=".YinDaoTu.GuideActivity" />
         <activity android:name=".Actiity.Zhuce" />
         <activity android:name=".Actiity.KaiHu" />
-        <activity android:name=".HangQingActivity.GlobalCurrency"/>
         <activity android:name=".IndexBannerClick.KeFuActivity" />
         <activity android:name=".IndexBannerClick.KeBiaoActivity" />
         <activity android:name=".IndexBannerClick.HanDanActivity" />
@@ -45,16 +56,16 @@
         <activity android:name=".IndexBannerClick.GuPiaoActivity" />
         <activity android:name=".IndexBannerClick.HuiLvActivity" />
         <activity android:name=".IndexBannerClick.LaoShiActivity" />
-        <!--<activity android:name=".IndexBannerClick.ZhiboActivity"/>-->
         <activity android:name=".Actiity.KaiHuRenZheng" />
         <activity android:name=".Actiity.Denglu" />
         <activity android:name=".Actiity.ZhuCeXiangQing" />
         <activity android:name=".MainActivity" />
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <activity android:name=".IndexBannerClick.ZhiboActivity" />
+        <activity android:name=".IndexBannerClick.AboutUsActivity" />
+        <activity android:name=".IndexBannerClick.AdviceCommitActivity" />
+        <activity android:name=".IndexBannerClick.VersionINfoActivity" />
+        <activity android:name=".IndexBannerClick.MsgSettingActivity" />
+        <activity android:name=".IndexBannerClick.MianDaRaoActivity"></activity>
     </application>
 
 </manifest>
