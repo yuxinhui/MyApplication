@@ -59,6 +59,7 @@ public class TianTongYinActivity extends AppCompatActivity {
                         mData=gson.fromJson(s,TianTongYinData.class);
                         ArrayList<TianTongYinData> list = (ArrayList<TianTongYinData>) mData.getDatas();
                         mList.addAll(list);
+                        mAdapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 },

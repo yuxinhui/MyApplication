@@ -60,6 +60,7 @@ public class XianHuoHuangJinActivity extends AppCompatActivity {
                         mData = gson.fromJson(s, XianHuoHuangJinData.class);
                         ArrayList<XianHuoHuangJinData> list = (ArrayList<XianHuoHuangJinData>) mData.getmDatas();
                         mList.addAll(list);
+                        mAdapter.notifyDataSetChanged();
                         progressDialog.dismiss();
                     }
                 },

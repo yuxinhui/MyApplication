@@ -48,7 +48,6 @@ public class GuPiaoActivity extends Activity{
     private ListView rightListView;
     private SyncHorizontalScrollView titleHorsv;
     private SyncHorizontalScrollView contentHorsv;
-    RequestQueue requestQueue ;
     private ImageView gupiao_return;
     private Intent mIntent;
     private TextView hugu_txt,shengu_txt;
@@ -58,7 +57,6 @@ public class GuPiaoActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gupiao_activity);
-        requestQueue= Volley.newRequestQueue(this);
         initLeftData();
         initView();
         //设置两个水平控件的联动
@@ -79,6 +77,7 @@ public class GuPiaoActivity extends Activity{
 
 
     private void initLeftData() {
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
         final ProgressDialog dialog=ProgressDialog.show(this,"沪股","加载ing");
         StringRequest request=new StringRequest(
                 Request.Method.GET,
@@ -90,7 +89,9 @@ public class GuPiaoActivity extends Activity{
                         dataBean1 = gson.fromJson(s, GuPiaoHuData.DataBean.class);
                         ArrayList<GuPiaoHuData.DataBean.Bean> data = (ArrayList<GuPiaoHuData.DataBean.Bean>) dataBean1.getData();
                         mBean1ArrayList.addAll(data);
-                        Log.e("沪股","加载成功");
+//                        mHuLeftAdapter.notifyDataSetChanged();
+                        mHuRightAdapter.notifyDataSetChanged();
+                        Log.i("沪股",data.get(1).toString());
                         dialog.dismiss();
                     }
                 },
@@ -110,7 +111,6 @@ public class GuPiaoActivity extends Activity{
             }
         };
         requestQueue.add(request);
-        mBean1ArrayList.clear();
     }
 
     private void initView() {

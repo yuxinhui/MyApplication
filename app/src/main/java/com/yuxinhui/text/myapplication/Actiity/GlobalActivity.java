@@ -60,6 +60,7 @@ public class GlobalActivity extends AppCompatActivity {
                         mCurrencyData = gson.fromJson(s, GlobalCurrencyData.class);
                         ArrayList<GlobalCurrencyData.dataBean> list = (ArrayList<GlobalCurrencyData.dataBean>) mCurrencyData.getDatas();
                         mArrayList.addAll(list);
+                        mGlobalAdapter.notifyDataSetChanged();
                         Log.e("全球外汇","加载成功");
                         progressDialog.dismiss();
                     }

@@ -59,6 +59,7 @@ public class LaoShiActivity extends AppCompatActivity{
                         teachData = gson.fromJson(s, TeachData.class);
                         ArrayList<TeachData.DataBean> list = (ArrayList<TeachData.DataBean>) teachData.getData();
                         mTeachDatas.addAll(list);
+                        teacherAdapter.notifyDataSetChanged();
                         Log.i("laoshi","加载消息成功");
                         progressDialog.dismiss();
                     }

@@ -59,6 +59,7 @@ public class ShangHaiJinActivity extends AppCompatActivity {
                         mData=gson.fromJson(s,ShangHaiJinData.class);
                         ArrayList<ShangHaiJinData> list = (ArrayList<ShangHaiJinData>) mData.getDatas();
                         mList.addAll(list);
+                        mAdapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 },

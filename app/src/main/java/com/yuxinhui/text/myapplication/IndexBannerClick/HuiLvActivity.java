@@ -88,6 +88,7 @@ public class HuiLvActivity extends AppCompatActivity {
                           ArrayList<HuiLvData.DataBean> list  = (ArrayList<HuiLvData.DataBean>) mHuiLv.getData();
 //                        Log.e("TAG", list.get(1).toString());
                           mList.addAll(list);
+                          mAdapter.notifyDataSetChanged();
 //                        for(HuiLvText.DataBean db:mList){
 //                            Log.e("TAG", db.toString());
 //                        }

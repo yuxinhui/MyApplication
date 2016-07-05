@@ -59,6 +59,7 @@ public class ComexActivity extends AppCompatActivity {
                         mData=gson.fromJson(s,ComexData.class);
                         ArrayList<ComexData> list = (ArrayList<ComexData>) mData.getComexDatas();
                         mList.addAll(list);
+                        mAdapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 },

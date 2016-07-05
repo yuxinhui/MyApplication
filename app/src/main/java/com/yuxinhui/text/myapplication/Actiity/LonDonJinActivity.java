@@ -59,6 +59,7 @@ public class LonDonJinActivity extends AppCompatActivity {
                         mData=gson.fromJson(s,LondonJinData.class);
                         ArrayList<LondonJinData> list = (ArrayList<LondonJinData>) mData.getDatas();
                         mList.addAll(list);
+                        mAdapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 },
