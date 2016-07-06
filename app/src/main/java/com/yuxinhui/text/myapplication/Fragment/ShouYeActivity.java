@@ -1,14 +1,25 @@
 package com.yuxinhui.text.myapplication.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.Actiity.KaiHu;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HanDanActivity;
@@ -16,13 +27,15 @@ import com.yuxinhui.text.myapplication.IndexBannerClick.HuiLvActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.KeBiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.KeFuActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.LaoShiActivity;
-import com.yuxinhui.text.myapplication.IndexBannerClick.WeiPanActivity;
+import com.yuxinhui.text.myapplication.IndexBannerClick.RiLiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.ZhiboActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by "于志渊"
@@ -46,12 +59,12 @@ public class ShouYeActivity extends Fragment{
         //初始化控件
         initImage(view);
         imageClick();
-//        initData();
-//        initView(view);
+        initData();
+        initView(view);
         return view;
     }
 
-    /*private void initData() {
+    private void initData() {
 //        Log.e("indexKuaiXun",mDataList.get(1).toString());
         indexKuaiXunData = new IndexKuaiXunData();
         RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
@@ -96,7 +109,7 @@ public class ShouYeActivity extends Fragment{
         kuaixun_list.setDivider(null);
         kuaixun_list.setAdapter(mIndexKuaiXunAdapter);
 
-    }*/
+    }
 
     /**导航图片点击*/
     private void imageClick() {
@@ -178,7 +191,7 @@ public class ShouYeActivity extends Fragment{
                 new Runnable() {
                     @Override
                     public void run() {
-                        mIntent=new Intent(getActivity(), WeiPanActivity.class);
+                        mIntent=new Intent(getActivity(), RiLiActivity.class);
                         startActivity(mIntent);
                     }
                 }.run();

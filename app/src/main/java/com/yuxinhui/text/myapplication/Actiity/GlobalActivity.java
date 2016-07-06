@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.GlobalCurrencyData;
 import com.yuxinhui.text.myapplication.adapter.GlobalAdapter;
@@ -29,8 +30,7 @@ import java.util.ArrayList;
  */
 public class GlobalActivity extends AppCompatActivity {
     private GlobalAdapter mGlobalAdapter;
-    private GlobalCurrencyData mCurrencyData=new GlobalCurrencyData();
-    private ArrayList<GlobalCurrencyData.dataBean> mArrayList=new ArrayList<GlobalCurrencyData.dataBean>();
+    private ArrayList<GlobalCurrencyData> mArrayList=new ArrayList<GlobalCurrencyData>();
     private ListView global_lv;
     private String url="http://pull.api.fxgold.com/realtime/products?codes=IXFXEURUSD,IXFXAUDUSD,IXFXGBPCHF,IXFXUSDJPY,IXFXGBPUSD,IXFXUSDCHF,IXFXUSDCAD,IXFXEURGBP,IXFXEURJPY,IXFXEURCHF,IXEAINUDI,IXFXNZDUSD,IXFXAUDJPY,IXFXEURAUD,IXFXUSDHKD,IXFXGBPJPY,IXFXUSDTWD,IXFXEURCAD,IXFXUSDCNY,IXFXAUDNZD,IXFXAUDCNY,IXFXGBPAUD,IXFXAUDCAD,IXFXGBPCHF,IXFXUSDKRW,IXFXGBPCAD";
     @Override
@@ -57,9 +57,8 @@ public class GlobalActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         Gson gson=new Gson();
-                        mCurrencyData = gson.fromJson(s, GlobalCurrencyData.class);
-                        ArrayList<GlobalCurrencyData.dataBean> list = (ArrayList<GlobalCurrencyData.dataBean>) mCurrencyData.getDatas();
-                        mArrayList.addAll(list);
+                        ArrayList<GlobalCurrencyData> datas=gson.fromJson(s,new TypeToken<ArrayList<GlobalCurrencyData>>(){}.getType());
+                        mArrayList.addAll(datas);
                         mGlobalAdapter.notifyDataSetChanged();
                         Log.e("全球外汇","加载成功");
                         progressDialog.dismiss();

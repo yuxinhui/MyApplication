@@ -9,15 +9,6 @@ import java.util.List;
  * 描述:全球外汇实体类
  */
 public class GlobalCurrencyData {
-    private List<dataBean> datas;
-
-    public List<dataBean> getDatas() {
-        return datas;
-    }
-
-    public void setDatas(List<dataBean> datas) {
-        this.datas = datas;
-    }
 
     /**
      * change : 0.003000021
@@ -31,7 +22,7 @@ public class GlobalCurrencyData {
      * open : 1.1022
      * time : 1467083415000
      */
-    public static class dataBean{
+
         private double change;
         private double changePercent;
         private double close;
@@ -138,5 +129,5 @@ public class GlobalCurrencyData {
                     ", time=" + time +
                     '}';
         }
-    }
+
 }

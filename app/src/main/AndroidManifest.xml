@@ -53,7 +53,7 @@
         <activity android:name=".IndexBannerClick.KeFuActivity" />
         <activity android:name=".IndexBannerClick.KeBiaoActivity" />
         <activity android:name=".IndexBannerClick.HanDanActivity" />
-        <activity android:name=".IndexBannerClick.WeiPanActivity" />
+        <activity android:name=".IndexBannerClick.RiLiActivity" />
         <activity android:name=".IndexBannerClick.GuPiaoActivity" />
         <activity android:name=".IndexBannerClick.HuiLvActivity" />
         <activity android:name=".IndexBannerClick.LaoShiActivity" />
