@@ -102,11 +102,11 @@
                     android:layout_margin="1dp"/>
                 <ImageView
                     android:layout_margin="1dp"
-                    android:id="@+id/weipan_image"
+                    android:id="@+id/rili_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/weipan"/>
+                    android:src="@mipmap/riliicon"/>
             </LinearLayout>
         </RelativeLayout>
         <RelativeLayout

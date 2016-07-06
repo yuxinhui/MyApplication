@@ -37,12 +37,14 @@ public class KeBiaoActivity extends Activity{
     private ArrayList<KeBiaoData.DataBean> mList=new ArrayList<KeBiaoData.DataBean>();
     private CurriculumAdapter mAdapter;
     private ImageView curriculum_return_img;
+
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.activity_curriculum);
         initData();
         initView();
+
     }
 
     private void initView() {
@@ -63,7 +65,7 @@ public class KeBiaoActivity extends Activity{
 
     private void initData() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        final ProgressDialog dialog=ProgressDialog.show(this,"课程表","努力加载》》》》");
+        final ProgressDialog dialog= ProgressDialog.show(this,"课程表","努力加载》》》》");
         StringRequest request=new StringRequest(
                 Request.Method.GET,
                 url,
@@ -75,6 +77,7 @@ public class KeBiaoActivity extends Activity{
                         ArrayList<KeBiaoData.DataBean> data = (ArrayList<KeBiaoData.DataBean>) mData.getData();
                         mList.addAll(data);
                         mAdapter.notifyDataSetChanged();
+                        Log.e("课表","加载成功");
                     }
                 },
                 new Response.ErrorListener() {
@@ -87,6 +90,7 @@ public class KeBiaoActivity extends Activity{
         );
         requestQueue.add(request);
     }
+
     private void finishActivity(){
         this.finish();
     }

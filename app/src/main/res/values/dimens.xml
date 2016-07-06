@@ -8,6 +8,7 @@
     <dimen name="rdo4">5dp</dimen>
     <dimen name="rdo5">5dp</dimen>
     <dimen name="rdo6">5dp</dimen>
+    <dimen name="weekItemHeight">40dp</dimen>
     <dimen name="weekItemMarTop">2dp</dimen>
     <dimen name="weekItemMarLeft">2dp</dimen>
 </resources>

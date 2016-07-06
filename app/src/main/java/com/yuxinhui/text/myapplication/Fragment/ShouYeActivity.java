@@ -1,25 +1,14 @@
 package com.yuxinhui.text.myapplication.Fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.Actiity.KaiHu;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HanDanActivity;
@@ -34,8 +23,6 @@ import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by "于志渊"
@@ -44,7 +31,7 @@ import java.util.Map;
  * 描述:显示首页界面
  */
 public class ShouYeActivity extends Fragment{
-    private ImageView kaihu_image,zhibo1_image,laoshi_image,kefu_image,kechengbiao_image,handan_image,weipan_image,gupiao_image,huilv_image;
+    private ImageView kaihu_image,zhibo1_image,laoshi_image,kefu_image,kechengbiao_image,handan_image,rili_image,gupiao_image,huilv_image;
     private Intent mIntent;
     private ListView kuaixun_list;
     private ArrayList<IndexKuaiXunData.DataBean> mDataList=new ArrayList<IndexKuaiXunData.DataBean>();
@@ -59,12 +46,12 @@ public class ShouYeActivity extends Fragment{
         //初始化控件
         initImage(view);
         imageClick();
-        initData();
-        initView(view);
+//        initData();
+//        initView(view);
         return view;
     }
 
-    private void initData() {
+    /*private void initData() {
 //        Log.e("indexKuaiXun",mDataList.get(1).toString());
         indexKuaiXunData = new IndexKuaiXunData();
         RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
@@ -109,7 +96,7 @@ public class ShouYeActivity extends Fragment{
         kuaixun_list.setDivider(null);
         kuaixun_list.setAdapter(mIndexKuaiXunAdapter);
 
-    }
+    }*/
 
     /**导航图片点击*/
     private void imageClick() {
@@ -185,7 +172,7 @@ public class ShouYeActivity extends Fragment{
                 }.run();
             }
         });
-        weipan_image.setOnClickListener(new View.OnClickListener() {
+        rili_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Runnable() {
@@ -231,7 +218,7 @@ public class ShouYeActivity extends Fragment{
         kefu_image= (ImageView) view.findViewById(R.id.kefu_image);
         kechengbiao_image= (ImageView) view.findViewById(R.id.kechengbiao_image);
         handan_image= (ImageView) view.findViewById(R.id.handan_image);
-        weipan_image= (ImageView) view.findViewById(R.id.weipan_image);
+        rili_image= (ImageView) view.findViewById(R.id.rili_image);
         gupiao_image= (ImageView) view.findViewById(R.id.gupiao_image);
         huilv_image= (ImageView) view.findViewById(R.id.huilv_image);
     }
