@@ -31,7 +31,7 @@ public class TianTongYinActivity extends AppCompatActivity {
     private String url="http://pull.api.fxgold.com/realtime/products?codes=TJAG,TJMAG,TJAP,TJMAP,TJAG30KG,TJNI,TJMPD,TJPD,TJMNI,TJCU,TJCU1T,TJAL,TJAL1T";
     private TianTongYinAdapter mAdapter;
     private TianTongYinData mData=new TianTongYinData();
-    private ArrayList<TianTongYinData> mList=new ArrayList<TianTongYinData>();
+    private ArrayList<TianTongYinData.Data> mList=new ArrayList<TianTongYinData.Data>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +57,7 @@ public class TianTongYinActivity extends AppCompatActivity {
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         mData=gson.fromJson(s,TianTongYinData.class);
-                        ArrayList<TianTongYinData> list = (ArrayList<TianTongYinData>) mData.getDatas();
+                        ArrayList<TianTongYinData.Data> list = (ArrayList<TianTongYinData.Data>) mData.getDatas();
                         mList.addAll(list);
                         mAdapter.notifyDataSetChanged();
                         dialog.dismiss();

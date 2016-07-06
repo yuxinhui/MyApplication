@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class XianHuoHuangJinActivity extends AppCompatActivity {
     private XianHuoHuangJinAdapter mAdapter;
     private XianHuoHuangJinData mData=new XianHuoHuangJinData();
-    private ArrayList<XianHuoHuangJinData> mList=new ArrayList<XianHuoHuangJinData>();
+    private ArrayList<XianHuoHuangJinData.Data> mList=new ArrayList<XianHuoHuangJinData.Data>();
     private ListView xianhuojin_lv;
     private String url="http://pull.api.fxgold.com/realtime/products?codes=OSTWGD,PMHKAUJC,PMHKAUYH,OSCNYAUG,OSCNYAGG,PMAU,PMAG,PMAP,PMPD,PMHKAULD,PMHKAGLD,OSHKG";
     @Override
@@ -58,8 +58,8 @@ public class XianHuoHuangJinActivity extends AppCompatActivity {
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         mData = gson.fromJson(s, XianHuoHuangJinData.class);
-                        ArrayList<XianHuoHuangJinData> list = (ArrayList<XianHuoHuangJinData>) mData.getmDatas();
-                        mList.addAll(list);
+                        ArrayList<XianHuoHuangJinData.Data> datas = (ArrayList<XianHuoHuangJinData.Data>) mData.getmDatas();
+                        mList.addAll(datas);
                         mAdapter.notifyDataSetChanged();
                         progressDialog.dismiss();
                     }
@@ -74,4 +74,5 @@ public class XianHuoHuangJinActivity extends AppCompatActivity {
         );
         requestQueue.add(request);
     }
+
 }

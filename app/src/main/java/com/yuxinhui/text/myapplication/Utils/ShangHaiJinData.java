@@ -1,7 +1,5 @@
 package com.yuxinhui.text.myapplication.Utils;
 
-import android.content.Context;
-
 import java.util.List;
 
 /**
@@ -12,13 +10,13 @@ import java.util.List;
  */
 public class ShangHaiJinData {
 
-    private List<ShangHaiJinData> datas;
+    private List<Data> datas;
 
-    public List<ShangHaiJinData> getDatas() {
+    public List<Data> getDatas() {
         return datas;
     }
 
-    public void setDatas(List<ShangHaiJinData> datas) {
+    public void setDatas(List<Data> datas) {
         this.datas = datas;
     }
 
@@ -34,95 +32,97 @@ public class ShangHaiJinData {
      * open : 282.11
      * time : 1467212329000
      */
+    public static class Data{
 
-    private double change;
-    private double changePercent;
-    private double close;
-    private String code;
-    private double high;
-    private double low;
-    private String name;
-    private double newPrice;
-    private double open;
-    private long time;
+        private double change;
+        private double changePercent;
+        private double close;
+        private String code;
+        private double high;
+        private double low;
+        private String name;
+        private double newPrice;
+        private double open;
+        private long time;
 
-    public double getChange() {
-        return change;
-    }
+        public double getChange() {
+            return change;
+        }
 
-    public void setChange(double change) {
-        this.change = change;
-    }
+        public void setChange(double change) {
+            this.change = change;
+        }
 
-    public double getChangePercent() {
-        return changePercent;
-    }
+        public double getChangePercent() {
+            return changePercent;
+        }
 
-    public void setChangePercent(double changePercent) {
-        this.changePercent = changePercent;
-    }
+        public void setChangePercent(double changePercent) {
+            this.changePercent = changePercent;
+        }
 
-    public double getClose() {
-        return close;
-    }
+        public double getClose() {
+            return close;
+        }
 
-    public void setClose(double close) {
-        this.close = close;
-    }
+        public void setClose(double close) {
+            this.close = close;
+        }
 
-    public String getCode() {
-        return code;
-    }
+        public String getCode() {
+            return code;
+        }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+        public void setCode(String code) {
+            this.code = code;
+        }
 
-    public double getHigh() {
-        return high;
-    }
+        public double getHigh() {
+            return high;
+        }
 
-    public void setHigh(double high) {
-        this.high = high;
-    }
+        public void setHigh(double high) {
+            this.high = high;
+        }
 
-    public double getLow() {
-        return low;
-    }
+        public double getLow() {
+            return low;
+        }
 
-    public void setLow(double low) {
-        this.low = low;
-    }
+        public void setLow(double low) {
+            this.low = low;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public double getNewPrice() {
-        return newPrice;
-    }
+        public double getNewPrice() {
+            return newPrice;
+        }
 
-    public void setNewPrice(double newPrice) {
-        this.newPrice = newPrice;
-    }
+        public void setNewPrice(double newPrice) {
+            this.newPrice = newPrice;
+        }
 
-    public double getOpen() {
-        return open;
-    }
+        public double getOpen() {
+            return open;
+        }
 
-    public void setOpen(double open) {
-        this.open = open;
-    }
+        public void setOpen(double open) {
+            this.open = open;
+        }
 
-    public long getTime() {
-        return time;
-    }
+        public long getTime() {
+            return time;
+        }
 
-    public void setTime(long time) {
-        this.time = time;
+        public void setTime(long time) {
+            this.time = time;
+        }
     }
 }

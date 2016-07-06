@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
-    <LinearLayout
+    <!--<LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,5 +87,153 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
+    </LinearLayout>-->
+    <LinearLayout
+        android:id="@+id/weekName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:background="#ccc"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_marginLeft="2dp"
+            android:text=""
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="20dp" />
+        <TextView
+            style="@style/curriculumTitle"
+            android:text="星期一"/>
+        <TextView
+            style="@style/curriculumTitle"
+            android:text="星期二"/>
+        <TextView
+            style="@style/curriculumTitle"
+            android:text="星期三"/>
+        <TextView
+            style="@style/curriculumTitle"
+            android:text="星期四"/>
+        <TextView
+            style="@style/curriculumTitle"
+            android:text="星期五"/>
     </LinearLayout>
+    <ScrollView
+        android:id="@+id/scrollPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/contentPanel"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/weekPanel_0"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="9:00-10:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="10:00-11:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="11:00-12:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="12:00-13:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="13:00-14:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="14:00-15:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="15:00-16:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="16:00-17:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="17:00-18:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="18:00-19:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="19:00-20:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="20:00-21:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="21:00-22:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="22:00-23:00"/>
+                <TextView
+                    style="@style/weekPanel_0"
+                    android:text="23:00-24:00"/>
+            </LinearLayout>
+            <!--周一到周五的排列-->
+            <!--<LinearLayout
+                android:id="@+id/weekPanel_1"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </ListView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/weekPanel_2"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/weekPanel_3"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/weekPanel_4"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/weekPanel_5"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <ListView
+                    android:id="@+id/curriculum_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ListView>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

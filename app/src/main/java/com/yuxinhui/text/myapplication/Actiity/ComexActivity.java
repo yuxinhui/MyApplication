@@ -31,7 +31,7 @@ public class ComexActivity extends AppCompatActivity {
     private String url="http://pull.api.fxgold.com/realtime/products?codes=IXCMGCA0,CMGCG0,CMGCJ0,CMGCK0,CMGCM0,CMGCQ0,CMGCV0,CMGCZ0,IXCMSIA0,CMSIF0,CMSIH0,CMSIJ0,CMSIK0,CMSIM0,CMSIN0,CMSIU0,CMSIZ0,IXNEPAA0,IXNEPAH0,IXNEPAZ0,IXNEPAM0,IXNEPAU0,IXNEPLA0,IXNEPLF0,IXNEPLJ0,IXNEPLN0,IXNEPLV0,IXNEPLJ0";
     private ComexAdapter mAdapter;
     private ComexData mData=new ComexData();
-    private ArrayList<ComexData> mList=new ArrayList<ComexData>();
+    private ArrayList<ComexData.Data> mList=new ArrayList<ComexData.Data>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +57,7 @@ public class ComexActivity extends AppCompatActivity {
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         mData=gson.fromJson(s,ComexData.class);
-                        ArrayList<ComexData> list = (ArrayList<ComexData>) mData.getComexDatas();
+                        ArrayList<ComexData.Data> list = (ArrayList<ComexData.Data>) mData.getComexDatas();
                         mList.addAll(list);
                         mAdapter.notifyDataSetChanged();
                         dialog.dismiss();

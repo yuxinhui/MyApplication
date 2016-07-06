@@ -31,7 +31,7 @@ public class ShangHaiJinActivity extends AppCompatActivity {
     private String url="http://pull.api.fxgold.com/realtime/products?codes=SGAuT+D,SGAgT+D,SGmAuT+D,SGAu100g,SGAu9999,SGiAu9999,SGAu9995,SGiAu100g,SGPT9995";
     private ShangHaiJinAdapter mAdapter;
     private ShangHaiJinData mData=new ShangHaiJinData();
-    private ArrayList<ShangHaiJinData> mList=new ArrayList<ShangHaiJinData>();
+    private ArrayList<ShangHaiJinData.Data> mList=new ArrayList<ShangHaiJinData.Data>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +57,7 @@ public class ShangHaiJinActivity extends AppCompatActivity {
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         mData=gson.fromJson(s,ShangHaiJinData.class);
-                        ArrayList<ShangHaiJinData> list = (ArrayList<ShangHaiJinData>) mData.getDatas();
+                        ArrayList<ShangHaiJinData.Data> list = (ArrayList<ShangHaiJinData.Data>) mData.getDatas();
                         mList.addAll(list);
                         mAdapter.notifyDataSetChanged();
                         dialog.dismiss();

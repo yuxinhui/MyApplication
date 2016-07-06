@@ -16,4 +16,19 @@
         <item name="android:layout_height">40dp</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="curriculumTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">#ccc</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+    <style name="weekPanel_0">
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">#ccc</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
 </resources>

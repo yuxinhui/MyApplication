@@ -19,10 +19,10 @@ import java.util.List;
  * 描述:在行情界面显示伦敦金属的适配器
  */
 public class LonDonJinAdapter extends BaseAdapter {
-    private List<LondonJinData> mList;
+    private List<LondonJinData.Data> mList;
     private Context context;
 
-    public LonDonJinAdapter(List<LondonJinData> mList, Context context) {
+    public LonDonJinAdapter(List<LondonJinData.Data> mList, Context context) {
         this.mList = mList;
         this.context = context;
     }
@@ -36,7 +36,7 @@ public class LonDonJinAdapter extends BaseAdapter {
     }
 
     @Override
-    public LondonJinData getItem(int position) {
+    public LondonJinData.Data getItem(int position) {
         if (mList!=null){
             return mList.get(position);
         }
@@ -65,7 +65,7 @@ public class LonDonJinAdapter extends BaseAdapter {
         }else {
             holder= (viewHolder) convertView.getTag();
         }
-        LondonJinData data = getItem(position);
+        LondonJinData.Data data = getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");
         holder.changePercent.setText(data.getChangePercent()+"");

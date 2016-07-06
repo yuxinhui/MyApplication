@@ -32,7 +32,7 @@ public class XueyuanActivity extends Fragment {
     private ListView xueyuan_lv;
     private XueYuanData.DataBean mData=new XueYuanData.DataBean();
     private XueYuanAdapter mAdapter;
-    private ArrayList<XueYuanData.DataBean.ResultBean> mList=new ArrayList<XueYuanData.DataBean.ResultBean>();
+    private ArrayList<XueYuanData.DataBean.ResultBean> mBeen=new ArrayList<XueYuanData.DataBean.ResultBean>();
     private String url="http://114.55.98.142/video/selectVideo?pageNo=1";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,14 +45,14 @@ public class XueyuanActivity extends Fragment {
 
     private void initView(View view) {
         xueyuan_lv= (ListView) view.findViewById(R.id.xueyuan_lv);
-        mAdapter=new XueYuanAdapter(mList,getActivity());
+        mAdapter=new XueYuanAdapter(mBeen,getContext());
         xueyuan_lv.setDivider(null);
         xueyuan_lv.setAdapter(mAdapter);
     }
 
     private void initData() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        final ProgressDialog dialog=ProgressDialog.show(getActivity(),"学院界面","加载ing.......");
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        final ProgressDialog dialog=ProgressDialog.show(getContext(),"学院界面","加载ing.......");
         StringRequest request=new StringRequest(
                 Request.Method.GET,
                 url,
@@ -62,7 +62,8 @@ public class XueyuanActivity extends Fragment {
                         Gson gson=new Gson();
                         mData=gson.fromJson(s,XueYuanData.DataBean.class);
                         ArrayList<XueYuanData.DataBean.ResultBean> list = (ArrayList<XueYuanData.DataBean.ResultBean>) mData.getResult();
-                        mList.addAll(list);
+                        mBeen.addAll(list);
+                        mAdapter.notifyDataSetChanged();
                         Log.e("学院","我说成功您信吗");
                         dialog.dismiss();
                     }

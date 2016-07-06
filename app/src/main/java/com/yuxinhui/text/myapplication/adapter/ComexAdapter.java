@@ -19,10 +19,10 @@ import java.util.List;
  * 描述:在行情界面显示comex的适配器
  */
 public class ComexAdapter extends BaseAdapter {
-    private List<ComexData> datas;
+    private List<ComexData.Data> datas;
     private Context context;
 
-    public ComexAdapter(List<ComexData> datas, Context context) {
+    public ComexAdapter(List<ComexData.Data> datas, Context context) {
         this.datas = datas;
         this.context = context;
     }
@@ -36,7 +36,7 @@ public class ComexAdapter extends BaseAdapter {
     }
 
     @Override
-    public ComexData getItem(int position) {
+    public ComexData.Data getItem(int position) {
         if (datas!=null){
             return datas.get(position);
         }
@@ -65,7 +65,7 @@ public class ComexAdapter extends BaseAdapter {
         }else {
             holder= (viewHodle) convertView.getTag();
         }
-        ComexData data = getItem(position);
+        ComexData.Data data = getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");
         holder.changePercent.setText(data.getChangePercent()+"");

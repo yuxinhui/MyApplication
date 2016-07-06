@@ -19,10 +19,10 @@ import java.util.List;
  * 描述:在行情界面显示上海金的适配器
  */
 public class ShangHaiJinAdapter extends BaseAdapter {
-    private List<ShangHaiJinData> list;
+    private List<ShangHaiJinData.Data> list;
     private Context context;
 
-    public ShangHaiJinAdapter(List<ShangHaiJinData> list, Context context) {
+    public ShangHaiJinAdapter(List<ShangHaiJinData.Data> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -36,7 +36,7 @@ public class ShangHaiJinAdapter extends BaseAdapter {
     }
 
     @Override
-    public ShangHaiJinData getItem(int position) {
+    public ShangHaiJinData.Data getItem(int position) {
         if (list!=null){
             return list.get(position);
         }
@@ -65,7 +65,7 @@ public class ShangHaiJinAdapter extends BaseAdapter {
         }else {
             holder= (viewHodle) convertView.getTag();
         }
-        ShangHaiJinData data = getItem(position);
+        ShangHaiJinData.Data data = getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");
         holder.changePercent.setText(data.getChangePercent()+"");

@@ -31,7 +31,7 @@ public class LonDonJinActivity extends AppCompatActivity {
     private String url="http://pull.api.fxgold.com/realtime/products?codes=IXLEAHD3M,IXLENID3M,IXLECAD3M,IXLENAD3M,IXLEPBD3M,IXLESND3M,LEAAD3M,LEAHD3M,LECAD3M,IXLEZSD3M,LEMOD3M,LENID3M,LEPBD3M,LECOD3M,LEZSD3M,LESND3M";
     private LonDonJinAdapter mAdapter;
     private LondonJinData mData=new LondonJinData();
-    private ArrayList<LondonJinData> mList=new ArrayList<LondonJinData>();
+    private ArrayList<LondonJinData.Data> mList=new ArrayList<LondonJinData.Data>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +57,7 @@ public class LonDonJinActivity extends AppCompatActivity {
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         mData=gson.fromJson(s,LondonJinData.class);
-                        ArrayList<LondonJinData> list = (ArrayList<LondonJinData>) mData.getDatas();
+                        ArrayList<LondonJinData.Data> list = (ArrayList<LondonJinData.Data>) mData.getDatas();
                         mList.addAll(list);
                         mAdapter.notifyDataSetChanged();
                         dialog.dismiss();
