@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="#6eecfdfd"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ListView
-        android:id="@+id/xianhuojin_lv"
+    <TextView
+        android:text="已        经        到        头        了"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textColor="#fc0f0f"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-    </ListView>
 </LinearLayout>

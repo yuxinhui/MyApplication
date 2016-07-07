@@ -1,7 +1,5 @@
 package com.yuxinhui.text.myapplication.Utils;
 
-import java.util.List;
-
 /**
  * Created by "于志渊"
  * 时间:"15:43"
@@ -9,15 +7,6 @@ import java.util.List;
  * 描述:现货黄金实体类
  */
 public class XianHuoHuangJinData {
-    private List<Data> mDatas;
-
-    public List<Data> getmDatas() {
-        return mDatas;
-    }
-
-    public void setmDatas(List<Data> mDatas) {
-        this.mDatas = mDatas;
-    }
 
     /**
      * change : -498.0
@@ -31,7 +20,6 @@ public class XianHuoHuangJinData {
      * open : 51796.0
      * time : 1467099773000
      */
-    public static class Data{
         private double change;
         private double changePercent;
         private double close;
@@ -138,5 +126,4 @@ public class XianHuoHuangJinData {
                     ", time=" + time +
                     '}';
         }
-    }
 }

@@ -1,7 +1,5 @@
 package com.yuxinhui.text.myapplication.Utils;
 
-import java.util.List;
-
 /**
  * 包:com.yuxinhui.text.myapplication.Utils
  * Create By:"于志渊"
@@ -9,15 +7,6 @@ import java.util.List;
  * 描述:天通银实体类
  */
 public class TianTongYinData {
-    private List<Data> datas;
-
-    public List<Data> getDatas() {
-        return datas;
-    }
-
-    public void setDatas(List<Data> datas) {
-        this.datas = datas;
-    }
 
     /**
      * change : 108.0
@@ -31,7 +20,6 @@ public class TianTongYinData {
      * open : 3805.0
      * time : 1467214677000
      */
-    public static class Data{
 
         private double change;
         private double changePercent;
@@ -123,5 +111,4 @@ public class TianTongYinData {
         public void setTime(long time) {
             this.time = time;
         }
-    }
 }

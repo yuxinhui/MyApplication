@@ -45,14 +45,13 @@ public class XueyuanActivity extends Fragment {
 
     private void initView(View view) {
         xueyuan_lv= (ListView) view.findViewById(R.id.xueyuan_lv);
-        mAdapter=new XueYuanAdapter(mBeen,getContext());
-        xueyuan_lv.setDivider(null);
+        mAdapter=new XueYuanAdapter(mBeen,getActivity());
         xueyuan_lv.setAdapter(mAdapter);
     }
 
     private void initData() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        final ProgressDialog dialog=ProgressDialog.show(getContext(),"学院界面","加载ing.......");
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        final ProgressDialog dialog=ProgressDialog.show(getActivity(),"学院界面","加载ing.......");
         StringRequest request=new StringRequest(
                 Request.Method.GET,
                 url,

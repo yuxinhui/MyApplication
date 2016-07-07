@@ -19,10 +19,10 @@ import java.util.ArrayList;
  * 描述:在行情界面显示现货黄金的适配器
  */
 public class XianHuoHuangJinAdapter extends BaseAdapter {
-    private ArrayList<XianHuoHuangJinData.Data> mList=new ArrayList<XianHuoHuangJinData.Data>();
+    private ArrayList<XianHuoHuangJinData> mList=new ArrayList<XianHuoHuangJinData>();
     private Context context;
 
-    public XianHuoHuangJinAdapter(ArrayList<XianHuoHuangJinData.Data> mList, Context context) {
+    public XianHuoHuangJinAdapter(ArrayList<XianHuoHuangJinData> mList, Context context) {
         this.mList = mList;
         this.context = context;
     }
@@ -36,7 +36,7 @@ public class XianHuoHuangJinAdapter extends BaseAdapter {
     }
 
     @Override
-    public XianHuoHuangJinData.Data getItem(int position) {
+    public XianHuoHuangJinData getItem(int position) {
         if (mList!=null){
             return mList.get(position);
         }
@@ -65,7 +65,7 @@ public class XianHuoHuangJinAdapter extends BaseAdapter {
         }else {
             holder= (viewHodle) convertView.getTag();
         }
-        XianHuoHuangJinData.Data data=getItem(position);
+        XianHuoHuangJinData data=getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");
         holder.changePercent.setText(data.getChangePercent()+"");

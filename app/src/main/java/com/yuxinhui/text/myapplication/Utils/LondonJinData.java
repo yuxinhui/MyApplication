@@ -1,7 +1,5 @@
 package com.yuxinhui.text.myapplication.Utils;
 
-import java.util.List;
-
 /**
  * 包:com.yuxinhui.text.myapplication.Utils
  * Create By:"于志渊"
@@ -9,15 +7,7 @@ import java.util.List;
  * 描述:伦敦金属实体类
  */
 public class LondonJinData {
-    private List<Data> datas;
 
-    public List<Data> getDatas() {
-        return datas;
-    }
-
-    public void setDatas(List<Data> datas) {
-        this.datas = datas;
-    }
 
     /**
      * change : 7.5
@@ -31,7 +21,7 @@ public class LondonJinData {
      * open : 1628.0
      * time : 1467213625000
      */
-    public static class Data{
+
         private double change;
         private double changePercent;
         private double close;
@@ -122,5 +112,5 @@ public class LondonJinData {
         public void setTime(long time) {
             this.time = time;
         }
-    }
+
 }

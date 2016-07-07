@@ -1,20 +1,10 @@
 package com.yuxinhui.text.myapplication.Utils;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2016/6/29.
  */
 public class ComexData {
-    private List<Data> comexDatas;
 
-    public List<Data> getComexDatas() {
-        return comexDatas;
-    }
-
-    public void setComexDatas(List<Data> comexDatas) {
-        this.comexDatas = comexDatas;
-    }
 
     /**
      * change : 5.199951
@@ -28,7 +18,7 @@ public class ComexData {
      * open : 1313.8
      * time : 1467208123000
      */
-    public static class Data{
+
         private double change;
         private double changePercent;
         private double close;
@@ -119,5 +109,5 @@ public class ComexData {
         public void setTime(long time) {
             this.time = time;
         }
-    }
+
 }

@@ -19,10 +19,10 @@ import java.util.ArrayList;
  * 描述:在行情界面显示天通银的适配器
  */
 public class TianTongYinAdapter extends BaseAdapter {
-    private ArrayList<TianTongYinData.Data> mList=new ArrayList<TianTongYinData.Data>();
+    private ArrayList<TianTongYinData> mList=new ArrayList<TianTongYinData>();
     private Context context;
 
-    public TianTongYinAdapter(ArrayList<TianTongYinData.Data> mList, Context context) {
+    public TianTongYinAdapter(ArrayList<TianTongYinData> mList, Context context) {
         this.mList = mList;
         this.context = context;
     }
@@ -36,7 +36,7 @@ public class TianTongYinAdapter extends BaseAdapter {
     }
 
     @Override
-    public TianTongYinData.Data getItem(int position) {
+    public TianTongYinData getItem(int position) {
         if (mList!=null){
             return mList.get(position);
         }
@@ -65,7 +65,7 @@ public class TianTongYinAdapter extends BaseAdapter {
         }else {
             holder= (viewHolder) convertView.getTag();
         }
-        TianTongYinData.Data data = getItem(position);
+        TianTongYinData data = getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");
         holder.changePercent.setText(data.getChangePercent()+"");

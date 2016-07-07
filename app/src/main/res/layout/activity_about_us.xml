@@ -10,11 +10,12 @@
         android:background="#f00"
         >
         <ImageView
+            android:id="@+id/about_us_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/fanhui"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="20dp"
             />
         <ImageView
             android:layout_width="80dp"
@@ -31,7 +32,7 @@
         android:scaleType="fitXY"
         />
     <LinearLayout
-        android:id="@+id/version_info"
+        android:id="@+id/layout_version"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@mipmap/itembackgroud"
@@ -63,7 +64,7 @@
             />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/advice_back"
+        android:id="@+id/layout_advice"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@mipmap/itembackgroud"

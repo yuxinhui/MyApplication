@@ -1,7 +1,5 @@
 package com.yuxinhui.text.myapplication.Utils;
 
-import java.util.List;
-
 /**
  * 包:com.yuxinhui.text.myapplication.Utils
  * Create By:"于志渊"
@@ -9,16 +7,6 @@ import java.util.List;
  * 描述:上海金实体类
  */
 public class ShangHaiJinData {
-
-    private List<Data> datas;
-
-    public List<Data> getDatas() {
-        return datas;
-    }
-
-    public void setDatas(List<Data> datas) {
-        this.datas = datas;
-    }
 
     /**
      * change : 0.6000061
@@ -32,7 +20,6 @@ public class ShangHaiJinData {
      * open : 282.11
      * time : 1467212329000
      */
-    public static class Data{
 
         private double change;
         private double changePercent;
@@ -124,5 +111,4 @@ public class ShangHaiJinData {
         public void setTime(long time) {
             this.time = time;
         }
-    }
 }
