@@ -1,6 +1,9 @@
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,22 +24,23 @@ import com.gensee.player.Player;
 import com.gensee.view.GSVideoView;
 import com.yuxinhui.text.myapplication.R;
 
+import java.net.Authenticator;
+
 /**直播视频的activity
  * Created by Administrator on 2016/5/31.
- * */
-
+ */
 public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
 
-    private GSVideoView mGSzhibo;//视频插件
+    private GSVideoView mGSzhibo,mGSzhiboLand;//视频插件
     Player player = new Player();
     InitParam initParam = new InitParam();
-    Handler mHandler = new Handler();
     ImageView mIvbackgroud,mIvplayer,mContentZhibo,mIvretrun;
     boolean isPlayed = false;
-    TextView mtvFullScreen;
-    SeekBar msbAudio;
+    ImageView mtvFullScreen,mivNormalScreen;
+    SeekBar msbAudio,msbAudioLand;
     AudioManager am ;
     int streamVolume;
+    int streamMaxVolume;
 //    String url = "dd020436921d43a79dcf6965415179f8";
     //491a1a7b416043b0987c499690412a11
 
@@ -44,9 +48,10 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhibo);
-        Log.e("TAG",isPlayed+"");
-        am= (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         streamVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);//获取系统当前的媒体音量
+        streamMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        Log.e("TAG",isPlayed+"");
         initView();
         setOnClick();
     }
@@ -57,8 +62,9 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         mGSzhibo = (GSVideoView)findViewById(R.id.zhibo_video);
         mContentZhibo = (ImageView) findViewById(R.id.contentZhibo);
         mIvretrun = (ImageView) findViewById(R.id.zhibo_return_img);
-        mtvFullScreen = (TextView) findViewById(R.id.tv_fullscreen);
+        mtvFullScreen = (ImageView) findViewById(R.id.tv_fullscreen);
         msbAudio = (SeekBar) findViewById(R.id.sb_audio);
+        msbAudio.setMax(streamMaxVolume);
         msbAudio.setProgress(streamVolume);
         mIvplayer = (ImageView) findViewById(R.id.iv_player);
         player.setGSVideoView(mGSzhibo);
@@ -75,6 +81,92 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     //结束这个activity
     private void finishactivity(){
         this.finish();
+    }
+
+    //横竖屏的切换处理
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            this.setContentView(R.layout.activity_zhibo);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            initLandView();
+            setLandOnClick();
+            if(isPlayed){
+                player.leave();
+                player.setGSVideoView(mGSzhiboLand);
+                initplayer(initParam);
+            }
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            this.setContentView(R.layout.activity_zhibo);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//            Intent intent = getIntent();
+//            boolean restart = intent.getBooleanExtra("重启竖屏", false);
+//            if(restart&&isPlayed){
+//                mIvbackgroud.setVisibility(View.GONE);
+//                mIvplayer.setVisibility(View.GONE);
+//            }
+            initView();
+            setOnClick();
+            if(isPlayed){
+                mIvbackgroud.setVisibility(View.GONE);
+                mIvplayer.setVisibility(View.GONE);
+                player.leave();
+                player.setGSVideoView(mGSzhibo);
+                initplayer(initParam);
+            }
+        }
+    }
+
+//    @Override
+//    protected void onNewIntent(Intent intent) {
+//        intent.putExtra("重启竖屏", true);
+//        super.onNewIntent(intent);
+//    }
+
+    //设置横屏时的监听事件
+    private void setLandOnClick() {
+        mGSzhiboLand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isPlayed){
+                    player.leave();
+                }else {
+                    initplayer(initParam);
+                }
+                isPlayed = !isPlayed;
+            }
+        });
+        msbAudioLand.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                changeAudio(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        mivNormalScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        });
+    }
+
+    private void initLandView() {
+        mGSzhiboLand = (GSVideoView) findViewById(R.id.zhibo_video_land);
+        msbAudioLand = (SeekBar) findViewById(R.id.sb_audio_land);
+        msbAudioLand.setMax(streamMaxVolume);
+        msbAudioLand.setProgress(streamVolume);
+        mivNormalScreen = (ImageView) findViewById(R.id.iv_normalscreen);
     }
 
     @Override
@@ -117,9 +209,7 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         msbAudio.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
                 changeAudio(progress);
-
             }
 
             @Override
@@ -136,9 +226,14 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         mtvFullScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                playbyFullscreen();
             }
         });
+    }
+
+    //全屏播放的方法
+    private void playbyFullscreen() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     //改变系统音量大小的方法
@@ -146,7 +241,7 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                am.setStreamVolume(AudioManager.STREAM_MUSIC,streamVolume,i);
+                am.setStreamVolume(AudioManager.STREAM_MUSIC,i,AudioManager.FLAG_SHOW_UI);
             }
         });
 
@@ -169,13 +264,7 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
 
     //初始化播放器（开始播放）
     private void initplayer(final InitParam initParam) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                player.join(getApplicationContext(), initParam, ZhiboActivity.this);
-            }
-        });
-
+        player.join(getApplicationContext(),initParam,this);
     }
 
 
