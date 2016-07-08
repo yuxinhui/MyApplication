@@ -1,15 +1,18 @@
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.yuxinhui.text.myapplication.Actiity.Denglu;
+import com.yuxinhui.text.myapplication.Fragment.Actiity.Denglu;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
@@ -17,19 +20,28 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
     ImageView mivReturn,mivZhendong,mivAudio;
     RelativeLayout miandarao;
     Button unLogin;
-    boolean isVibrate=true,isRing=true;
+    boolean isVibrate=YuXinHuiApplication.getInstace().isVirbate(),isRing=YuXinHuiApplication.getInstace().isRing();
     AudioManager am;
+    int streamMaxVolume;
     boolean isLogin;
     boolean isMiandaorao;
+    AlarmReceiver mReceiver;
+    NotAlarmReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_msg_setting);
         am = (AudioManager) getSystemService(AUDIO_SERVICE);
-        am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        streamMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_ALARM);
         isLogin = YuXinHuiApplication.getInstace().isLogin();
         isMiandaorao = YuXinHuiApplication.getInstace().isOpenMiandarao();
+        mReceiver = new AlarmReceiver();
+        IntentFilter filter = new IntentFilter("ChangeRingAndVibrate");
+        registerReceiver(mReceiver, filter);
+        receiver = new NotAlarmReceiver();
+        IntentFilter intentFilter = new IntentFilter("openMsg");
+        registerReceiver(receiver, intentFilter);
         initView();
         setOnClickLIstener();
     }
@@ -53,8 +65,15 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
             mivZhendong.setClickable(false);
             mivAudio.setImageResource(R.mipmap.icon_close);
             mivAudio.setClickable(false);
+        }else{
+            if(!isVibrate){
+                mivZhendong.setImageResource(R.mipmap.icon_close);
+            }
+            if (!isRing) {
+                mivAudio.setImageResource(R.mipmap.icon_close);
+            }
         }
-        if (isLogin == false) {
+        if (!isLogin) {
             unLogin.setText("点击登陆");
         }
     }
@@ -68,22 +87,24 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
             case R.id.iv_vibrate_setting:
                 if(isVibrate){
                     mivZhendong.setImageResource(R.mipmap.icon_close);
-                    am.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER,AudioManager.VIBRATE_SETTING_OFF);
+                    am.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION,AudioManager.VIBRATE_SETTING_OFF);
                 }else {
                     mivZhendong.setImageResource(R.mipmap.icon_opne);
-                    am.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER,AudioManager.VIBRATE_SETTING_ON);
+                    am.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION,AudioManager.VIBRATE_SETTING_ON);
                 }
                 isVibrate = !isVibrate;
+                YuXinHuiApplication.getInstace().setVirbate(isVibrate);
                 break;
             case R.id.iv_audio_setting:
                 if (isRing) {
                     mivAudio.setImageResource(R.mipmap.icon_close);
-                    am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                    am.setStreamVolume(AudioManager.STREAM_ALARM,0,0);
                 }else{
                     mivAudio.setImageResource(R.mipmap.icon_opne);
-                    am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                    am.setStreamVolume(AudioManager.STREAM_ALARM,streamMaxVolume,0);
                 }
                 isRing = !isRing;
+                YuXinHuiApplication.getInstace().setRing(isRing);
                 break;
             case R.id.miandarao:
                 Intent intent = new Intent(this,MianDaRaoActivity.class);
@@ -99,5 +120,40 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
         }
+    }
+
+    class NotAlarmReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mivZhendong.setImageResource(R.mipmap.icon_opne);
+            mivZhendong.setClickable(true);
+            mivAudio.setImageResource(R.mipmap.icon_opne);
+            mivAudio.setClickable(true);
+        }
+    }
+
+    class AlarmReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            runOnUiThread(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            mivZhendong.setImageResource(R.mipmap.icon_close);
+                            mivZhendong.setClickable(false);
+                            mivAudio.setImageResource(R.mipmap.icon_close);
+                            mivAudio.setClickable(false);
+                        }
+                    });
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
+        unregisterReceiver(receiver);
     }
 }
