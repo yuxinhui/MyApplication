@@ -14,13 +14,22 @@ public class YuXinHuiApplication extends Application {
     private boolean isRing = true;
     private boolean isVirbate = true;
     private boolean isOpenMiandarao = false;
-    private User user;
+    private User user = new User();
     private static YuXinHuiApplication instace;
+    private int MIANDAORAO;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instace = this;
+    }
+
+    public int getMIANDAORAO() {
+        return MIANDAORAO;
+    }
+
+    public void setMIANDAORAO(int MIANDAORAO) {
+        this.MIANDAORAO = MIANDAORAO;
     }
 
     public boolean isLogin() {
