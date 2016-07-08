@@ -1,10 +1,11 @@
-package com.yuxinhui.text.myapplication.Actiity;
+package com.yuxinhui.text.myapplication.Fragment.Actiity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class ZhuCeXiangQing extends AppCompatActivity {
     Zhuce zhuce;
     EditText metUserName,metNick,metQQ,metSex,metFactor;
     TextView mtvCommit;
+    ImageView mivReturn;
     User user;
     String url = "http://114.55.98.142/user/perfectInfo";
     String nick,userName,QQ, gendar,telephone;
@@ -60,6 +62,12 @@ public class ZhuCeXiangQing extends AppCompatActivity {
     }
 
     private void setOnClickListener() {
+        mivReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ZhuCeXiangQing.this.finish();
+            }
+        });
         mtvCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +145,7 @@ public class ZhuCeXiangQing extends AppCompatActivity {
     }
 
     private void initView() {
+        mivReturn = (ImageView) findViewById(R.id.zhucexiangqing_return_img);
         metUserName = (EditText) findViewById(R.id.et_username);
         metNick = (EditText) findViewById(R.id.et_nick);
         metQQ = (EditText) findViewById(R.id.et_qq);
