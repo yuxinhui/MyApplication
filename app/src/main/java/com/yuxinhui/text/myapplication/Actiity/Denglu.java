@@ -1,9 +1,10 @@
-package com.yuxinhui.text.myapplication.Actiity;
+package com.yuxinhui.text.myapplication.Fragment.Actiity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.DialogUtils;
 import com.yuxinhui.text.myapplication.Utils.Message;
+import com.yuxinhui.text.myapplication.Utils.SmsMessage;
 import com.yuxinhui.text.myapplication.Utils.User;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
@@ -41,11 +43,13 @@ public class Denglu extends AppCompatActivity {
     String  loginId,password,telephone,userName;
     String url = YuXinHuiApplication.getUrlBoot()+"user/login";
     User user;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.denglu);
+        queue = Volley.newRequestQueue(this);
         //初始化控件
         initView();
         initData();
@@ -94,6 +98,7 @@ public class Denglu extends AppCompatActivity {
                     denglu_mima_text.setError("密码不能为空");
                     denglu_mima_text.requestFocus();
                 }
+                login(loginId,password);
             }
         });
     }
@@ -125,20 +130,22 @@ public class Denglu extends AppCompatActivity {
             user.setUsername(userName);
         }
         user.setPassword(password);
-        RequestQueue queue = Volley.newRequestQueue(this);
+        Log.e("TAG", user.toString());
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Gson gson = new Gson();
-                Message message = gson.fromJson(s, Message.class);
-                if(message.getStatus()!="fail"){
+                Log.e("TAG",s);
+                if(s.contains("ok")){
+                    Gson gson = new Gson();
+                    Message message = gson.fromJson(s, Message.class);
                     YuXinHuiApplication.getInstace().setUser(message.getUser());
                     YuXinHuiApplication.getInstace().setLogin(true);
-                } else{
-                    YuXinHuiApplication.getInstace().setLogin(false);
+                    Intent intent = new Intent(Denglu.this, MainActivity.class);
+                    startActivity(intent);
+                    DialogUtils.createToasdt(Denglu.this,message.getMessage());
+                }else {
+                    DialogUtils.createToasdt(Denglu.this,"用户名或者密码错误");
                 }
-                Intent intent = new Intent(Denglu.this, MainActivity.class);
-                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -154,9 +161,10 @@ public class Denglu extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("",user.toString());
+                params.put("user",user.toString());
                 return params;
             }
         };
+        queue.add(request);
     }
 }
