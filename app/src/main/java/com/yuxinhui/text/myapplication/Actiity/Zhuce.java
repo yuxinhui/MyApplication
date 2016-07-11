@@ -46,7 +46,7 @@ public class Zhuce extends AppCompatActivity {
     Message message;
     User user;
     int time = 60;
-    String url = "http://114.55.98.142/user/register";
+    String url = YuXinHuiApplication.getUrlBoot()+"user/register";
     RequestQueue queue;
 
     @Override

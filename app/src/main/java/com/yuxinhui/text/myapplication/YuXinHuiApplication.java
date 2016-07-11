@@ -16,6 +16,7 @@ public class YuXinHuiApplication extends Application {
     private boolean isOpenMiandarao = false;
     private User user;
     private static YuXinHuiApplication instace;
+    public static final String URL_BOOT = "http://114.55.67.167:8080/jmj/";
 
     @Override
     public void onCreate() {
@@ -69,6 +70,10 @@ public class YuXinHuiApplication extends Application {
 
     public static void setInstace(YuXinHuiApplication instace) {
         YuXinHuiApplication.instace = instace;
+    }
+
+    public static String getUrlBoot() {
+        return URL_BOOT;
     }
 
     public void unLoginclear() {

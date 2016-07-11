@@ -40,8 +40,6 @@ public class HuiLvActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_huilv);
-       /* mHuiLv = new HuiLvData();
-        mList = new ArrayList<>();*/
         InitDate();
         InitView();
     }

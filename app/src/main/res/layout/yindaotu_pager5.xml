@@ -7,7 +7,7 @@
         android:id="@+id/guide_close_img"
         android:background="@mipmap/yindao03"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
     <ImageButton
         android:id="@+id/guide_close_btn"
         android:src="@mipmap/tiyan"

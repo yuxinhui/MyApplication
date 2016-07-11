@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.KeBiaoData;
+import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 import com.yuxinhui.text.myapplication.adapter.CurriculumAdapter;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
  * 描述:课程表显示界面
  */
 public class KeBiaoActivity extends Activity{
-    private String url="http://114.55.98.142/course/select_app";
+    private String url= YuXinHuiApplication.getUrlBoot()+"course/select_app";
     private ListView curriculum_lv;
     private KeBiaoData mData=new KeBiaoData();
     private ArrayList<KeBiaoData.DataBean> mList=new ArrayList<KeBiaoData.DataBean>();

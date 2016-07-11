@@ -39,7 +39,7 @@ public class Denglu extends AppCompatActivity {
     private TextView wangjiMM_text;
     private TextView zhuce_text;
     String  loginId,password,telephone,userName;
-    String url = "http://114.55.98.142/user/login";
+    String url = YuXinHuiApplication.getUrlBoot()+"user/login";
     User user;
 
     @Override

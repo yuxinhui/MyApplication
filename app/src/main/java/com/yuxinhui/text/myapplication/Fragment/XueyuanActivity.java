@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.XueYuanData;
+import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 import com.yuxinhui.text.myapplication.adapter.XueYuanAdapter;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class XueyuanActivity extends Fragment {
     private XueYuanData.DataBean mData=new XueYuanData.DataBean();
     private XueYuanAdapter mAdapter;
     private ArrayList<XueYuanData.DataBean.ResultBean> mBeen=new ArrayList<XueYuanData.DataBean.ResultBean>();
-    private String url="http://114.55.98.142/video/selectVideo?pageNo=1";
+    private String url= YuXinHuiApplication.getUrlBoot()+"video/selectVideo?pageNo=1";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

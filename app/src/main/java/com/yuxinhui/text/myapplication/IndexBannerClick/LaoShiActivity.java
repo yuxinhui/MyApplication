@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.TeachData;
+import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 import com.yuxinhui.text.myapplication.adapter.TeacherAdapter;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class LaoShiActivity extends AppCompatActivity{
     private ArrayList<TeachData.DataBean> mTeachDatas=new ArrayList<TeachData.DataBean>();
     private TeachData teachData=new TeachData();
     private ListView teacher_lv;
-    private String url="http://114.55.98.142/analyst/select_app";
+    private String url= YuXinHuiApplication.getUrlBoot()+"analyst/select_app";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

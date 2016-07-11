@@ -35,7 +35,7 @@ public class ZhuCeXiangQing extends AppCompatActivity {
     EditText metUserName,metNick,metQQ,metSex,metFactor;
     TextView mtvCommit;
     User user;
-    String url = "http://114.55.98.142/user/perfectInfo";
+    String url =YuXinHuiApplication.getUrlBoot()+ "user/perfectInfo";
     String nick,userName,QQ, gendar,telephone;
     Message message;
 
