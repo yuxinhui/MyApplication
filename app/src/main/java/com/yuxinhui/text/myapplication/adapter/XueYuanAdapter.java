@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.XueYuanData;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,7 +60,7 @@ public class XueYuanAdapter extends BaseAdapter {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView= inflater.inflate(R.layout.xueyuan_item, null);
             holder.xueyuan_title= (TextView) convertView.findViewById(R.id.xueyuan_title);
-            holder.bofang= (TextView) convertView.findViewById(R.id.bofang);
+            holder.bofang= (ImageView) convertView.findViewById(R.id.bofang);
             holder.author= (TextView) convertView.findViewById(R.id.author);
             holder.content= (TextView) convertView.findViewById(R.id.content);
             holder.xueyuan_time= (TextView) convertView.findViewById(R.id.xueyuan_time);
@@ -66,14 +69,18 @@ public class XueYuanAdapter extends BaseAdapter {
             holder= (viewHolder) convertView.getTag();
         }
         XueYuanData.DataBean.ResultBean bean = getItem(position);
-        holder.bofang.setText(bean.getUrl());
         holder.xueyuan_title.setText(bean.getTitle());
         holder.content.setText(bean.getContent());
         holder.author.setText(bean.getAuthor());
-        holder.xueyuan_time.setText("时间:"+bean.getTime());
+        long time = bean.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+        Date date = new Date(time);
+        String format = sdf.format(date);
+        holder.xueyuan_time.setText("时间:"+format);
         return convertView;
     }
     public class viewHolder{
-        private TextView bofang,xueyuan_title,content,author,xueyuan_time;
+        private TextView xueyuan_title,content,author,xueyuan_time;
+        private ImageView bofang;
     }
 }

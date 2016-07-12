@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.yuxinhui.text.myapplication.Fragment.Actiity.Denglu;
+import com.yuxinhui.text.myapplication.Actiity.Denglu;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 

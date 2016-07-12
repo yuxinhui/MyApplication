@@ -26,6 +26,7 @@ public class KaiHu extends AppCompatActivity{
             public void onClick(View v) {
                 Intent fanhui = new Intent(KaiHu.this, MainActivity.class);
                 startActivity(fanhui);
+                finishActivity();
             }
         });
         kaihu_lijikaihu_img.setOnClickListener(new View.OnClickListener() {
@@ -33,7 +34,11 @@ public class KaiHu extends AppCompatActivity{
             public void onClick(View v) {
                 Intent lijizhuce = new Intent(KaiHu.this, KaiHuRenZheng.class);
                 startActivity(lijizhuce);
+                finishActivity();
             }
         });
+    }
+    private void finishActivity(){
+        this.finish();
     }
 }

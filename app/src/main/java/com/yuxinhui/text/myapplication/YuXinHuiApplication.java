@@ -14,14 +14,23 @@ public class YuXinHuiApplication extends Application {
     private boolean isRing = true;
     private boolean isVirbate = true;
     private boolean isOpenMiandarao = false;
-    private User user;
+    private User user = new User();
     private static YuXinHuiApplication instace;
+    private int MIANDAORAO;
     public static final String URL_BOOT = "http://114.55.67.167:8080/jmj/";
 
     @Override
     public void onCreate() {
         super.onCreate();
         instace = this;
+    }
+
+    public int getMIANDAORAO() {
+        return MIANDAORAO;
+    }
+
+    public void setMIANDAORAO(int MIANDAORAO) {
+        this.MIANDAORAO = MIANDAORAO;
     }
 
     public boolean isLogin() {
@@ -72,13 +81,12 @@ public class YuXinHuiApplication extends Application {
         YuXinHuiApplication.instace = instace;
     }
 
-    public static String getUrlBoot() {
-        return URL_BOOT;
-    }
-
     public void unLoginclear() {
         user = null;
         isLogin = false;
+    }
 
+    public static String getUrlBoot() {
+        return URL_BOOT;
     }
 }

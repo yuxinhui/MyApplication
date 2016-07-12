@@ -19,7 +19,6 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.XueYuanData;
-import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 import com.yuxinhui.text.myapplication.adapter.XueYuanAdapter;
 
 import java.util.ArrayList;
@@ -33,8 +32,8 @@ public class XueyuanActivity extends Fragment {
     private ListView xueyuan_lv;
     private XueYuanData.DataBean mData=new XueYuanData.DataBean();
     private XueYuanAdapter mAdapter;
-    private ArrayList<XueYuanData.DataBean.ResultBean> mBeen=new ArrayList<XueYuanData.DataBean.ResultBean>();
-    private String url= YuXinHuiApplication.getUrlBoot()+"video/selectVideo?pageNo=1";
+    private ArrayList<XueYuanData.DataBean.ResultBean> mBeen=new ArrayList<>();
+    private String url= "http://114.55.98.142/video/selectVideo?pageNo=1";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,8 +59,8 @@ public class XueyuanActivity extends Fragment {
                     @Override
                     public void onResponse(String s) {
                         Gson gson=new Gson();
-                        mData=gson.fromJson(s,XueYuanData.DataBean.class);
-                        ArrayList<XueYuanData.DataBean.ResultBean> list = (ArrayList<XueYuanData.DataBean.ResultBean>) mData.getResult();
+                        XueYuanData xueYuanData = gson.fromJson(s, XueYuanData.class);
+                        ArrayList<XueYuanData.DataBean.ResultBean> list = (ArrayList<XueYuanData.DataBean.ResultBean>) xueYuanData.getData().getResult();
                         mBeen.addAll(list);
                         mAdapter.notifyDataSetChanged();
                         Log.e("学院","我说成功您信吗");

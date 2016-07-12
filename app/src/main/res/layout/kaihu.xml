@@ -23,14 +23,7 @@
                 android:src="@mipmap/kaihubiaoti"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <ImageView
-                android:id="@+id/kaihu1_img"
-                android:src="@mipmap/kaihu"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="27dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
         </RelativeLayout>
         <ImageView
             android:background="@mipmap/kaihubanner"

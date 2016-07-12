@@ -1,4 +1,4 @@
-package com.yuxinhui.text.myapplication.Fragment.Actiity;
+package com.yuxinhui.text.myapplication.Actiity;
 
 import android.content.Intent;
 import android.os.Bundle;

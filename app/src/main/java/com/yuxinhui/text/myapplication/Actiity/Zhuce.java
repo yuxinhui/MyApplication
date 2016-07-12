@@ -108,6 +108,8 @@ public class Zhuce extends AppCompatActivity {
         zhuce_return_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent renzheng = new Intent(Zhuce.this, KaiHuRenZheng.class);
+                startActivity(renzheng);
                 Zhuce.this.finish();
                 return;
             }
@@ -117,6 +119,7 @@ public class Zhuce extends AppCompatActivity {
             public void onClick(View v) {
                 Intent shouye = new Intent(Zhuce.this, MainActivity.class);
                 startActivity(shouye);
+                Zhuce.this.finish();
                 return;
             }
         });

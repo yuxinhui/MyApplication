@@ -31,6 +31,7 @@ public class KaiHuRenZheng extends AppCompatActivity {
             public void onClick(View v) {
                 Intent fanhui = new Intent(KaiHuRenZheng.this, KaiHu.class);
                 startActivity(fanhui);
+                finishActivity();
             }
         });
         kaihurenzheng_wancheng_button.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +39,7 @@ public class KaiHuRenZheng extends AppCompatActivity {
             public void onClick(View v) {
                 Intent wancheng = new Intent(KaiHuRenZheng.this, Zhuce.class);
                 startActivity(wancheng);
+                finishActivity();
             }
         });
     }
@@ -46,5 +48,8 @@ public class KaiHuRenZheng extends AppCompatActivity {
         kaihurenzheng_return_img= (ImageView) findViewById(R.id.kaihurenzheng_return_img);
         kaihurenzheng_wancheng_button= (Button) findViewById(R.id.kaihurenzheng_wancheng_button);
         kaihurenzheng_shuru_txt= (EditText) findViewById(R.id.kaihurenzheng_shuru_txt);
+    }
+    private void finishActivity(){
+        this.finish();
     }
 }

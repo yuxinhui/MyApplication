@@ -1,11 +1,12 @@
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,6 +20,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -29,29 +31,34 @@ import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoPackage.MyHScrollView;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.GuPiaoHuData;
+import com.yuxinhui.text.myapplication.Utils.GuPiaoShenData;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Created by Administrator on 2016/6/15.
+ * Created by "于志渊"
+ * 时间:"15:51"
+ * 包名:com.yuxinhui.text.myapplication.IndexBannerClick
+ * 描述:深股界面详情
  */
-public class GuPiaoActivity extends Activity{
+public class ShenGuActivity extends AppCompatActivity{
     private ListView mListView1;
     private GuPiaoAdapter mGuPiaoAdapter;
     private RelativeLayout mHead;
     private LinearLayout main;
-    private GuPiaoHuData mDataBean=new GuPiaoHuData();
-    private ArrayList<GuPiaoHuData.DataBean.DataBean1> mBeen=new ArrayList<>();
-    private String urlGuPiao= YuXinHuiApplication.getUrlBoot()+"app/getShareList?name=sh&shpage=1&type=1";
+    private GuPiaoShenData mDataBean=new GuPiaoShenData();
+    private ArrayList<GuPiaoShenData.DataBean.DataBean1> mBeen=new ArrayList<>();
+    private String urlGuPiaoShen= YuXinHuiApplication.getUrlBoot()+"app/getShareList?name=sz&shpage=1&type=1";
 
-    private ImageView gupiao_return;
     private TextView hugu_txt,shengu_txt;
+    private ImageView gupiao_return;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gupiao_activity);
+        setContentView(R.layout.gupiaoshen_activity);
         mHead= (RelativeLayout) findViewById(R.id.head);
         mHead.setClickable(true);
         mHead.setFocusable(true);
@@ -72,17 +79,17 @@ public class GuPiaoActivity extends Activity{
         gupiao_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(GuPiaoActivity.this, MainActivity.class);
+                Intent intent=new Intent(ShenGuActivity.this, MainActivity.class);
                 startActivity(intent);
                 finishActivity();
             }
         });
         hugu_txt= (TextView) findViewById(R.id.hugu_txt);
         shengu_txt= (TextView) findViewById(R.id.shengu_txt);
-        shengu_txt.setOnClickListener(new View.OnClickListener() {
+        hugu_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(GuPiaoActivity.this,ShenGuActivity.class);
+                Intent intent=new Intent(ShenGuActivity.this,GuPiaoActivity.class);
                 startActivity(intent);
                 finishActivity();
             }
@@ -95,13 +102,13 @@ public class GuPiaoActivity extends Activity{
         final ProgressDialog dialog=ProgressDialog.show(this,"股票界面","努力加载......");
         StringRequest request=new StringRequest(
                 Request.Method.GET,
-                urlGuPiao,
+                urlGuPiaoShen,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         Gson gson=new Gson();
-                        mDataBean = gson.fromJson(s, GuPiaoHuData.class);
-                        ArrayList<GuPiaoHuData.DataBean.DataBean1> been= (ArrayList<GuPiaoHuData.DataBean.DataBean1>) mDataBean.getData().getData();
+                        mDataBean = gson.fromJson(s, GuPiaoShenData.class);
+                        ArrayList<GuPiaoShenData.DataBean.DataBean1> been= (ArrayList<GuPiaoShenData.DataBean.DataBean1>) mDataBean.getData().getData();
                         mBeen.addAll(been);
                         mGuPiaoAdapter.notifyDataSetChanged();
                         Log.e("gupiao","成功");
@@ -115,20 +122,22 @@ public class GuPiaoActivity extends Activity{
                         dialog.dismiss();
                     }
                 }
-        );
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+                map.put("name","平安银行");
+                return map;
+            }
+        };
         requestQueue.add(request);
     }
-
-    private void finishActivity(){
-        this.finish();
-    }
-
     //股票适配器
-    private class GuPiaoAdapter extends BaseAdapter{
-        ArrayList<GuPiaoHuData.DataBean.DataBean1> beanArrayList=new ArrayList<GuPiaoHuData.DataBean.DataBean1>();
+    private class GuPiaoAdapter extends BaseAdapter {
+        ArrayList<GuPiaoShenData.DataBean.DataBean1> beanArrayList=new ArrayList<GuPiaoShenData.DataBean.DataBean1>();
         LayoutInflater mInflater;
 
-        public GuPiaoAdapter(ArrayList<GuPiaoHuData.DataBean.DataBean1> beanArrayList, Context context) {
+        public GuPiaoAdapter(ArrayList<GuPiaoShenData.DataBean.DataBean1> beanArrayList, Context context) {
             super();
             this.beanArrayList = beanArrayList;
             mInflater=LayoutInflater.from(context);
@@ -159,7 +168,7 @@ public class GuPiaoActivity extends Activity{
         public View getView(int position, View convertView, ViewGroup parent) {
             viewHolder holder=null;
             if (convertView==null){
-                synchronized (GuPiaoActivity.this){
+                synchronized (ShenGuActivity.this){
                     convertView=mInflater.inflate(R.layout.gupiao_item,null);
                     holder=new viewHolder();
                     MyHScrollView myHScrollView= (MyHScrollView) convertView.findViewById(R.id.horizontalScrollView1);
@@ -178,7 +187,7 @@ public class GuPiaoActivity extends Activity{
             }else {
                 holder= (viewHolder) convertView.getTag();
             }
-            GuPiaoHuData.DataBean.DataBean1 bean= (GuPiaoHuData.DataBean.DataBean1) getItem(position);
+            GuPiaoShenData.DataBean.DataBean1 bean= (GuPiaoShenData.DataBean.DataBean1) getItem(position);
             holder.txt1.setText(bean.getName()+"\n"+bean.getSymbol());
             holder.txt2.setText(bean.getSell());
             holder.txt3.setText(bean.getBuy());
@@ -205,7 +214,6 @@ public class GuPiaoActivity extends Activity{
             }
         }
     }
-
     //触摸监听
     private class ListViewAndHeadViewTouchLinstener implements View.OnTouchListener {
         @Override
@@ -215,5 +223,8 @@ public class GuPiaoActivity extends Activity{
             horizontalScrollView.onTouchEvent(event);
             return false;
         }
+    }
+    private void finishActivity(){
+        this.finish();
     }
 }

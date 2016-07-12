@@ -1,4 +1,4 @@
-package com.yuxinhui.text.myapplication.Fragment.Actiity;
+package com.yuxinhui.text.myapplication.Actiity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +22,6 @@ import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.DialogUtils;
 import com.yuxinhui.text.myapplication.Utils.Message;
-import com.yuxinhui.text.myapplication.Utils.SmsMessage;
 import com.yuxinhui.text.myapplication.Utils.User;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
@@ -69,6 +68,7 @@ public class Denglu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Denglu.this, MainActivity.class);
                 startActivity(intent);
+                Denglu.this.finish();
             }
         });
         zhuce_text.setOnClickListener(new View.OnClickListener() {

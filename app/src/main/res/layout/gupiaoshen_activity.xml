@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
@@ -20,13 +21,13 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/hugu_txt"
-                android:background="@color/white"
-                android:textColor="#f51010"
+                android:textColor="#ffffff"
                 android:text="沪股"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
-                android:textColor="#ffffff"
+                android:textColor="#f51010"
+                android:background="@color/white"
                 android:id="@+id/shengu_txt"
                 android:text="深股"
                 android:layout_toRightOf="@id/hugu_txt"
