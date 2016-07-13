@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/denglubg">
 
     <RelativeLayout
+        android:id="@+id/layout_title"
         android:background="@mipmap/daohang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -33,14 +34,19 @@
     </RelativeLayout>
     <ImageView
         android:id="@+id/denglu_logo_img"
-        android:src="@mipmap/logo"
+        android:src="@mipmap/yellowlogo"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/layout_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="13dp"/>
     <RelativeLayout
+        android:id="@+id/layout_telephone"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/denglu_logo_img"
+        android:layout_centerHorizontal="true"
         android:background="@mipmap/shurukuang"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
@@ -62,9 +68,11 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/layout_password"
+        android:layout_below="@id/layout_telephone"
         android:layout_marginTop="13dp"
         android:background="@mipmap/shurukuang"
-        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
@@ -87,7 +95,9 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
     <RelativeLayout
-        android:layout_marginTop="5dp"
+        android:id="@+id/layoou_telecode"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/layout_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <EditText
@@ -96,30 +106,57 @@
             android:layout_marginLeft="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/zhuce_getyanzheng_img"
-            android:src="@mipmap/getyanzhen"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tv_validate_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#000601"
+            android:background="@mipmap/getvercode_bg"
             android:textSize="18sp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="50dp"
+            android:layout_toRightOf="@id/zhuce_writeyanzheng_text"
+            android:layout_marginRight="5dp"
             android:layout_centerVertical="true"
             android:textColor="#fff"
+            android:text="获取验证码"
+            android:gravity="center"
             />
     </RelativeLayout>
+
     <ImageView
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
         android:id="@+id/zhuce_img"
         android:src="@mipmap/zhuce"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-</LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="11dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoou_telecode"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <EditText
+            android:id="@+id/et_gid"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:background="@mipmap/writeyanzhen"/>
+        <TextView
+            android:id="@+id/tv_gid"
+            android:layout_toRightOf="@id/et_gid"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="代理商"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/getvercode_bg"
+            android:textColor="#fff"
+            android:gravity="center"
+            />
+    </RelativeLayout>
+</RelativeLayout>

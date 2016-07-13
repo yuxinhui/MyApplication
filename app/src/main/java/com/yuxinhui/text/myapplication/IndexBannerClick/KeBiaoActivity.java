@@ -2,13 +2,21 @@ package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,11 +25,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoPackage.MyHScrollView;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.KeBiaoData;
-import com.yuxinhui.text.myapplication.YuXinHuiApplication;
-import com.yuxinhui.text.myapplication.adapter.CurriculumAdapter;
 
 import java.util.ArrayList;
 
@@ -32,20 +39,33 @@ import java.util.ArrayList;
  * 描述:课程表显示界面
  */
 public class KeBiaoActivity extends Activity{
-    private String url= YuXinHuiApplication.getUrlBoot()+"course/select_app";
-    private ListView curriculum_lv;
+    //private String url= YuXinHuiApplication.getUrlBoot()+"course/select_app";
+    private String url="http://114.55.98.142/course/select_app";
+    private ListView mListView1;
+    private CurriculumAdapter mCurriculumAdapter;
+    private RelativeLayout mHead;
     private KeBiaoData mData=new KeBiaoData();
-    private ArrayList<KeBiaoData.DataBean> mList=new ArrayList<KeBiaoData.DataBean>();
-    private CurriculumAdapter mAdapter;
+    private ArrayList<KeBiaoData.DataBean> mDataBeen=new ArrayList<KeBiaoData.DataBean>();
+
     private ImageView curriculum_return_img;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curriculum);
-        initData();
-        initView();
+        mHead= (RelativeLayout) findViewById(R.id.head);
+        mHead.setFocusable(true);
+        mHead.setBackgroundColor(Color.parseColor("#00ff00"));
+        mHead.setClickable(true);
+        mHead.setOnTouchListener(new ListViewAndHeadViewTouchLinstener());
 
+        initData();
+        mListView1= (ListView) findViewById(R.id.listView1);
+        mListView1.setOnTouchListener(new ListViewAndHeadViewTouchLinstener());
+
+        mCurriculumAdapter=new CurriculumAdapter(mDataBeen,this);
+        mListView1.setAdapter(mCurriculumAdapter);
+        initView();
     }
 
     private void initView() {
@@ -58,33 +78,33 @@ public class KeBiaoActivity extends Activity{
                 finishActivity();
             }
         });
-        curriculum_lv= (ListView) findViewById(R.id.curriculum_lv);
-        mAdapter=new CurriculumAdapter(mList,KeBiaoActivity.this);
-        curriculum_lv.setDivider(null);
-        curriculum_lv.setAdapter(mAdapter);
+
     }
 
+    //获取课表的数据
     private void initData() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        final ProgressDialog dialog= ProgressDialog.show(this,"课程表","努力加载》》》》");
+        final ProgressDialog dialog=ProgressDialog.show(this,"课程表","努力加载.....");
         StringRequest request=new StringRequest(
                 Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
+                        /*Log.e("tag",s);*/
                         Gson gson=new Gson();
-                        mData = gson.fromJson(s, KeBiaoData.class);
-                        ArrayList<KeBiaoData.DataBean> data = (ArrayList<KeBiaoData.DataBean>) mData.getData();
-                        mList.addAll(data);
-                        mAdapter.notifyDataSetChanged();
-                        Log.e("课表","加载成功");
+                        mData=gson.fromJson(s,KeBiaoData.class);
+                        ArrayList<KeBiaoData.DataBean> been= (ArrayList<KeBiaoData.DataBean>) mData.getData();
+                        mDataBeen.addAll(been);
+                        mCurriculumAdapter.notifyDataSetChanged();
+                        Log.e("kebiao","成功了吧");
+                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.e("课表","加载成功");
+                        Log.e("kebiao","失败");
                         dialog.dismiss();
                     }
                 }
@@ -94,5 +114,96 @@ public class KeBiaoActivity extends Activity{
 
     private void finishActivity(){
         this.finish();
+    }
+
+    //课表适配器
+    private class CurriculumAdapter extends BaseAdapter{
+        private ArrayList<KeBiaoData.DataBean> mArrayList=new ArrayList<KeBiaoData.DataBean>();
+        private LayoutInflater mInflater;
+
+        public CurriculumAdapter(ArrayList<KeBiaoData.DataBean> mArrayList, Context context) {
+            super();
+            this.mArrayList = mArrayList;
+            mInflater=LayoutInflater.from(context);
+        }
+
+        @Override
+        public int getCount() {
+            if (mArrayList!=null){
+                return mArrayList.size();
+            }
+            return 0;
+        }
+
+        @Override
+        public KeBiaoData.DataBean getItem(int position) {
+            if (mArrayList!=null){
+                return mArrayList.get(position);
+            }
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            viewHolder holder=null;
+            if (convertView==null){
+                synchronized (KeBiaoActivity.this){
+                    convertView=mInflater.inflate(R.layout.curriculum_item,null);
+                    holder=new viewHolder();
+                    MyHScrollView myHScrollView= (MyHScrollView) convertView.findViewById(R.id.horizontalScrollView1);
+                    holder.scrollView=myHScrollView;
+                    holder.txt1= (TextView) convertView.findViewById(R.id.time_txt);
+                    holder.txt2= (TextView) convertView.findViewById(R.id.mon_txt);
+                    holder.txt3= (TextView) convertView.findViewById(R.id.tuse_txt);
+                    holder.txt4= (TextView) convertView.findViewById(R.id.wed_txt);
+                    holder.txt5= (TextView) convertView.findViewById(R.id.thu_txt);
+                    holder.txt6= (TextView) convertView.findViewById(R.id.fin_txt);
+                    MyHScrollView hScrollView= (MyHScrollView) mHead.findViewById(R.id.horizontalScrollView1);
+                    hScrollView.AddOnScrollChangedListener(new OnScrollChangedListenerImp(myHScrollView));
+                    convertView.setTag(holder);
+                }
+            }else {
+                holder= (viewHolder) convertView.getTag();
+            }
+            KeBiaoData.DataBean dataBean=getItem(position);
+            holder.txt1.setText(dataBean.getStartTime()+"\n"+"  |"+"\n"+dataBean.getEndTime());
+            holder.txt2.setText(dataBean.getMonday());
+            holder.txt3.setText(dataBean.getTuesday());
+            holder.txt4.setText(dataBean.getWednesday());
+            holder.txt5.setText(dataBean.getThursday());
+            holder.txt6.setText(dataBean.getFriday());
+            return convertView;
+        }
+        public class viewHolder{
+            TextView txt1,txt2,txt3,txt4,txt5,txt6;
+            private HorizontalScrollView scrollView;
+        }
+
+        private class OnScrollChangedListenerImp implements MyHScrollView.OnScrollChangedListener {
+            private MyHScrollView mScrollViewArg;
+            public OnScrollChangedListenerImp(MyHScrollView myHScrollView) {
+                mScrollViewArg=myHScrollView;
+            }
+
+            @Override
+            public void onScrollChanged(int l, int t, int oldl, int oldt) {
+                mScrollViewArg.smoothScrollTo(l,t);
+            }
+        }
+    }
+    //触摸监听
+    private class ListViewAndHeadViewTouchLinstener implements View.OnTouchListener {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            //当在列头 和 listView控件上touch时，将这个touch的事件分发给 ScrollView
+            HorizontalScrollView horizontalScrollView = (HorizontalScrollView) mHead.findViewById(R.id.horizontalScrollView1);
+            horizontalScrollView.onTouchEvent(event);
+            return false;
+        }
     }
 }

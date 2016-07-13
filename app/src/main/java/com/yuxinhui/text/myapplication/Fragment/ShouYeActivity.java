@@ -188,13 +188,10 @@ public class ShouYeActivity extends Fragment{
         kaihu_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Runnable() {
-                    @Override
-                    public void run() {
+
                         mIntent=new Intent(getActivity(), KaiHu.class);
-                        startActivity(mIntent);
-                    }
-                }.run();
+                        getActivity().startActivity(mIntent);
+
             }
         });
         zhibo1_image.setOnClickListener(new View.OnClickListener() {

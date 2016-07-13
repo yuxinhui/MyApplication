@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
+import com.yuxinhui.text.myapplication.Utils.DailiBean;
 import com.yuxinhui.text.myapplication.Utils.DialogUtils;
 import com.yuxinhui.text.myapplication.Utils.Message;
 import com.yuxinhui.text.myapplication.Utils.SmsMessage;
@@ -27,13 +28,17 @@ import com.yuxinhui.text.myapplication.Utils.User;
 import com.yuxinhui.text.myapplication.Utils.VerCodeTImer;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Administrator on 2016/6/1.
+ *请求代理商接口 http://192.168.0.107:8080/jmj/agent/findAll
  */
 public class Zhuce extends AppCompatActivity {
+    
+
     private ImageView zhuce_return_img;
     private ImageView zhuce_home_img;
     private ImageView zhuce_img;
@@ -41,19 +46,21 @@ public class Zhuce extends AppCompatActivity {
     private EditText zhuce_mima_text;
     private EditText zhuce_writeyanzheng_text;
     private TextView metVadateCode;
+    private EditText metGid;
     String telepone,password,validateCode;
     SmsMessage smsMessage = new SmsMessage();
     Message message;
     User user;
-    int time = 60;
-    String url = YuXinHuiApplication.getUrlBoot()+"user/register";
+    String url = YuXinHuiApplication.URL_BOOT+"user/register";
     RequestQueue queue;
+    String gid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zhuce);
         queue = Volley.newRequestQueue(this);
+        getDaili();
         initView();
         initData();
         onClick();
@@ -76,6 +83,7 @@ public class Zhuce extends AppCompatActivity {
         zhuce_mima_text= (EditText) findViewById(R.id.et_passwrod);
         zhuce_writeyanzheng_text= (EditText) findViewById(R.id.zhuce_writeyanzheng_text);
         metVadateCode = (TextView) findViewById(R.id.tv_validate_code);
+        metGid = (EditText) findViewById(R.id.et_gid);
     }
 
     //view控件的监听事件
@@ -94,22 +102,16 @@ public class Zhuce extends AppCompatActivity {
                     zhuce_mingzi_text.requestFocus();
                     return;
                 }
-                String url_getcode = "http://114.55.98.142/sms/tel_code?telphone="+telepone;
+                String url_getcode = YuXinHuiApplication.URL_BOOT+"user/tel_code?telephone="+telepone;
+                Log.e("TAG", url_getcode);
                 getVerCode(url_getcode);
-                Log.e("TAG", smsMessage.getStatus());
-                if("fail".equals(smsMessage.getStatus())){
-                    metVadateCode.setText(smsMessage.getMessage());
-                    return;
-                }
-                VerCodeTImer vct = new VerCodeTImer(60000, 1000, metVadateCode);
+                VerCodeTImer vct = new VerCodeTImer(300000, 1000, metVadateCode);
                 vct.start();
             }
         });
         zhuce_return_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent renzheng = new Intent(Zhuce.this, KaiHuRenZheng.class);
-                startActivity(renzheng);
                 Zhuce.this.finish();
                 return;
             }
@@ -119,7 +121,6 @@ public class Zhuce extends AppCompatActivity {
             public void onClick(View v) {
                 Intent shouye = new Intent(Zhuce.this, MainActivity.class);
                 startActivity(shouye);
-                Zhuce.this.finish();
                 return;
             }
         });
@@ -164,38 +165,43 @@ public class Zhuce extends AppCompatActivity {
 
     //注册的volley请求
     public void register(){
+        Log.e("TAG", gid);
         user = YuXinHuiApplication.getInstace().getUser();
         user.setTelephone(telepone);
         user.setPassword(password);
+        Log.e("TAG", user.toString());
+//        ?telephone=13170015502&password=123456&tel_code=890455&gid=a489350e-0a99-4fe1-81da-1d73404279b9
+//        user.setGid("jmj");
+//        url = url + "?telephone=" + telepone + "&password=" + password + "&tel_code=" + validateCode + "&gid=" + gid;
+//        Log.e("TAG", url);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Gson gson = new Gson();
-                message = gson.fromJson(s, Message.class);
-                if(message.getStatus().equals("success")){
-                    Denglu denglu = new Denglu();
-                    denglu.login(telepone,password);
+                if (s != null) {
+                    Gson gson = new Gson();
+                    Message message = gson.fromJson(s, Message.class);
+                    Log.e("TAG", message.toString());
+                    if (("ok").equals(message.getStatus())) {
+                        YuXinHuiApplication.getInstace().setUser(user);
+                        Intent intent = new Intent(Zhuce.this, ZhuCeXiangQing.class);
+                        startActivity(intent);
+                    }
                 }
-                Intent intent = new Intent(Zhuce.this, ZhuCeXiangQing.class);
-                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        DialogUtils.createToasdt(Zhuce.this,"请检查网络连接是否正确");
-                    }
-                });
+                DialogUtils.createToasdt(Zhuce.this,volleyError.getMessage());
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Gson g = new Gson();
                 Map<String, String> params = new HashMap<>();
-                params.put("user",g.toJson(user));
-                params.put("validateCode", validateCode);
+                params.put("user", user.toString());
+                params.put("tel_code", validateCode);
+                params.put("gid",gid);
+                Log.e("TAG", params.toString());
                 return params;
             }
         };
@@ -211,6 +217,10 @@ public class Zhuce extends AppCompatActivity {
                 Gson gson = new Gson();
                 smsMessage = gson.fromJson(s, SmsMessage.class);
                 Log.e("TAG", smsMessage.toString());
+                if("fail".equals(smsMessage.getStatus())){
+                    DialogUtils.createToasdt(Zhuce.this,smsMessage.getMessage());
+                    return;
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -224,5 +234,25 @@ public class Zhuce extends AppCompatActivity {
             }
         });
         queue.add(requestVerCode);
+    }
+
+    //下载代理商的数据
+    public void getDaili(){
+        String url_daili = YuXinHuiApplication.URL_BOOT+"agent/findAll?code="+metGid.getText().toString();
+        StringRequest request = new StringRequest(Request.Method.GET, url_daili, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Gson gson = new Gson();
+                DailiBean dailiBean = gson.fromJson(s, DailiBean.class);
+                ArrayList<DailiBean.DataBean> l = (ArrayList<DailiBean.DataBean>) dailiBean.getData();
+                gid = l.get(0).getId();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                DialogUtils.createToasdt(Zhuce.this,"请检查网络连接是否正确");
+            }
+        });
+        queue.add(request);
     }
 }

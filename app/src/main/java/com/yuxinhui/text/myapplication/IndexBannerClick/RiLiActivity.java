@@ -1,12 +1,14 @@
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.webkit.HttpAuthHandler;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -16,59 +18,100 @@ import com.yuxinhui.text.myapplication.R;
  * Created by Administrator on 2016/6/15.
  */
 public class RiLiActivity extends Activity{
-    private WebView mWebView;
+    /** Called when the activity is first created. */
+    WebView wv;
+    ProgressDialog pd;
+    Handler handler;
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rili);
-        init();
+        init();//执行初始化函数
+        loadurl(wv,"http://m.jin10.com/rili");
     }
 
-    private void init() {
-        mWebView= (WebView) findViewById(R.id.webView);
-        //如果访问的页面中有Javascript，则webview必须设置支持Javascript
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        //触摸焦点起作用
-        mWebView.requestFocus();
-        // 取消滚动条
-        // this.setScrollBarStyle();
-        //WebView加载web资源
-        mWebView.loadUrl("http://m.jin10.com/rili");
-        //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
-        mWebView.setWebViewClient(new WebViewClient(){
-            /**
-             * 对网页中超链接按钮的响应
-             * 当按下某个连接时WebViewClient会调用这个方法，并传递参数：按下的url
-             */
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-                return super.shouldOverrideUrlLoading(view, url);
+    public void init(){
+        // Progress
+        pd=new ProgressDialog(RiLiActivity.this);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("数据载入中，请稍候！");
+        // Show/Hide message
+        handler=new Handler(){
+            public void handleMessage(Message msg)
+            {//定义一个Handler，用于处理下载线程与UI间通讯
+                if (!Thread.currentThread().isInterrupted())
+                {
+                    switch (msg.what)
+                    {
+                        case 0:
+                            pd.show();//显示进度对话框
+                            break;
+                        case 1:
+                            pd.hide();//隐藏进度对话框，不可使用dismiss()、cancel(),否则再次调用show()时，显示的对话框小圆圈不会动。
+                            break;
+                    }
+                }
+                super.handleMessage(msg);
             }
+        };
+        // WebView
+        wv=(WebView)findViewById(R.id.webView);
+        wv.getSettings().setJavaScriptEnabled(true);//可用JS
+        wv.setScrollBarStyle(0);//滚动条风格，为0就是不给滚动条留空间，滚动条覆盖在网页上
+        wv.setWebViewClient(new WebViewClient(){
+            public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
+                loadurl(view,url);//载入网页
+                return true;
+            }//重写点击动作,用webview载入
 
-            @Override
-            public void onLoadResource(WebView view, String url) {
-                super.onLoadResource(view, url);
+        });
+        wv.setWebChromeClient(new WebChromeClient(){
+            public void onProgressChanged(WebView view,int progress){//载入进度改变而触发
+                if(progress==100){
+                    handler.sendEmptyMessage(1);//如果全部载入,隐藏进度对话框
+                }
+                super.onProgressChanged(view, progress);
             }
+        });
 
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-            }
+    }
 
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-            }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {//捕捉返回键
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && wv.canGoBack()) {
+            wv.goBack();
+            return true;
+        }else if(keyCode == KeyEvent.KEYCODE_BACK){
+        	ConfirmExit();//按了返回键，但已经不能返回，则执行退出确认
+        	return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    public void ConfirmExit(){//退出确认
+    	AlertDialog.Builder ad=new AlertDialog.Builder(RiLiActivity.this);
+    	ad.setTitle("退出");
+    	ad.setMessage("是否返回主界面?");
+    	ad.setPositiveButton("是", new DialogInterface.OnClickListener() {//退出按钮
+			@Override
+			public void onClick(DialogInterface dialog, int i) {
+				// TODO Auto-generated method stub
+				RiLiActivity.this.finish();//关闭activity
 
+			}
+		});
+    	ad.setNegativeButton("否",new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int i) {
+				//不退出不用执行任何操作
+			}
+		});
+    	ad.show();//显示对话框
+    }
+    public void loadurl(final WebView view,final String url){
+        runOnUiThread(new Runnable() {
             @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                super.onReceivedError(view, request, error);
-            }
-
-            @Override
-            public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
-                super.onReceivedHttpAuthRequest(view, handler, host, realm);
+            public void run() {
+                handler.sendEmptyMessage(0);
+                view.loadUrl(url);//载入网页
             }
         });
     }

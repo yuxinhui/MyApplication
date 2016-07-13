@@ -18,8 +18,8 @@
             android:id="@+id/zhibo_biaoti_img"
             android:layout_centerInParent="true"
             android:src="@mipmap/zhibozi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="60dp"
+            android:layout_height="30dp" />
     </RelativeLayout>
     <FrameLayout
         android:layout_width="match_parent"
@@ -42,7 +42,6 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/playicon"
             android:layout_gravity="center"
-            android:onClick="onClick"
             />
     </FrameLayout>
     <LinearLayout
@@ -51,6 +50,7 @@
         android:orientation="horizontal"
         >
         <TextView
+            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="音量"
@@ -61,25 +61,25 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:max="100"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             />
-        <TextView
+        <ImageView
             android:id="@+id/tv_fullscreen"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="全屏播放"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
             android:gravity="center_vertical"
+            android:src="@mipmap/icon_full_screen"
             />
     </LinearLayout>
     <RelativeLayout
         android:background="@mipmap/background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:src="@mipmap/zhibocontent"

@@ -19,10 +19,9 @@
             />
         <ImageView
             android:layout_width="80dp"
-            android:layout_height="34dp"
+            android:layout_height="30dp"
             android:src="@mipmap/about_us"
             android:layout_centerInParent="true"
-            android:scaleType="fitXY"
             />
     </RelativeLayout>
     <ImageView
@@ -39,7 +38,7 @@
         >
         <ImageView
             android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:src="@mipmap/app_info"
             android:scaleType="fitCenter"
             android:layout_marginLeft="20dp"
@@ -71,7 +70,7 @@
         >
         <ImageView
             android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:src="@mipmap/advice_back"
             android:scaleType="fitCenter"
             android:layout_marginLeft="20dp"

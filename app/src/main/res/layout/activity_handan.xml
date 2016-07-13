@@ -14,12 +14,19 @@
             android:layout_marginLeft="20dp"
             android:src="@mipmap/fanhui"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <ImageView
+            android:layout_height="30dp" />
+        <TextView
             android:id="@+id/huilv_biaoti_img"
             android:layout_centerInParent="true"
-            android:src="@mipmap/huilvbiaoti"
+            android:text="喊单"
+            android:textColor="@color/white"
+            android:textSize="30dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="30dp" />
     </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="努力改进img，请期待下个版本到来"
+        android:layout_height="match_parent" />
 </LinearLayout>

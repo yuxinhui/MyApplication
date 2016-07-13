@@ -1,18 +1,15 @@
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gensee.common.ServiceType;
@@ -23,8 +20,6 @@ import com.gensee.player.OnPlayListener;
 import com.gensee.player.Player;
 import com.gensee.view.GSVideoView;
 import com.yuxinhui.text.myapplication.R;
-
-import java.net.Authenticator;
 
 /**直播视频的activity
  * Created by Administrator on 2016/5/31.
@@ -64,8 +59,8 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         mIvretrun = (ImageView) findViewById(R.id.zhibo_return_img);
         mtvFullScreen = (ImageView) findViewById(R.id.tv_fullscreen);
         msbAudio = (SeekBar) findViewById(R.id.sb_audio);
-        msbAudio.setMax(streamMaxVolume);
-        msbAudio.setProgress(streamVolume);
+//        msbAudio.setMax(streamMaxVolume);
+//        msbAudio.setProgress(streamVolume);
         mIvplayer = (ImageView) findViewById(R.id.iv_player);
         player.setGSVideoView(mGSzhibo);
         initParam.setDomain("yxhcorp.gensee.com");
@@ -241,7 +236,7 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                am.setStreamVolume(AudioManager.STREAM_MUSIC,i,AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_MUSIC,i,0);
             }
         });
 

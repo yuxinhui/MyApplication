@@ -37,6 +37,7 @@ public class LaoShiActivity extends AppCompatActivity{
     private TeachData teachData=new TeachData();
     private ListView teacher_lv;
     private String url= "http://114.55.98.142/analyst/select_app";
+    //private String url= YuXinHuiApplication.getUrlBoot()+"analyst/select_app";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

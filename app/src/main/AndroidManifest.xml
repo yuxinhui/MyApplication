@@ -34,7 +34,7 @@
     <application
         android:name=".YuXinHuiApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
@@ -62,7 +62,8 @@
         <activity android:name=".MainActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".HangQingActivity.GlobalCurrency"/>
-        <activity android:name=".IndexBannerClick.ZhiboActivity" />
+        <activity android:name=".IndexBannerClick.ZhiboActivity"
+            android:configChanges="orientation|screenSize"/>
         <activity android:name=".IndexBannerClick.AboutUsActivity" />
         <activity android:name=".IndexBannerClick.AdviceCommitActivity" />
         <activity android:name=".IndexBannerClick.VersionINfoActivity" />

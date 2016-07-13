@@ -12,12 +12,12 @@
             android:layout_marginLeft="20dp"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="30dp" />
         <ImageView
             android:src="@mipmap/laoshi_title"
             android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="60dp"
+            android:layout_height="30dp" />
     </RelativeLayout>
     <ListView
         android:id="@+id/teacher_lv"

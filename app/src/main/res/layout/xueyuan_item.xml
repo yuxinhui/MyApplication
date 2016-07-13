@@ -16,6 +16,7 @@
         android:id="@+id/xueyuan_time"
         android:text="2016:06:30"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
         android:layout_alignBottom="@id/bofang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -41,6 +42,7 @@
         android:id="@+id/author"
         android:text="author"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
         android:layout_alignTop="@id/bofang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

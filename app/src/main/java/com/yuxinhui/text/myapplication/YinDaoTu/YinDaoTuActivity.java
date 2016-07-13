@@ -17,7 +17,6 @@ public class YinDaoTuActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_yindaotu);
         boolean mFirst = isFirstEnter(YinDaoTuActivity.this, YinDaoTuActivity.this.getClass().getName());
         if (mFirst){
             handler.sendEmptyMessageAtTime(SWITCH_GUIDEACTIVITY,3000);
