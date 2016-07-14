@@ -188,107 +188,79 @@ public class ShouYeActivity extends Fragment{
         kaihu_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                         mIntent=new Intent(getActivity(), KaiHu.class);
                         getActivity().startActivity(mIntent);
-
             }
         });
         zhibo1_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               new Runnable() {
-                   @Override
-                   public void run() {
                        mIntent=new Intent(getActivity(), ZhiboActivity.class);
-                       startActivity(mIntent);
+                       getActivity().startActivity(mIntent);
                    }
-               }.run();
-            }
         });
         laoshi_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Runnable() {
-                    @Override
-                    public void run() {
+
                         mIntent=new Intent(getActivity(), LaoShiActivity.class);
-                        startActivity(mIntent);
+                        getActivity().startActivity(mIntent);
                     }
-                }.run();
-            }
+
         });
         kefu_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Runnable() {
-                    @Override
-                    public void run() {
+
                         mIntent=new Intent(getActivity(), KeFuActivity.class);
-                        startActivity(mIntent);
+                        getActivity().startActivity(mIntent);
                     }
-                }.run();
-            }
+
         });
         kechengbiao_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Runnable() {
-                    @Override
-                    public void run() {
+
                         mIntent = new Intent(getActivity(), KeBiaoActivity.class);
-                        startActivity(mIntent);
+                        getActivity().startActivity(mIntent);
                     }
-                }.run();
-            }
+
         });
         handan_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Runnable() {
-                    @Override
-                    public void run() {
+
                         mIntent=new Intent(getActivity(), HanDanActivity.class);
-                        startActivity(mIntent);
+                        getActivity().startActivity(mIntent);
                     }
-                }.run();
-            }
+
         });
         rili_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Runnable() {
-                    @Override
-                    public void run() {
+
                         mIntent=new Intent(getActivity(), RiLiActivity.class);
-                        startActivity(mIntent);
+                        getActivity().startActivity(mIntent);
                     }
-                }.run();
-            }
+
         });
         gupiao_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Runnable() {
-                    @Override
-                    public void run() {
+
                         mIntent=new Intent(getActivity(), GuPiaoActivity.class);
-                        startActivity(mIntent);
+                        getActivity().startActivity(mIntent);
                     }
-                }.run();
-            }
+
         });
         huilv_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Runnable() {
-                    @Override
-                    public void run() {
+
                         mIntent=new Intent(getActivity(), HuiLvActivity.class);
-                        startActivity(mIntent);
+                        getActivity().startActivity(mIntent);
                     }
-                }.run();
-            }
+
         });
     }
 

@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/zhucexiangqing_jin_img"
             android:layout_centerInParent="true"
-            android:src="@mipmap/zhucexiangqinglogo"
+            android:src="@mipmap/whitelogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -43,10 +43,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
-            android:src="@mipmap/shouzhang05"
+            android:src="@mipmap/yellowlogo"
             android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="80dp"
+            android:layout_height="50dp" />
     </RelativeLayout>
     <ImageView
         android:background="@mipmap/ziliaowanshan"

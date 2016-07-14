@@ -10,7 +10,10 @@ import android.widget.TextView;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.TianTongYinData;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * 包:com.yuxinhui.text.myapplication.adapter
@@ -68,8 +71,15 @@ public class TianTongYinAdapter extends BaseAdapter {
         TianTongYinData data = getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");
-        holder.changePercent.setText(data.getChangePercent()+"");
-        holder.time.setText(data.getTime()+"");
+        double changePercent = data.getChangePercent();
+        double v = changePercent * 100;
+        DecimalFormat df=new DecimalFormat("#0.00");
+        holder.changePercent.setText(df.format(v)+"%");
+        long time = data.getTime();
+        Date date=new Date(time);
+        SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss");
+        String format = sdf.format(date);
+        holder.time.setText(format);
         holder.low.setText(data.getLow()+"");
         holder.high.setText(data.getHigh()+"");
         return convertView;

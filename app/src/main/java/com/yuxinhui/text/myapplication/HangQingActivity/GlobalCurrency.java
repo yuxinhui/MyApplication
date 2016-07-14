@@ -420,6 +420,7 @@ public class GlobalCurrency extends AppCompatActivity implements RadioGroup.OnCh
         mRadioButton4 = (RadioButton)findViewById(R.id.radiobt4);
         mRadioButton5 = (RadioButton)findViewById(R.id.radiobt5);
         mRadioButton6 = (RadioButton)findViewById(R.id.radiobt6);
+        mViewPager = (ViewPager)findViewById(R.id.hangqing_pager);
         global_lv= (ListView) getLayoutInflater().inflate(R.layout.activity_globalcurrency,null).findViewById(R.id.global_lv);
         mGlobalAdapter=new GlobalAdapter(mGlobalCurrencyDatas,GlobalCurrency.this);
         global_lv.setAdapter(mGlobalAdapter);
@@ -446,7 +447,7 @@ public class GlobalCurrency extends AppCompatActivity implements RadioGroup.OnCh
 
         mHorizontalScrollView = (HorizontalScrollView)findViewById(R.id.horizontalScrollView);
 
-        mViewPager = (ViewPager)findViewById(R.id.hangqing_pager);
+
     }
     /**
      * ViewPager的适配器

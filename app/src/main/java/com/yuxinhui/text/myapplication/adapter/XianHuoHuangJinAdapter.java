@@ -10,7 +10,10 @@ import android.widget.TextView;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.XianHuoHuangJinData;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by "于志渊"
@@ -68,8 +71,12 @@ public class XianHuoHuangJinAdapter extends BaseAdapter {
         XianHuoHuangJinData data=getItem(position);
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");
-        holder.changePercent.setText(data.getChangePercent()+"");
-        holder.time.setText(data.getTime()+"");
+        double v = data.getChangePercent() * 100;
+        DecimalFormat df=new DecimalFormat("#0.00");
+        holder.changePercent.setText(df.format(v)+"%");
+        SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss");
+        String format = sdf.format(new Date(data.getTime()));
+        holder.time.setText(format);
         holder.low.setText(data.getLow()+"");
         holder.high.setText(data.getHigh()+"");
         return convertView;

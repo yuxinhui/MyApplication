@@ -1,12 +1,14 @@
 package com.yuxinhui.text.myapplication.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.AuthFailureError;
@@ -17,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.yuxinhui.text.myapplication.Actiity.XueYuanPlayActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.XueYuanData;
 import com.yuxinhui.text.myapplication.adapter.XueYuanAdapter;
@@ -47,6 +50,13 @@ public class XueyuanActivity extends Fragment {
         xueyuan_lv= (ListView) view.findViewById(R.id.xueyuan_lv);
         mAdapter=new XueYuanAdapter(mBeen,getActivity());
         xueyuan_lv.setAdapter(mAdapter);
+        xueyuan_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getActivity(), XueYuanPlayActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initData() {
@@ -63,14 +73,14 @@ public class XueyuanActivity extends Fragment {
                         ArrayList<XueYuanData.DataBean.ResultBean> list = (ArrayList<XueYuanData.DataBean.ResultBean>) xueYuanData.getData().getResult();
                         mBeen.addAll(list);
                         mAdapter.notifyDataSetChanged();
-                        Log.e("学院","我说成功您信吗");
+                        Log.e("xueyuan","我说成功您信吗");
                         dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.e("学院","加载失败");
+                        Log.e("xueyuan","加载失败");
                         dialog.dismiss();
                     }
                 }
