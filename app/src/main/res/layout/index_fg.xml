@@ -154,11 +154,10 @@
         android:background="@mipmap/kuaixun"
         android:layout_width="match_parent"
         android:layout_height="30dp" />
-    <ListView
-        android:id="@+id/kuaixun_list"
-        android:background="@mipmap/background"
+    <WebView
+        android:id="@+id/kuaixun_wv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </ListView>
+    </WebView>
 </LinearLayout>

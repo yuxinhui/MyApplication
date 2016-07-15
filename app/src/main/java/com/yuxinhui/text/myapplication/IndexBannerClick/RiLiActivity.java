@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 
 /**
@@ -76,36 +78,20 @@ public class RiLiActivity extends Activity{
 
     }
 
+
     public boolean onKeyDown(int keyCode, KeyEvent event) {//捕捉返回键
         if ((keyCode == KeyEvent.KEYCODE_BACK) && wv.canGoBack()) {
             wv.goBack();
             return true;
         }else if(keyCode == KeyEvent.KEYCODE_BACK){
-        	ConfirmExit();//按了返回键，但已经不能返回，则执行退出确认
-        	return true;
+            Intent intent=new Intent(RiLiActivity.this, MainActivity.class);
+            startActivity(intent);
+            RiLiActivity.this.finish();
+        	return false;
         }
         return super.onKeyDown(keyCode, event);
     }
-    public void ConfirmExit(){//退出确认
-    	AlertDialog.Builder ad=new AlertDialog.Builder(RiLiActivity.this);
-    	ad.setTitle("退出");
-    	ad.setMessage("是否返回主界面?");
-    	ad.setPositiveButton("是", new DialogInterface.OnClickListener() {//退出按钮
-			@Override
-			public void onClick(DialogInterface dialog, int i) {
-				// TODO Auto-generated method stub
-				RiLiActivity.this.finish();//关闭activity
 
-			}
-		});
-    	ad.setNegativeButton("否",new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int i) {
-				//不退出不用执行任何操作
-			}
-		});
-    	ad.show();//显示对话框
-    }
     public void loadurl(final WebView view,final String url){
         runOnUiThread(new Runnable() {
             @Override

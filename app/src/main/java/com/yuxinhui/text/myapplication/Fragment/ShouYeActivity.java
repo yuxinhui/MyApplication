@@ -1,6 +1,7 @@
 package com.yuxinhui.text.myapplication.Fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,25 +13,24 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.yuxinhui.text.myapplication.Actiity.Denglu;
 import com.yuxinhui.text.myapplication.Actiity.KaiHu;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HanDanActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.HuiLvActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.KeBiaoActivity;
-import com.yuxinhui.text.myapplication.IndexBannerClick.KeFuActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.LaoShiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.RiLiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.ZhiboActivity;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.IndexKuaiXunData;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
-import com.yuxinhui.text.myapplication.adapter.ShouyeKuaiXunAdapter;
-
-import java.util.ArrayList;
 
 /**
  * Created by "于志渊"
@@ -42,15 +42,14 @@ public class ShouYeActivity extends Fragment{
     private ImageView kaihu_image,zhibo1_image,laoshi_image,kefu_image,kechengbiao_image,handan_image,rili_image,gupiao_image,huilv_image;
     private Intent mIntent;
     //快讯一系列控件
-    private ListView kuaixun_list;
-    private ArrayList<IndexKuaiXunData.DataBean> mDataList=new ArrayList<IndexKuaiXunData.DataBean>();
-    private IndexKuaiXunData indexKuaiXunData;
-    private String url= YuXinHuiApplication.getUrlBoot()+"app/news/";
-    private ShouyeKuaiXunAdapter mIndexKuaiXunAdapter;
+    private WebView kuaixun_wv;
+
     //导航banner
     private int[] imageIds;
     private LinearLayout main_ll_dots;
     private ViewPager main_vp;
+    private String qq;
+    RequestQueue requestQueue;
 
     Handler handler=new Handler(){
         @Override
@@ -63,11 +62,12 @@ public class ShouYeActivity extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.index_fg, container, false);
+        requestQueue = Volley.newRequestQueue(getActivity());
         //初始化控件
         initImage(view);
         imageClick();
-        /*initData();
-        initView(view);*/
+        initView(view);
+
         imageIds=new int[]{R.mipmap.banner,R.mipmap.banner02,R.mipmap.banner03};
         main_ll_dots= (LinearLayout) view.findViewById(R.id.main_ll_dots);
         initDot();
@@ -135,134 +135,118 @@ public class ShouYeActivity extends Fragment{
             main_ll_dots.addView(view);
         }
     }
-
-    //快讯数据
-    /*private void initData() {
-//        Log.e("indexKuaiXun",mDataList.get(1).toString());
-        indexKuaiXunData = new IndexKuaiXunData();
-        RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
-        final ProgressDialog dialog = ProgressDialog.show(getActivity(), "快讯界面", "加载ing......");
-        StringRequest mJsonObjectRequest=new StringRequest(
-                Request.Method.GET,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        Gson gson = new Gson();
-                        indexKuaiXunData = gson.fromJson(s,IndexKuaiXunData.class);
-                        ArrayList<IndexKuaiXunData.DataBean> list = (ArrayList<IndexKuaiXunData.DataBean>) indexKuaiXunData.getData();
-                        mDataList.addAll(list);
-                        mIndexKuaiXunAdapter.notifyDataSetChanged();
-                        Log.e("快讯","加载成功");
-                        dialog.dismiss();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(getActivity(), "下载失败,请检查网络连接", Toast.LENGTH_LONG);
-                        Log.e("indexkuaixun","下载失败哈");
-                        dialog.dismiss();
-                    }
-                }
-        ){
+    private void initView(View view) {
+        kuaixun_wv= (WebView) view.findViewById(R.id.kuaixun_wv);
+        kuaixun_wv.loadUrl("http://www.niubo.tv/cjsj_nb.php");
+        kuaixun_wv.getSettings().setJavaScriptEnabled(true);
+        kuaixun_wv.setScrollBarStyle(0);
+        kuaixun_wv.setWebViewClient(new WebViewClient(){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=new HashMap<>();
-                map.put("title","大庆论金:6.22现货黄金白银原油沥青交易思路及策略");
-                return map;
-            }
-        };
-        requestQueue.add(mJsonObjectRequest);
-    }*/
-
-    /*private void initView(View view) {
-        kuaixun_list= (ListView) view.findViewById(R.id.kuaixun_list);
-        mIndexKuaiXunAdapter=new ShouyeKuaiXunAdapter(mDataList,getActivity());
-        kuaixun_list.setAdapter(mIndexKuaiXunAdapter);
-
-    }*/
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return super.shouldOverrideUrlLoading(view, url);
+            }//重写点击动作,用webview载入
+        });
+    }
 
     /**导航图片点击*/
     private void imageClick() {
         kaihu_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        mIntent=new Intent(getActivity(), KaiHu.class);
-                        getActivity().startActivity(mIntent);
+                Intent intent = new Intent(getActivity(), KaiHu.class);
+                getActivity().startActivity(intent);
             }
         });
         zhibo1_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                       mIntent=new Intent(getActivity(), ZhiboActivity.class);
-                       getActivity().startActivity(mIntent);
-                   }
+                mIntent=new Intent(getActivity(), ZhiboActivity.class);
+                getActivity().startActivity(mIntent);
+            }
         });
         laoshi_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                        mIntent=new Intent(getActivity(), LaoShiActivity.class);
-                        getActivity().startActivity(mIntent);
-                    }
-
+                mIntent=new Intent(getActivity(), LaoShiActivity.class);
+                getActivity().startActivity(mIntent);
+            }
         });
         kefu_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                        mIntent=new Intent(getActivity(), KeFuActivity.class);
-                        getActivity().startActivity(mIntent);
-                    }
-
+                if (YuXinHuiApplication.getInstace().isLogin()) {
+                    //getQQ();
+//                    Log.e("TAG", qq);
+                    String url = "mqqwpa://im/chat?chat_type=wpa&uin="+qq;
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                } else {
+                    Intent intent = new Intent(getActivity(), Denglu.class);
+                    getActivity().startActivity(intent);
+                }
+            }
         });
         kechengbiao_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                        mIntent = new Intent(getActivity(), KeBiaoActivity.class);
-                        getActivity().startActivity(mIntent);
-                    }
-
+                mIntent = new Intent(getActivity(), KeBiaoActivity.class);
+                getActivity().startActivity(mIntent);
+            }
         });
         handan_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                        mIntent=new Intent(getActivity(), HanDanActivity.class);
-                        getActivity().startActivity(mIntent);
-                    }
-
+                mIntent=new Intent(getActivity(), HanDanActivity.class);
+                getActivity().startActivity(mIntent);
+            }
         });
         rili_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                        mIntent=new Intent(getActivity(), RiLiActivity.class);
-                        getActivity().startActivity(mIntent);
-                    }
-
+                mIntent=new Intent(getActivity(), RiLiActivity.class);
+                getActivity().startActivity(mIntent);
+            }
         });
         gupiao_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                        mIntent=new Intent(getActivity(), GuPiaoActivity.class);
-                        getActivity().startActivity(mIntent);
-                    }
-
+                mIntent=new Intent(getActivity(), GuPiaoActivity.class);
+                getActivity().startActivity(mIntent);
+            }
         });
         huilv_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                        mIntent=new Intent(getActivity(), HuiLvActivity.class);
-                        getActivity().startActivity(mIntent);
-                    }
-
+                mIntent=new Intent(getActivity(), HuiLvActivity.class);
+                getActivity().startActivity(mIntent);
+            }
         });
     }
+
+    /*private void getQQ() {
+//        http://114.55.98.142/app/getQQ?gid=%@
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String url = YuXinHuiApplication.URL_BOOT+"app/getQQ?gid="+YuXinHuiApplication.getInstace().getUser().getGid();
+        Log.e("TAG", url);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Gson gson = new Gson();
+                QQBean qqBean = gson.fromJson(s, QQBean.class);
+                Log.e("TAG", qqBean.toString());
+                if(qqBean.getStatus().equals("ok")){
+                    qq = qqBean.getData().getQq();
+                    Log.e("TAG", qq);
+                }
+                DialogUtils.createToasdt(getActivity(),"获取"+qqBean.getMessage());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                DialogUtils.createToasdt(getActivity(),volleyError.getMessage());
+            }
+        });
+        queue.add(request);
+    }*/
 
     /**实例化图片控件*/
     private void initImage(View view) {
@@ -309,4 +293,5 @@ public class ShouYeActivity extends Fragment{
             container.removeView((View) object);
         }
     }
+
 }

@@ -22,12 +22,19 @@ public class HangQingActivity extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.hangqing_activity, container, false);
         hangqing_ll= (LinearLayout) view.findViewById(R.id.hangqing_ll);
+        hangqing_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tizoZhuan();
+            }
+        });
         tizoZhuan();
         return view;
     }
     private void tizoZhuan(){
         mIntent=new Intent(getActivity(), GlobalCurrency.class);
         getActivity().startActivity(mIntent);
+        getActivity().finish();
     }
 
 }
