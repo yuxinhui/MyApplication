@@ -26,10 +26,13 @@ import com.yuxinhui.text.myapplication.R;
  */
 public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
 
+    private final static int SCREEN_LAND = 0;
+    private final static int SCREEN_PORT = 1;
+    private int screen_direction;
     private GSVideoView mGSzhibo,mGSzhiboLand;//视频插件
     Player player = new Player();
     InitParam initParam = new InitParam();
-    ImageView mIvbackgroud,mIvplayer,mContentZhibo,mIvretrun;
+    ImageView mIvbackgroud,mIvplayer,mContentZhibo,mIvretrun,mivPlayLand;
     boolean isPlayed = false;
     ImageView mtvFullScreen,mivNormalScreen;
     SeekBar msbAudio,msbAudioLand;
@@ -59,8 +62,8 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         mIvretrun = (ImageView) findViewById(R.id.zhibo_return_img);
         mtvFullScreen = (ImageView) findViewById(R.id.tv_fullscreen);
         msbAudio = (SeekBar) findViewById(R.id.sb_audio);
-//        msbAudio.setMax(streamMaxVolume);
-//        msbAudio.setProgress(streamVolume);
+        msbAudio.setMax(streamMaxVolume);
+        msbAudio.setProgress(streamVolume);
         mIvplayer = (ImageView) findViewById(R.id.iv_player);
         player.setGSVideoView(mGSzhibo);
         initParam.setDomain("yxhcorp.gensee.com");
@@ -83,24 +86,23 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            requestWindowFeature(Window.FEATURE_NO_TITLE);
+//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
             this.setContentView(R.layout.activity_zhibo);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            screen_direction = SCREEN_LAND;
             initLandView();
             setLandOnClick();
             if(isPlayed){
                 player.leave();
                 player.setGSVideoView(mGSzhiboLand);
                 initplayer(initParam);
+                mivPlayLand.setVisibility(View.GONE);
             }
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             this.setContentView(R.layout.activity_zhibo);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//            Intent intent = getIntent();
-//            boolean restart = intent.getBooleanExtra("重启竖屏", false);
-//            if(restart&&isPlayed){
-//                mIvbackgroud.setVisibility(View.GONE);
-//                mIvplayer.setVisibility(View.GONE);
-//            }
+            screen_direction = SCREEN_PORT;
             initView();
             setOnClick();
             if(isPlayed){
@@ -121,13 +123,21 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
 
     //设置横屏时的监听事件
     private void setLandOnClick() {
+        mivPlayLand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initplayer(initParam);
+            }
+        });
         mGSzhiboLand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(isPlayed){
                     player.leave();
+                    mivPlayLand.setVisibility(View.VISIBLE);
                 }else {
                     initplayer(initParam);
+                    mivPlayLand.setVisibility(View.GONE);
                 }
                 isPlayed = !isPlayed;
             }
@@ -162,12 +172,17 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         msbAudioLand.setMax(streamMaxVolume);
         msbAudioLand.setProgress(streamVolume);
         mivNormalScreen = (ImageView) findViewById(R.id.iv_normalscreen);
+        mivPlayLand = (ImageView) findViewById(R.id.iv_player_land);
     }
 
     @Override
     public void finish() {
-        player.leave();
-        super.finish();
+        if(screen_direction==SCREEN_LAND){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }else{
+            player.leave();
+            super.finish();
+        }
     }
 
     //设置每个控件的监听事件

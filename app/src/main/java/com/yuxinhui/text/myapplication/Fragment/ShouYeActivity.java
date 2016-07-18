@@ -18,8 +18,13 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.Actiity.Denglu;
 import com.yuxinhui.text.myapplication.Actiity.KaiHu;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoActivity;
@@ -30,6 +35,8 @@ import com.yuxinhui.text.myapplication.IndexBannerClick.LaoShiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.RiLiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.ZhiboActivity;
 import com.yuxinhui.text.myapplication.R;
+import com.yuxinhui.text.myapplication.Utils.DialogUtils;
+import com.yuxinhui.text.myapplication.Utils.QQBean;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
 /**
@@ -50,6 +57,8 @@ public class ShouYeActivity extends Fragment{
     private ViewPager main_vp;
     private String qq;
     RequestQueue requestQueue;
+
+    private boolean isGetQQ;
 
     Handler handler=new Handler(){
         @Override
@@ -175,10 +184,12 @@ public class ShouYeActivity extends Fragment{
             @Override
             public void onClick(View v) {
                 if (YuXinHuiApplication.getInstace().isLogin()) {
-                    //getQQ();
+                    getQQ();
 //                    Log.e("TAG", qq);
-                    String url = "mqqwpa://im/chat?chat_type=wpa&uin="+qq;
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    if (isGetQQ){
+                        String url = "mqqwpa://im/chat?chat_type=wpa&uin="+qq;
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    }
                 } else {
                     Intent intent = new Intent(getActivity(), Denglu.class);
                     getActivity().startActivity(intent);
@@ -222,7 +233,7 @@ public class ShouYeActivity extends Fragment{
         });
     }
 
-    /*private void getQQ() {
+    private void getQQ() {
 //        http://114.55.98.142/app/getQQ?gid=%@
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         String url = YuXinHuiApplication.URL_BOOT+"app/getQQ?gid="+YuXinHuiApplication.getInstace().getUser().getGid();
@@ -234,6 +245,7 @@ public class ShouYeActivity extends Fragment{
                 QQBean qqBean = gson.fromJson(s, QQBean.class);
                 Log.e("TAG", qqBean.toString());
                 if(qqBean.getStatus().equals("ok")){
+                    isGetQQ=true;
                     qq = qqBean.getData().getQq();
                     Log.e("TAG", qq);
                 }
@@ -246,7 +258,7 @@ public class ShouYeActivity extends Fragment{
             }
         });
         queue.add(request);
-    }*/
+    }
 
     /**实例化图片控件*/
     private void initImage(View view) {

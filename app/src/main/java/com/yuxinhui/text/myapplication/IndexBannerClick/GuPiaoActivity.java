@@ -44,7 +44,7 @@ public class GuPiaoActivity extends Activity{
     private LinearLayout main;
     private GuPiaoHuData mDataBean=new GuPiaoHuData();
     private ArrayList<GuPiaoHuData.DataBean.DataBean1> mBeen=new ArrayList<>();
-    private String urlGuPiao= YuXinHuiApplication.getUrlBoot()+"app/getShareList?name=sh&shpage=1&type=1";
+    private String urlGuPiao= YuXinHuiApplication.url_boot+"app/getShareList?name=sh&shpage=1&type=1";
 
     private ImageView gupiao_return;
     private TextView hugu_txt,shengu_txt;

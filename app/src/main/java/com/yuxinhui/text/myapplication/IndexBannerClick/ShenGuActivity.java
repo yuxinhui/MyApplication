@@ -51,7 +51,7 @@ public class ShenGuActivity extends AppCompatActivity{
     private LinearLayout main;
     private GuPiaoShenData mDataBean=new GuPiaoShenData();
     private ArrayList<GuPiaoShenData.DataBean.DataBean1> mBeen=new ArrayList<>();
-    private String urlGuPiaoShen= YuXinHuiApplication.getUrlBoot()+"app/getShareList?name=sz&shpage=1&type=1";
+    private String urlGuPiaoShen= YuXinHuiApplication.url_boot+"app/getShareList?name=sz&shpage=1&type=1";
 
     private TextView hugu_txt,shengu_txt;
     private ImageView gupiao_return;

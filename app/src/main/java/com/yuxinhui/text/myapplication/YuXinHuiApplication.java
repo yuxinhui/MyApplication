@@ -17,7 +17,8 @@ public class YuXinHuiApplication extends Application {
     private User user = new User();
     private static YuXinHuiApplication instace;
     private int MIANDAORAO;
-    public static final String URL_BOOT = "http://114.55.67.167:8080/jmj/";
+    public static final String URL_BOOT = "http://114.55.89.142/";
+    public static final String url_boot="http://114.55.67.167:8080/jmj/";
 
     @Override
     public void onCreate() {

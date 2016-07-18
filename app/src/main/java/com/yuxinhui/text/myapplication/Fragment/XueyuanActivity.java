@@ -19,7 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.yuxinhui.text.myapplication.Actiity.XueYuanPlayActivity;
+import com.yuxinhui.text.myapplication.Actiity.PlayVideoActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.XueYuanData;
 import com.yuxinhui.text.myapplication.adapter.XueYuanAdapter;
@@ -53,7 +53,8 @@ public class XueyuanActivity extends Fragment {
         xueyuan_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getActivity(), XueYuanPlayActivity.class);
+                Intent intent=new Intent(getActivity(), PlayVideoActivity.class);
+                intent.putExtra("url",mBeen.get(position).getUrl());
                 startActivity(intent);
             }
         });

@@ -40,19 +40,25 @@ public class Denglu extends AppCompatActivity {
     private TextView wangjiMM_text;
     private TextView zhuce_text;
     String  loginId,password,telephone,userName;
-    String url = YuXinHuiApplication.getUrlBoot()+"user/login";
+    String url = YuXinHuiApplication.URL_BOOT+"user/login";
     User user;
     RequestQueue queue;
+    boolean isLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.denglu);
-        queue = Volley.newRequestQueue(this);
-        //初始化控件
-        initView();
-        initData();
-        setOnClikListener();
+        isLogin = YuXinHuiApplication.getInstace().isLogin();
+        if(isLogin){
+            startMainActivity();
+        }else {
+            queue = Volley.newRequestQueue(this);
+            //初始化控件
+            initView();
+            initData();
+            setOnClikListener();
+        }
     }
 
     //view控件的监听事件
@@ -68,7 +74,6 @@ public class Denglu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Denglu.this, MainActivity.class);
                 startActivity(intent);
-                Denglu.this.finish();
             }
         });
         zhuce_text.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +95,7 @@ public class Denglu extends AppCompatActivity {
             public void onClick(View v) {
                 initData();
                 if (TextUtils.isEmpty(loginId)) {
-                    denglu_mingzi_text.setError("电话或者用户名不能为空");
+                    denglu_mingzi_text.setError("用户名不能为空");
                     denglu_mingzi_text.requestFocus();
                     return;
                 }
@@ -120,7 +125,7 @@ public class Denglu extends AppCompatActivity {
     }
 
     //使用volley进行登录操作
-    public void login(String nameortele,String password) {
+    public void login(String nameortele, final String password) {
         user = new User();
         if (nameortele.length()==11&&nameortele.startsWith("1")){
             telephone = nameortele;
@@ -138,10 +143,10 @@ public class Denglu extends AppCompatActivity {
                 if(s.contains("ok")){
                     Gson gson = new Gson();
                     Message message = gson.fromJson(s, Message.class);
+                    isLogin = true;
                     YuXinHuiApplication.getInstace().setUser(message.getUser());
-                    YuXinHuiApplication.getInstace().setLogin(true);
-                    Intent intent = new Intent(Denglu.this, MainActivity.class);
-                    startActivity(intent);
+                    YuXinHuiApplication.getInstace().setLogin(isLogin);
+                    startMainActivity();
                     DialogUtils.createToasdt(Denglu.this,message.getMessage());
                 }else {
                     DialogUtils.createToasdt(Denglu.this,"用户名或者密码错误");
@@ -161,10 +166,17 @@ public class Denglu extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("user",user.toString());
+                params.put("username",userName);
+                params.put("password", password);
                 return params;
             }
         };
         queue.add(request);
+    }
+
+    private void startMainActivity() {
+        Intent intent = new Intent(Denglu.this, MainActivity.class);
+        intent.putExtra("isLogin", isLogin);
+        startActivity(intent);
     }
 }

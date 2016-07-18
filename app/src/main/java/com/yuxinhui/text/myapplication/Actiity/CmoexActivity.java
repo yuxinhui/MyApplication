@@ -2,7 +2,6 @@ package com.yuxinhui.text.myapplication.Actiity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -36,8 +35,6 @@ public class CmoexActivity extends Fragment {
     private ComexAdapter mComexAdapter;
     private ArrayList<ComexData> mComexDatas = new ArrayList<ComexData>();
     private String urlComex = "http://pull.api.fxgold.com/realtime/products?codes=IXCMGCA0,CMGCG0,CMGCJ0,CMGCK0,CMGCM0,CMGCQ0,CMGCV0,CMGCZ0,IXCMSIA0,CMSIF0,CMSIH0,CMSIJ0,CMSIK0,CMSIM0,CMSIN0,CMSIU0,CMSIZ0,IXNEPAA0,IXNEPAH0,IXNEPAZ0,IXNEPAM0,IXNEPAU0,IXNEPLA0,IXNEPLF0,IXNEPLJ0,IXNEPLN0,IXNEPLV0,IXNEPLJ0";
-    private Handler handler;
-    private Runnable runnable;
 
     @Nullable
     @Override
@@ -50,15 +47,7 @@ public class CmoexActivity extends Fragment {
     private void initView(View view) {
         comex_lv= (ListView) view.findViewById(R.id.comex_lv);
         mComexAdapter=new ComexAdapter(mComexDatas,getActivity());
-        handler=new Handler();
-        runnable=new Runnable() {
-            @Override
-            public void run() {
-                comex_lv.setAdapter(mComexAdapter);
-                handler.postDelayed(this,1000*3);
-            }
-        };
-        handler.postDelayed(runnable,1000*3);
+        comex_lv.setAdapter(mComexAdapter);
     }
     private void initComexData() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
@@ -88,9 +77,5 @@ public class CmoexActivity extends Fragment {
         requestQueue.add(request);
     }
 
-    @Override
-    public void onDestroy() {
-        handler.removeCallbacks(runnable);
-        super.onDestroy();
-    }
+
 }
