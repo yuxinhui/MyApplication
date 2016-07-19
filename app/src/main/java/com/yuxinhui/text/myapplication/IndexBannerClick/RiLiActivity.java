@@ -44,8 +44,6 @@ public class RiLiActivity extends Activity {
         loadurl(wv, "http://m.jin10.com/rili");
         //file:///android_asset/www/xueyuan.html
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -143,10 +141,10 @@ public class RiLiActivity extends Activity {
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {//捕捉返回键
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && wv.canGoBack()) {
+        /*if ((keyCode == KeyEvent.KEYCODE_BACK) && wv.canGoBack()) {
             wv.goBack();
             return true;
-        } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+        } else */if (keyCode == KeyEvent.KEYCODE_BACK) {
             Intent intent = new Intent(RiLiActivity.this, MainActivity.class);
             startActivity(intent);
             RiLiActivity.this.finish();

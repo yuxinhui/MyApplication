@@ -55,7 +55,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/hangqingicon"/>
+                    android:src="@mipmap/hangqing_i"/>
                 <TextView
                     android:id="@+id/hangqing_txt"
                     android:layout_gravity="center_horizontal"

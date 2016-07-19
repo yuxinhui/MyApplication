@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,10 +27,7 @@ import com.yuxinhui.text.myapplication.Utils.User;
 import com.yuxinhui.text.myapplication.Utils.VerCodeTImer;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016/6/1.
@@ -101,7 +97,7 @@ public class Zhuce extends AppCompatActivity {
                     zhuce_mingzi_text.requestFocus();
                     return;
                 }
-                String url_getcode = YuXinHuiApplication.URL_BOOT + "user/tel_code?telephone=" + telepone;
+                String url_getcode = YuXinHuiApplication.URL_BOOT + "sms/tel_code?telephone=" + telepone;
                 Log.e("TAG", url_getcode);
                 getVerCode(url_getcode);
                 VerCodeTImer vct = new VerCodeTImer(300000, 1000, metVadateCode);

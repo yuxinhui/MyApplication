@@ -3,6 +3,7 @@ package com.yuxinhui.text.myapplication.Actiity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -72,22 +73,22 @@ public class ZhuCeXiangQing extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 initData();
-                if(nick==null||nick==""){
+                if(TextUtils.isEmpty(nick)){
                     metNick.requestFocus();
                     metNick.setError("昵称不能为空");
                     return;
                 }
-                if(userName==null||userName==""){
+                if(TextUtils.isEmpty(userName)){
                     metUserName.requestFocus();
                     metUserName.setError("用户名不能为空");
                     return;
                 }
-                if (QQ == null || QQ == "") {
+                if (TextUtils.isEmpty(QQ)) {
                     metQQ.requestFocus();
                     metQQ.setError("QQ不能为空");
                     return;
                 }
-                if(gendar==null||gendar==""){
+                if(TextUtils.isEmpty(gendar)){
                     gendar="男";
                 }
                 user = new User();

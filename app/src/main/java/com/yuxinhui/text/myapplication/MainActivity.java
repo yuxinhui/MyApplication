@@ -128,7 +128,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
                 break;
             case 3:
                 hangqing_txt.setTextColor(Red);
-                hangqing_image.setImageResource(R.mipmap.hangqing_i);
+                hangqing_image.setImageResource(R.mipmap.hangqing_u);
                 hangqing_image.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -179,6 +179,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
         my_text.setTextColor(Gray);
         my_image.setImageResource(R.mipmap.iconmy02);
         hangqing_txt.setTextColor(Gray);
-        hangqing_image.setImageResource(R.mipmap.hangqingicon);
+        hangqing_image.setImageResource(R.mipmap.hangqing_i);
     }
 }

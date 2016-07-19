@@ -32,7 +32,7 @@ public class KaiHu extends AppCompatActivity{
         kaihu_lijikaihu_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent lijizhuce = new Intent(KaiHu.this, KaiHuRenZheng.class);
+                Intent lijizhuce = new Intent(KaiHu.this, Zhuce.class);
                 startActivity(lijizhuce);
                 finishActivity();
             }

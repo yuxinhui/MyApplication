@@ -65,10 +65,10 @@
         <activity android:name=".IndexBannerClick.ShenGuActivity"/>
         <activity android:name=".Actiity.Zhuce" />
         <activity android:name=".Actiity.KaiHu" />
-        <activity android:name=".Actiity.KaiHuRenZheng" />
         <activity android:name=".Actiity.Denglu" />
         <activity android:name=".Actiity.ZhuCeXiangQing" />
-        <activity android:name=".Actiity.PlayVideoActivity"/>
+        <activity android:name=".Actiity.PlayVideoActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".MainActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".HangQingActivity.GlobalCurrency"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
