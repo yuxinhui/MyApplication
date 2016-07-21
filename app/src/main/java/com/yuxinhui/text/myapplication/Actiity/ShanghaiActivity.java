@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.yuxinhui.text.myapplication.Bean.ShangHaiJinData;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.ShangHaiJinData;
+import com.yuxinhui.text.myapplication.Utils.DialogUtils;
 import com.yuxinhui.text.myapplication.adapter.ShangHaiJinAdapter;
 
 import java.util.ArrayList;
@@ -60,16 +60,14 @@ public class ShanghaiActivity extends Fragment {
                         Gson gson = new Gson();
                         ArrayList<ShangHaiJinData> list = gson.fromJson(s, new TypeToken<ArrayList<ShangHaiJinData>>() {
                         }.getType());
-                        mShangHaiJinDatas.addAll(list);
-                        mShangHaiJinAdapter.notifyDataSetChanged();
-                        Log.e("上海金", "加载成功");
+                        mShangHaiJinAdapter.initList(list);
                         dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.e("上海金", "加载失败");
+                        DialogUtils.createToasdt(getActivity(),"上海金加载失败");
                         dialog.dismiss();
                     }
                 }

@@ -36,7 +36,7 @@ import com.yuxinhui.text.myapplication.IndexBannerClick.RiLiActivity;
 import com.yuxinhui.text.myapplication.IndexBannerClick.ZhiboActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.DialogUtils;
-import com.yuxinhui.text.myapplication.Utils.QQBean;
+import com.yuxinhui.text.myapplication.Bean.QQBean;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
 /**
@@ -58,7 +58,7 @@ public class ShouYeActivity extends Fragment{
     private String qq;
     RequestQueue requestQueue;
 
-    private boolean isGetQQ;
+    private boolean isGetQQ = false;
 
     Handler handler=new Handler(){
         @Override
@@ -185,11 +185,6 @@ public class ShouYeActivity extends Fragment{
             public void onClick(View v) {
                 if (YuXinHuiApplication.getInstace().isLogin()) {
                     getQQ();
-//                    Log.e("TAG", qq);
-                    if (isGetQQ){
-                        String url = "mqqwpa://im/chat?chat_type=wpa&uin="+qq;
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                    }
                 } else {
                     Intent intent = new Intent(getActivity(), Denglu.class);
                     getActivity().startActivity(intent);
@@ -237,17 +232,14 @@ public class ShouYeActivity extends Fragment{
 //        http://114.55.98.142/app/getQQ?gid=%@
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         String url = YuXinHuiApplication.URL_BOOT+"app/getQQ?gid="+YuXinHuiApplication.getInstace().getUser().getGid();
-        Log.e("TAG", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 Gson gson = new Gson();
                 QQBean qqBean = gson.fromJson(s, QQBean.class);
-                Log.e("TAG", qqBean.toString());
                 if(qqBean.getStatus().equals("ok")){
                     isGetQQ=true;
-                    qq = qqBean.getData().getQq();
-                    Log.e("TAG", qq);
+                    qq = qqBean.getData().getQq();;
                 }
                 DialogUtils.createToasdt(getActivity(),"获取"+qqBean.getMessage());
             }
@@ -258,6 +250,20 @@ public class ShouYeActivity extends Fragment{
             }
         });
         queue.add(request);
+        if(isGetQQ){
+            startQQ();
+        }
+    }
+
+    public void startQQ(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url1 = "mqqwpa://im/chat?chat_type=wpa&uin="+qq;
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url1)));
+            }
+        }).run();
+
     }
 
     /**实例化图片控件*/

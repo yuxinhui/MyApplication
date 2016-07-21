@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.yuxinhui.text.myapplication.Bean.XianHuoHuangJinData;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.XianHuoHuangJinData;
+import com.yuxinhui.text.myapplication.Utils.DialogUtils;
 import com.yuxinhui.text.myapplication.adapter.XianHuoHuangJinAdapter;
 
 import java.util.ArrayList;
@@ -61,16 +61,14 @@ public class XianHuoActivity extends Fragment{
                         Gson gson = new Gson();
                         ArrayList<XianHuoHuangJinData> datas = gson.fromJson(s, new TypeToken<ArrayList<XianHuoHuangJinData>>() {
                         }.getType());
-                        mXianHuoHuangJinDatas.addAll(datas);
-                        mXianHuoHuangJinAdapter.notifyDataSetChanged();
-                        Log.e("现货黄金", "加载成功");
+                        mXianHuoHuangJinAdapter.initList(datas);
                         progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.e("现货黄金", "加载失败");
+                        DialogUtils.createToasdt(getActivity(),"现货黄金加载失败");
                         progressDialog.dismiss();
                     }
                 }

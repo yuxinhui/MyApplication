@@ -1,17 +1,19 @@
 package com.yuxinhui.text.myapplication.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.yuxinhui.text.myapplication.Bean.LondonJinData;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.LondonJinData;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +31,11 @@ public class LonDonJinAdapter extends BaseAdapter {
         this.mList = mList;
         this.context = context;
     }
-
+    public void initList(ArrayList<LondonJinData> list){
+        mList.clear();
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
     @Override
     public int getCount() {
         if (mList!=null){
@@ -72,6 +78,14 @@ public class LonDonJinAdapter extends BaseAdapter {
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");
         double v = data.getChangePercent() * 100;
+        int textColor;
+        if(v<0){
+            textColor = Color.rgb(64, 205, 157);
+        }else {
+            textColor = Color.rgb(247, 90, 88);
+        }
+        holder.changePercent.setTextColor(textColor);
+        holder.newPrice.setTextColor(textColor);
         DecimalFormat df=new DecimalFormat("#0.00");
         holder.changePercent.setText(df.format(v)+"%");
         SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss");

@@ -2,12 +2,13 @@ package com.yuxinhui.text.myapplication;
 
 import android.app.Application;
 
-import com.yuxinhui.text.myapplication.Utils.User;
+import com.yuxinhui.text.myapplication.Bean.User;
 
 /**
  * 用于存放全局变量的类
  * Created by Administrator on 2016/7/4.
  */
+
 
 public class YuXinHuiApplication extends Application {
     private boolean isLogin=false;
@@ -17,8 +18,9 @@ public class YuXinHuiApplication extends Application {
     private User user = new User();
     private static YuXinHuiApplication instace;
     private int MIANDAORAO;
-    public static final String URL_BOOT = "http://114.55.98.142/";
-    public static final String url_boot="http://114.55.67.167:8080/jmj/";
+    public static final String URL_BOOT = "http://114.55.11.183:8080/";
+//    public static final String URL_BOOT1 = "http://192.168.0.192:8080/jmj/";
+
 
     @Override
     public void onCreate() {

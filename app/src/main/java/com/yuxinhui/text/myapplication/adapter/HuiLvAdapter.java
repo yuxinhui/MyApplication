@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.HuiLvData;
+import com.yuxinhui.text.myapplication.Bean.HuiLvData;
 
 import java.util.ArrayList;
 

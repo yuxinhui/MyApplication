@@ -29,8 +29,8 @@
                 <ImageView
                     android:id="@+id/index_image"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="34dp"
+                    android:layout_height="24dp"
                     android:src="@mipmap/iconindex"/>
                 <TextView
                     android:id="@+id/index_text"
@@ -53,9 +53,10 @@
                 <ImageView
                     android:id="@+id/hangqing_image"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/hangqing_i"/>
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@mipmap/hangqing_u02"
+                    android:scaleType="fitXY"/>
                 <TextView
                     android:id="@+id/hangqing_txt"
                     android:layout_gravity="center_horizontal"
@@ -77,8 +78,8 @@
                 <ImageView
                     android:id="@+id/xueyuan_image"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="34dp"
+                    android:layout_height="24dp"
                     android:src="@mipmap/iconxueyuan02"/>
                 <TextView
                     android:id="@+id/xueyuan_text"
@@ -101,8 +102,8 @@
                 <ImageView
                     android:id="@+id/my_image"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="34dp"
+                    android:layout_height="24dp"
                     android:src="@mipmap/iconmy02"/>
                 <TextView
                     android:id="@+id/my_text"

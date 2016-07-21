@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.yuxinhui.text.myapplication.Bean.TianTongYinData;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.TianTongYinData;
+import com.yuxinhui.text.myapplication.Utils.DialogUtils;
 import com.yuxinhui.text.myapplication.adapter.TianTongYinAdapter;
 
 import java.util.ArrayList;
@@ -60,16 +60,14 @@ public class TianYinActivity extends Fragment {
                         Gson gson = new Gson();
                         ArrayList<TianTongYinData> list = gson.fromJson(s, new TypeToken<ArrayList<TianTongYinData>>() {
                         }.getType());
-                        mTianTongYinDatas.addAll(list);
-                        mTianTongYinAdapter.notifyDataSetChanged();
-                        Log.e("天通银", "加载成功");
+                        mTianTongYinAdapter.initList(list);
                         dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.e("天通银", "加载失败");
+                        DialogUtils.createToasdt(getActivity(),"天通银加载失败");
                         dialog.dismiss();
                     }
                 }

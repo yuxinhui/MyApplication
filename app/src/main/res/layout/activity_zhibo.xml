@@ -14,11 +14,13 @@
             android:src="@mipmap/fanhui"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageView
+        <TextView
             android:id="@+id/zhibo_biaoti_img"
             android:layout_centerInParent="true"
-            android:src="@mipmap/zhibozi"
-            android:layout_width="60dp"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:text="直播"
+            android:layout_width="wrap_content"
             android:layout_height="30dp" />
     </RelativeLayout>
     <FrameLayout

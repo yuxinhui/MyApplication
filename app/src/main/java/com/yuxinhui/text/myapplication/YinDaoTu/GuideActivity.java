@@ -159,7 +159,7 @@ public class GuideActivity extends Activity {
             for (int i=0;i<imageViews.length;i++){
                 imageViews[position].setBackgroundResource(R.mipmap.yindao_quan);
                 //不是当前选中的page，其小圆点设置为未选中的状态
-                if (position!=i){
+                if (i!=position){
                     imageViews[position].setBackgroundResource(R.mipmap.yindao_quan1);
                 }
             }

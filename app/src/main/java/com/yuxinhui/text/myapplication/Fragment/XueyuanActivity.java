@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.Actiity.PlayVideoActivity;
+import com.yuxinhui.text.myapplication.Bean.XueYuanData;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.XueYuanData;
+import com.yuxinhui.text.myapplication.Utils.DialogUtils;
+import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 import com.yuxinhui.text.myapplication.adapter.XueYuanAdapter;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class XueyuanActivity extends Fragment {
     private XueYuanData.DataBean mData=new XueYuanData.DataBean();
     private XueYuanAdapter mAdapter;
     private ArrayList<XueYuanData.DataBean.ResultBean> mBeen=new ArrayList<>();
-    private String url= "http://114.55.98.142/video/selectVideo?pageNo=1";
+    private String url= YuXinHuiApplication.URL_BOOT+"video/selectVideo?pageNo=1";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,14 +75,13 @@ public class XueyuanActivity extends Fragment {
                         ArrayList<XueYuanData.DataBean.ResultBean> list = (ArrayList<XueYuanData.DataBean.ResultBean>) xueYuanData.getData().getResult();
                         mBeen.addAll(list);
                         mAdapter.notifyDataSetChanged();
-                        Log.e("xueyuan","我说成功您信吗");
                         dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.e("xueyuan","加载失败");
+                        DialogUtils.createToasdt(getActivity(),"学院界面加载失败请检查网络连接");
                         dialog.dismiss();
                     }
                 }

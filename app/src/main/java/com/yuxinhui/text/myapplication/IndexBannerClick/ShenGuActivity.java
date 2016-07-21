@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,7 @@ import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoPackage.MyHScrollView;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.GuPiaoShenData;
+import com.yuxinhui.text.myapplication.Bean.GuPiaoShenData;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class ShenGuActivity extends AppCompatActivity{
     private LinearLayout main;
     private GuPiaoShenData mDataBean=new GuPiaoShenData();
     private ArrayList<GuPiaoShenData.DataBean.DataBean1> mBeen=new ArrayList<>();
-    private String urlGuPiaoShen= YuXinHuiApplication.url_boot+"app/getShareList?name=sz&shpage=1&type=1";
+    private String urlGuPiaoShen= YuXinHuiApplication.URL_BOOT+"app/getShareList?name=sz&shpage=1&type=1";
 
     private TextView hugu_txt,shengu_txt;
     private ImageView gupiao_return;
@@ -188,11 +189,23 @@ public class ShenGuActivity extends AppCompatActivity{
                 holder= (viewHolder) convertView.getTag();
             }
             GuPiaoShenData.DataBean.DataBean1 bean= (GuPiaoShenData.DataBean.DataBean1) getItem(position);
+            int bg;
+            if(bean.getChangepercent().contains("-")){
+                bg = Color.rgb(64, 205, 157);
+            }else {
+                bg = Color.rgb(247, 90, 88);
+            }
+            GradientDrawable drawable = new GradientDrawable();
+            drawable.setColor(bg);
+            holder.txt3.setBackgroundDrawable(drawable);
+            holder.txt3.setTextColor(Color.WHITE);
+            holder.txt4.setBackgroundDrawable(drawable);
+            holder.txt4.setTextColor(Color.WHITE);
             holder.txt1.setText(bean.getName()+"\n"+bean.getSymbol());
-            holder.txt2.setText(bean.getSell());
-            holder.txt3.setText(bean.getBuy());
-            holder.txt4.setText(bean.getHigh());
-            holder.txt5.setText(bean.getPricechange());
+            holder.txt2.setText(bean.getVolume()+"");
+            holder.txt3.setText(bean.getPricechange()+"");
+            holder.txt4.setText(bean.getChangepercent());
+            holder.txt5.setText(bean.getSell());
             holder.txt6.setText(bean.getAmount()+"");
             holder.txt7.setText(bean.getSettlement());
             return convertView;

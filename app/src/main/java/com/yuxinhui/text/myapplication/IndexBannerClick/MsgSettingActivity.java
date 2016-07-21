@@ -24,7 +24,6 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
     AudioManager am;
     int streamMaxVolume;
     boolean isLogin;
-    boolean isMiandaorao;
     AlarmReceiver mReceiver;
     NotAlarmReceiver receiver;
 
@@ -35,7 +34,6 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
         am = (AudioManager) getSystemService(AUDIO_SERVICE);
         streamMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_ALARM);
         isLogin = YuXinHuiApplication.getInstace().isLogin();
-        isMiandaorao = YuXinHuiApplication.getInstace().isOpenMiandarao();
         mReceiver = new AlarmReceiver();
         IntentFilter filter = new IntentFilter("ChangeRingAndVibrate");
         registerReceiver(mReceiver, filter);
@@ -60,7 +58,7 @@ public class MsgSettingActivity extends AppCompatActivity implements View.OnClic
         mivAudio = (ImageView) findViewById(R.id.iv_audio_setting);
         miandarao = (RelativeLayout) findViewById(R.id.miandarao);
         unLogin = (Button) findViewById(R.id.un_login);
-        if(isMiandaorao){
+        if(YuXinHuiApplication.getInstace().isOpenMiandarao()){
             mivZhendong.setImageResource(R.mipmap.icon_close);
             mivZhendong.setClickable(false);
             mivAudio.setImageResource(R.mipmap.icon_close);

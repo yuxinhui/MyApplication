@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.XueYuanData;
+import com.yuxinhui.text.myapplication.Bean.XueYuanData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

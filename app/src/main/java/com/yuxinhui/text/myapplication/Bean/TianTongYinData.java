@@ -1,24 +1,24 @@
-package com.yuxinhui.text.myapplication.Utils;
+package com.yuxinhui.text.myapplication.Bean;
 
 /**
  * 包:com.yuxinhui.text.myapplication.Utils
  * Create By:"于志渊"
- * 时间:23:03
- * 描述:上海金实体类
+ * 时间:23:38
+ * 描述:天通银实体类
  */
-public class ShangHaiJinData {
+public class TianTongYinData {
 
     /**
-     * change : 0.6000061
-     * changePercent : 0.0021209123
-     * close : 282.9
-     * code : SGAu100g
-     * high : 283.5
-     * low : 282.11
-     * name : 黄金100G
-     * newPrice : 283.5
-     * open : 282.11
-     * time : 1467212329000
+     * change : 108.0
+     * changePercent : 0.028383706
+     * close : 3805.0
+     * code : TJAG
+     * high : 3940.0
+     * low : 3801.0
+     * name : 天津白银
+     * newPrice : 3913.0
+     * open : 3805.0
+     * time : 1467214677000
      */
 
         private double change;

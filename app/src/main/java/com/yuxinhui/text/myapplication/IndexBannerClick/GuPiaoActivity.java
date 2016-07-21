@@ -5,8 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,10 +26,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.yuxinhui.text.myapplication.Bean.GuPiaoHuData;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoPackage.MyHScrollView;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.GuPiaoHuData;
+import com.yuxinhui.text.myapplication.Utils.DialogUtils;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class GuPiaoActivity extends Activity{
     private LinearLayout main;
     private GuPiaoHuData mDataBean=new GuPiaoHuData();
     private ArrayList<GuPiaoHuData.DataBean.DataBean1> mBeen=new ArrayList<>();
-    private String urlGuPiao= YuXinHuiApplication.url_boot+"app/getShareList?name=sh&shpage=1&type=1";
+    private String urlGuPiao= YuXinHuiApplication.URL_BOOT+"app/getShareList?name=sh&shpage=1&type=1";
 
     private ImageView gupiao_return;
     private TextView hugu_txt,shengu_txt;
@@ -104,14 +105,13 @@ public class GuPiaoActivity extends Activity{
                         ArrayList<GuPiaoHuData.DataBean.DataBean1> been= (ArrayList<GuPiaoHuData.DataBean.DataBean1>) mDataBean.getData().getData();
                         mBeen.addAll(been);
                         mGuPiaoAdapter.notifyDataSetChanged();
-                        Log.e("gupiao","成功");
                         dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.e("gupiao","失败");
+                        DialogUtils.createToasdt(GuPiaoActivity.this,"股票界面加载失败，请检查网络连接");
                         dialog.dismiss();
                     }
                 }
@@ -179,11 +179,23 @@ public class GuPiaoActivity extends Activity{
                 holder= (viewHolder) convertView.getTag();
             }
             GuPiaoHuData.DataBean.DataBean1 bean= (GuPiaoHuData.DataBean.DataBean1) getItem(position);
+            int bg;
+            if(bean.getChangepercent().contains("-")){
+                bg = Color.rgb(64, 205, 157);
+            }else {
+                bg = Color.rgb(247, 90, 88);
+            }
+            GradientDrawable drawable = new GradientDrawable();
+            drawable.setColor(bg);
+            holder.txt3.setBackgroundDrawable(drawable);
+            holder.txt3.setTextColor(Color.WHITE);
+            holder.txt4.setBackgroundDrawable(drawable);
+            holder.txt4.setTextColor(Color.WHITE);
             holder.txt1.setText(bean.getName()+"\n"+bean.getSymbol());
-            holder.txt2.setText(bean.getSell());
-            holder.txt3.setText(bean.getBuy());
-            holder.txt4.setText(bean.getHigh());
-            holder.txt5.setText(bean.getPricechange());
+            holder.txt2.setText(bean.getVolume()+"");
+            holder.txt3.setText(bean.getPricechange());
+            holder.txt4.setText(bean.getChangepercent());
+            holder.txt5.setText(bean.getSell());
             holder.txt6.setText(bean.getAmount()+"");
             holder.txt7.setText(bean.getSettlement());
             return convertView;

@@ -1,4 +1,4 @@
-package com.yuxinhui.text.myapplication.Utils;
+package com.yuxinhui.text.myapplication.Bean;
 
 /**
  * Created by "于志渊"

@@ -1,12 +1,12 @@
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -19,6 +19,7 @@ import com.gensee.net.AbsRtAction;
 import com.gensee.player.OnPlayListener;
 import com.gensee.player.Player;
 import com.gensee.view.GSVideoView;
+import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 
 /**直播视频的activity
@@ -39,8 +40,6 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     AudioManager am ;
     int streamVolume;
     int streamMaxVolume;
-//    String url = "dd020436921d43a79dcf6965415179f8";
-    //491a1a7b416043b0987c499690412a11
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         streamVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);//获取系统当前的媒体音量
         streamMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        Log.e("TAG",isPlayed+"");
+        screen_direction=SCREEN_PORT;
         initView();
         setOnClick();
     }
@@ -86,8 +85,6 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            requestWindowFeature(Window.FEATURE_NO_TITLE);
-//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
             this.setContentView(R.layout.activity_zhibo);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             screen_direction = SCREEN_LAND;
@@ -115,11 +112,6 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         }
     }
 
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        intent.putExtra("重启竖屏", true);
-//        super.onNewIntent(intent);
-//    }
 
     //设置横屏时的监听事件
     private void setLandOnClick() {
@@ -166,6 +158,7 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         });
     }
 
+    //初始化橫屏控件
     private void initLandView() {
         mGSzhiboLand = (GSVideoView) findViewById(R.id.zhibo_video_land);
         msbAudioLand = (SeekBar) findViewById(R.id.sb_audio_land);
@@ -190,6 +183,8 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         mIvretrun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(ZhiboActivity.this, MainActivity.class);
+                startActivity(intent);
                 finishactivity();
             }
         });
@@ -284,36 +279,29 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         switch (result) {
             case JOIN_OK:
                 msg = "加入成功";
-                Log.e("TAG",msg);
                 break;
             case JOIN_CONNECTING:
                 msg = "正在加入";
-                Log.e("Tag",msg);
                 break;
             case JOIN_CONNECT_FAILED:
                 msg = "连接失败";
                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-                Log.e("TAG", msg);
                 break;
             case JOIN_RTMP_FAILED:
                 msg = "连接服务器失败";
                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-                Log.e("TAG", msg);
                 break;
             case JOIN_TOO_EARLY:
                 msg = "直播还未开始";
                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-                Log.e("TAG",msg);
                 break;
             case JOIN_LICENSE:
                 msg = "人数已满";
                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-                Log.e("TAG", msg);
                 break;
             default:
                 msg = "加入返回错误" + result;
                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-                Log.e("TAG",msg);
                 break;
         }
 
@@ -440,8 +428,7 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
 
     @Override
     public void onVideoBegin() {
-        Log.e("TAG", "VideoBegin");
-//        mVodPlayer.play(getVodIdOrLocalPath(), this, "");
+
     }
 
     @Override

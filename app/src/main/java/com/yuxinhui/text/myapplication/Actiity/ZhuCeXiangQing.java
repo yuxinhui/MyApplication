@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,12 +20,9 @@ import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.DialogUtils;
-import com.yuxinhui.text.myapplication.Utils.Message;
-import com.yuxinhui.text.myapplication.Utils.User;
+import com.yuxinhui.text.myapplication.Bean.Message;
+import com.yuxinhui.text.myapplication.Bean.User;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016/6/2.
@@ -38,7 +34,7 @@ public class ZhuCeXiangQing extends AppCompatActivity {
     TextView mtvCommit;
     ImageView mivReturn;
     User user;
-    String url =YuXinHuiApplication.getUrlBoot()+ "user/perfectInfo";
+
     String nick,userName,QQ, gendar,telephone;
     Message message;
 
@@ -91,7 +87,7 @@ public class ZhuCeXiangQing extends AppCompatActivity {
                 if(TextUtils.isEmpty(gendar)){
                     gendar="男";
                 }
-                user = new User();
+                user =YuXinHuiApplication.getInstace().getUser();
                 user.setNickname(nick);
                 user.setUsername(userName);
                 user.setQq(QQ);
@@ -114,13 +110,15 @@ public class ZhuCeXiangQing extends AppCompatActivity {
     //发送Post请求去完善个人信息
     private void updateData() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        String url =YuXinHuiApplication.URL_BOOT+ "user/perfectInfo?id="+YuXinHuiApplication.getInstace().getUser().getId()+"&username="+userName+"&nickname="+nick+"&qq="+QQ+"&gander="+gendar;
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 Gson gson = new Gson();
                 message = gson.fromJson(s, Message.class);
-                if(message.getStatus()!="fail"){
+                if(message.getStatus()=="ok"){
                     YuXinHuiApplication.getInstace().setUser(message.getUser());
+
                 }else {
                     DialogUtils.createToasdt(ZhuCeXiangQing.this,message.getMessage());
                 }
@@ -132,16 +130,7 @@ public class ZhuCeXiangQing extends AppCompatActivity {
             public void onErrorResponse(VolleyError volleyError) {
                 showTip();
             }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Gson gson = new Gson();
-                String s = gson.toJson(user);
-                Map<String, String> params = new HashMap<>();
-                params.put("user",s);
-                return params;
-            }
-        };
+        });
         queue.add(request);
     }
 

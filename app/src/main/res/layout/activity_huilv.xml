@@ -13,10 +13,12 @@
             android:src="@mipmap/fanhui"
             android:layout_width="wrap_content"
             android:layout_height="30dp" />
-        <ImageView
+        <TextView
             android:id="@+id/huilv_biaoti_img"
             android:layout_centerInParent="true"
-            android:src="@mipmap/huilvbiaoti"
+            android:text="汇率"
+            android:textColor="#fff"
+            android:textSize="25sp"
             android:layout_width="50dp"
             android:layout_height="30dp" />
     </RelativeLayout>

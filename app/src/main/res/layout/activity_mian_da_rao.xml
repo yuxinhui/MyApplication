@@ -18,10 +18,12 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             />
-        <ImageView
-            android:layout_width="80dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:src="@mipmap/msg_setting"
+            android:text="通知设置"
+            android:textColor="#fff"
+            android:textSize="25sp"
             android:layout_centerInParent="true"
             />
     </RelativeLayout>

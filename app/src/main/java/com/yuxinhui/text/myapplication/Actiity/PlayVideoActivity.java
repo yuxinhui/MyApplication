@@ -16,7 +16,6 @@ import com.yuxinhui.text.myapplication.Utils.Player;
 
 public class PlayVideoActivity extends AppCompatActivity {
     private SurfaceView surfaceView;
-//    private Button btnPause, btnPlayUrl, btnStop;
     ImageView mivPlay;
     private SeekBar skbProgress;
     private Player player;
@@ -34,14 +33,6 @@ public class PlayVideoActivity extends AppCompatActivity {
         url = intent.getStringExtra("url");
         surfaceView = (SurfaceView) this.findViewById(R.id.surfaceView1);
 
-//        btnPlayUrl = (Button) this.findViewById(R.id.btnPlayUrl);
-//        btnPlayUrl.setOnClickListener(new ClickEvent());
-//
-//        btnPause = (Button) this.findViewById(R.id.btnPause);
-//        btnPause.setOnClickListener(new ClickEvent());
-//
-//        btnStop = (Button) this.findViewById(R.id.btnStop);
-//        btnStop.setOnClickListener(new ClickEvent());
         mivPlay = (ImageView) findViewById(R.id.play);
         mivPlay.setOnClickListener(new ClickEvent());
 
@@ -53,13 +44,6 @@ public class PlayVideoActivity extends AppCompatActivity {
     class ClickEvent implements View.OnClickListener {
         @Override
         public void onClick(View arg0) {
-//            if (arg0 == btnPause) {
-//                player.pause();
-//            } else if (arg0 == btnPlayUrl) {
-//                player.playUrl(url);
-//            } else if (arg0 == btnStop) {
-//                player.stop();
-//            }
             if(isPlaying){
                 mivPlay.setImageResource(R.mipmap.icon_play);
                 player.pause();

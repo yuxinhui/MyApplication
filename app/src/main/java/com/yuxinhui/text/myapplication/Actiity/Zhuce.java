@@ -19,11 +19,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.DailiBean;
+import com.yuxinhui.text.myapplication.Bean.DailiBean;
 import com.yuxinhui.text.myapplication.Utils.DialogUtils;
-import com.yuxinhui.text.myapplication.Utils.Message;
-import com.yuxinhui.text.myapplication.Utils.SmsMessage;
-import com.yuxinhui.text.myapplication.Utils.User;
+import com.yuxinhui.text.myapplication.Bean.Message;
+import com.yuxinhui.text.myapplication.Bean.SmsMessage;
+import com.yuxinhui.text.myapplication.Bean.User;
 import com.yuxinhui.text.myapplication.Utils.VerCodeTImer;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
@@ -47,7 +47,7 @@ public class Zhuce extends AppCompatActivity {
     SmsMessage smsMessage = new SmsMessage();
     Message message;
     User user;
-    String url = YuXinHuiApplication.URL_BOOT + "user/register";
+
     RequestQueue queue;
     String gid;
 
@@ -97,10 +97,10 @@ public class Zhuce extends AppCompatActivity {
                     zhuce_mingzi_text.requestFocus();
                     return;
                 }
-                String url_getcode = YuXinHuiApplication.URL_BOOT + "sms/tel_code?telephone=" + telepone;
+                String url_getcode = YuXinHuiApplication.URL_BOOT + "user/tel_code?telephone=" + telepone;
                 Log.e("TAG", url_getcode);
                 getVerCode(url_getcode);
-                VerCodeTImer vct = new VerCodeTImer(300000, 1000, metVadateCode);
+                VerCodeTImer vct = new VerCodeTImer(1000*300, 1000, metVadateCode);
                 vct.start();
             }
         });
@@ -152,31 +152,46 @@ public class Zhuce extends AppCompatActivity {
                     zhuce_writeyanzheng_text.setError("验证码不能为空");
                     return;
                 }
-                getDaili();
-                register();
+                String url_daili = YuXinHuiApplication.URL_BOOT + "agent/findAll?code=" + metGid.getText().toString();
+                getDaili(url_daili);
                 return;
             }
         });
     }
 
+    //下载代理商的数据
+    public void getDaili( String url_daili) {
+        StringRequest request = new StringRequest(Request.Method.GET, url_daili, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Gson gson = new Gson();
+                DailiBean dailiBean = gson.fromJson(s, DailiBean.class);
+                List<DailiBean.DataBean> data = dailiBean.getData();
+                gid = data.get(0).getId();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                DialogUtils.createToasdt(Zhuce.this, "请检查网络连接是否正确");
+            }
+        });
+        queue.add(request);
+        String url = YuXinHuiApplication.URL_BOOT + "user/register" + "?telephone=" + telepone + "&password=" + password + "&tel_code=" + validateCode + "&gid=" + gid;
+        register(url);
+    }
+
     //注册的volley请求
-    public void register() {
+    public void register(String url) {
         user = new User();
         user.setTelephone(telepone);
         user.setPassword(password);
-        Log.e("TAG", user.toString());
-//        ?telephone=13170015502&password=123456&tel_code=890455&gid=a489350e-0a99-4fe1-81da-1d73404279b9
-//        user.setGid("jmj");
-        url = url + "?telephone=" + telepone + "&password=" + password + "&tel_code=" + validateCode + "&gid=" + gid;
-//        Log.e("TAG", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 if (s != null) {
                     if (s.contains("ok")) {
                         Gson gson = new Gson();
-                        Message message = gson.fromJson(s, Message.class);
-                        Log.e("TAG", message.toString());
+                        message = gson.fromJson(s, Message.class);
                         YuXinHuiApplication.getInstace().setUser(user);
                         Intent intent = new Intent(Zhuce.this, ZhuCeXiangQing.class);
                         startActivity(intent);
@@ -200,10 +215,8 @@ public class Zhuce extends AppCompatActivity {
         StringRequest requestVerCode = new StringRequest(Request.Method.GET, url_getCode, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Log.e("TAG", s);
                 Gson gson = new Gson();
                 smsMessage = gson.fromJson(s, SmsMessage.class);
-                Log.e("TAG", smsMessage.toString());
                 if ("fail".equals(smsMessage.getStatus())) {
                     DialogUtils.createToasdt(Zhuce.this, smsMessage.getMessage());
                     return;
@@ -223,25 +236,5 @@ public class Zhuce extends AppCompatActivity {
         queue.add(requestVerCode);
     }
 
-    //下载代理商的数据
-    public void getDaili() {
-        String url_daili = YuXinHuiApplication.URL_BOOT + "agent/findAll?code=" + metGid.getText().toString();
-        Log.e("TAG", url_daili);
-        StringRequest request = new StringRequest(Request.Method.GET, url_daili, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String s) {
-                Gson gson = new Gson();
-                DailiBean dailiBean = gson.fromJson(s, DailiBean.class);
-                List<DailiBean.DataBean> data = dailiBean.getData();
-                gid = data.get(0).getId();
-                Log.e("TAG", gid);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                DialogUtils.createToasdt(Zhuce.this, "请检查网络连接是否正确");
-            }
-        });
-        queue.add(request);
-    }
+
 }

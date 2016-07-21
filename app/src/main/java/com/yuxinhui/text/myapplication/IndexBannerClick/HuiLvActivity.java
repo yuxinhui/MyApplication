@@ -19,7 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.HuiLvData;
+import com.yuxinhui.text.myapplication.Bean.HuiLvData;
 import com.yuxinhui.text.myapplication.adapter.HuiLvAdapter;
 
 import java.util.ArrayList;

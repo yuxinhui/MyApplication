@@ -48,7 +48,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".YinDaoTu.GuideActivity" />
-        <activity android:name=".IndexBannerClick.KeFuActivity" />
         <activity android:name=".IndexBannerClick.KeBiaoActivity" />
         <activity android:name=".IndexBannerClick.HanDanActivity" />
         <activity android:name=".IndexBannerClick.RiLiActivity" />

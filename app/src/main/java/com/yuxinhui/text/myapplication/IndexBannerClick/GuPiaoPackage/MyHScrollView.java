@@ -2,7 +2,6 @@ package com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoPackage;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.HorizontalScrollView;
 
@@ -33,7 +32,6 @@ public class MyHScrollView extends HorizontalScrollView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        Log.i("滚动条","MyHScrollView onTouchEvent");
         return super.onTouchEvent(ev);
     }
 

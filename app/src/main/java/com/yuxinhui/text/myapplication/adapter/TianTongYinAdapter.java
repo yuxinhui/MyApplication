@@ -1,14 +1,15 @@
 package com.yuxinhui.text.myapplication.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.yuxinhui.text.myapplication.Bean.TianTongYinData;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.TianTongYinData;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -29,7 +30,11 @@ public class TianTongYinAdapter extends BaseAdapter {
         this.mList = mList;
         this.context = context;
     }
-
+    public void initList(ArrayList<TianTongYinData> list){
+        mList.clear();
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
     @Override
     public int getCount() {
         if (mList!=null){
@@ -73,6 +78,14 @@ public class TianTongYinAdapter extends BaseAdapter {
         holder.newPrice.setText(data.getNewPrice()+"");
         double changePercent = data.getChangePercent();
         double v = changePercent * 100;
+        int textColor;
+        if(v<0){
+            textColor = Color.rgb(64, 205, 157);
+        }else {
+            textColor = Color.rgb(247, 90, 88);
+        }
+        holder.changePercent.setTextColor(textColor);
+        holder.newPrice.setTextColor(textColor);
         DecimalFormat df=new DecimalFormat("#0.00");
         holder.changePercent.setText(df.format(v)+"%");
         long time = data.getTime();

@@ -1,22 +1,24 @@
-package com.yuxinhui.text.myapplication.Utils;
+package com.yuxinhui.text.myapplication.Bean;
 
 /**
- * Created by Administrator on 2016/6/29.
+ * 包:com.yuxinhui.text.myapplication.Utils
+ * Create By:"于志渊"
+ * 时间:23:03
+ * 描述:上海金实体类
  */
-public class ComexData {
-
+public class ShangHaiJinData {
 
     /**
-     * change : 5.199951
-     * changePercent : 0.0039456342
-     * close : 1317.9
-     * code : IXCMGCA0
-     * high : 1327.0
-     * low : 1313.3
-     * name : 美黄金连续
-     * newPrice : 1323.1
-     * open : 1313.8
-     * time : 1467208123000
+     * change : 0.6000061
+     * changePercent : 0.0021209123
+     * close : 282.9
+     * code : SGAu100g
+     * high : 283.5
+     * low : 282.11
+     * name : 黄金100G
+     * newPrice : 283.5
+     * open : 282.11
+     * time : 1467212329000
      */
 
         private double change;
@@ -109,5 +111,4 @@ public class ComexData {
         public void setTime(long time) {
             this.time = time;
         }
-
 }

@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -24,17 +26,10 @@ import com.yuxinhui.text.myapplication.R;
  * Created by Administrator on 2016/6/15.
  */
 public class RiLiActivity extends Activity {
-    /**
-     * Called when the activity is first created.
-     */
     WebView wv;
     ProgressDialog pd;
     Handler handler;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    ImageView rili_return_img;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,8 +38,15 @@ public class RiLiActivity extends Activity {
         init();//执行初始化函数
         loadurl(wv, "http://m.jin10.com/rili");
         //file:///android_asset/www/xueyuan.html
-
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        rili_return_img= (ImageView) findViewById(R.id.rili_return_img);
+        rili_return_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(RiLiActivity.this,MainActivity.class);
+                startActivity(intent);
+                RiLiActivity.this.finish();
+            }
+        });
     }
 
     public void init() {

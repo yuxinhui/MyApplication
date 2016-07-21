@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.TeachData;
+import com.yuxinhui.text.myapplication.Bean.TeachData;
 
 import java.util.ArrayList;
 

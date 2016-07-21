@@ -13,10 +13,12 @@
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="30dp" />
-        <ImageView
-            android:src="@mipmap/laoshi_title"
+        <TextView
+            android:textColor="#fff"
+            android:textSize="25sp"
+            android:text="老师"
             android:layout_centerInParent="true"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp" />
     </RelativeLayout>
     <ListView

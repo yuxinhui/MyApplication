@@ -19,7 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.ComexData;
+import com.yuxinhui.text.myapplication.Bean.ComexData;
 import com.yuxinhui.text.myapplication.adapter.ComexAdapter;
 
 import java.util.ArrayList;
@@ -60,8 +60,7 @@ public class CmoexActivity extends Fragment {
                         Gson gson = new Gson();
                         ArrayList<ComexData> list = gson.fromJson(s, new TypeToken<ArrayList<ComexData>>() {
                         }.getType());
-                        mComexDatas.addAll(list);
-                        mComexAdapter.notifyDataSetChanged();
+                        mComexAdapter.initList(list);
                         Log.e("COMEX", "加载成功");
                         dialog.dismiss();
                     }

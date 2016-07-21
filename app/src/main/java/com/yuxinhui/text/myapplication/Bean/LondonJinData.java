@@ -1,26 +1,25 @@
-package com.yuxinhui.text.myapplication.Utils;
-
-import java.util.List;
+package com.yuxinhui.text.myapplication.Bean;
 
 /**
- * Created by "于志渊"
- * 时间:"11:17"
- * 包名:com.yuxinhui.text.myapplication.Utils
- * 描述:全球外汇实体类
+ * 包:com.yuxinhui.text.myapplication.Utils
+ * Create By:"于志渊"
+ * 时间:23:20
+ * 描述:伦敦金属实体类
  */
-public class GlobalCurrencyData {
+public class LondonJinData {
+
 
     /**
-     * change : 0.003000021
-     * changePercent : 0.0027235777
-     * close : 1.1015
-     * code : IXFXEURUSD
-     * high : 1.1058
-     * low : 1.1007
-     * name : 欧元美元
-     * newPrice : 1.1045
-     * open : 1.1022
-     * time : 1467083415000
+     * change : 7.5
+     * changePercent : 0.00460688
+     * close : 1628.0
+     * code : IXLEAHD3M
+     * high : 1636.0
+     * low : 1618.0
+     * name : LME铝03
+     * newPrice : 1635.5
+     * open : 1628.0
+     * time : 1467213625000
      */
 
         private double change;
@@ -112,22 +111,6 @@ public class GlobalCurrencyData {
 
         public void setTime(long time) {
             this.time = time;
-        }
-
-        @Override
-        public String toString() {
-            return "GlobalCurrencyData{" +
-                    "change=" + change +
-                    ", changePercent=" + changePercent +
-                    ", close=" + close +
-                    ", code='" + code + '\'' +
-                    ", high=" + high +
-                    ", low=" + low +
-                    ", name='" + name + '\'' +
-                    ", newPrice=" + newPrice +
-                    ", open=" + open +
-                    ", time=" + time +
-                    '}';
         }
 
 }

@@ -1,6 +1,5 @@
 package com.yuxinhui.text.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,7 +15,6 @@ import com.yuxinhui.text.myapplication.Fragment.HangQingActivity;
 import com.yuxinhui.text.myapplication.Fragment.MyActivity;
 import com.yuxinhui.text.myapplication.Fragment.ShouYeActivity;
 import com.yuxinhui.text.myapplication.Fragment.XueyuanActivity;
-import com.yuxinhui.text.myapplication.HangQingActivity.GlobalCurrency;
 
 public class MainActivity extends FragmentActivity implements OnClickListener{
     //fragment对象
@@ -128,21 +126,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
                 break;
             case 3:
                 hangqing_txt.setTextColor(Red);
-                hangqing_image.setImageResource(R.mipmap.hangqing_u);
-                hangqing_image.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(MainActivity.this, GlobalCurrency.class);
-                        startActivity(intent);
-                    }
-                });
-                hangqing_txt.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(MainActivity.this, GlobalCurrency.class);
-                        startActivity(intent);
-                    }
-                });
+                hangqing_image.setImageResource(R.mipmap.hangqing_u01);
                 if (hangQingActivity==null){
                 // 如果fg1为空，则创建一个并添加到界面上
                     hangQingActivity=new HangQingActivity();
@@ -179,6 +163,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
         my_text.setTextColor(Gray);
         my_image.setImageResource(R.mipmap.iconmy02);
         hangqing_txt.setTextColor(Gray);
-        hangqing_image.setImageResource(R.mipmap.hangqing_i);
+        hangqing_image.setImageResource(R.mipmap.hangqing_u02);
     }
 }

@@ -1,24 +1,22 @@
-package com.yuxinhui.text.myapplication.Utils;
+package com.yuxinhui.text.myapplication.Bean;
 
 /**
- * 包:com.yuxinhui.text.myapplication.Utils
- * Create By:"于志渊"
- * 时间:23:38
- * 描述:天通银实体类
+ * Created by Administrator on 2016/6/29.
  */
-public class TianTongYinData {
+public class ComexData {
+
 
     /**
-     * change : 108.0
-     * changePercent : 0.028383706
-     * close : 3805.0
-     * code : TJAG
-     * high : 3940.0
-     * low : 3801.0
-     * name : 天津白银
-     * newPrice : 3913.0
-     * open : 3805.0
-     * time : 1467214677000
+     * change : 5.199951
+     * changePercent : 0.0039456342
+     * close : 1317.9
+     * code : IXCMGCA0
+     * high : 1327.0
+     * low : 1313.3
+     * name : 美黄金连续
+     * newPrice : 1323.1
+     * open : 1313.8
+     * time : 1467208123000
      */
 
         private double change;
@@ -111,4 +109,5 @@ public class TianTongYinData {
         public void setTime(long time) {
             this.time = time;
         }
+
 }

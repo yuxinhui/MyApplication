@@ -1,4 +1,4 @@
-package com.yuxinhui.text.myapplication.Utils;
+package com.yuxinhui.text.myapplication.Bean;
 
 /**
  * Created by Administrator on 2016/7/5.

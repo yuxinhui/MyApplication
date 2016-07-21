@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,11 +17,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.yuxinhui.text.myapplication.Bean.Message;
+import com.yuxinhui.text.myapplication.Bean.User;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.DialogUtils;
-import com.yuxinhui.text.myapplication.Utils.Message;
-import com.yuxinhui.text.myapplication.Utils.User;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
 import java.util.HashMap;
@@ -39,7 +38,7 @@ public class Denglu extends AppCompatActivity {
     private EditText denglu_mima_text;
     private TextView wangjiMM_text;
     private TextView zhuce_text;
-    String  loginId,password,telephone,userName;
+    String  loginId,password;
     String url = YuXinHuiApplication.URL_BOOT+"user/login";
     User user;
     RequestQueue queue;
@@ -127,19 +126,11 @@ public class Denglu extends AppCompatActivity {
     //使用volley进行登录操作
     public void login(String nameortele, final String password) {
         user = new User();
-        if (nameortele.length()==11&&nameortele.startsWith("1")){
-            telephone = nameortele;
-            user.setTelephone(telephone);
-        }else {
-            userName = nameortele;
-            user.setUsername(userName);
-        }
+        user.setUsername(loginId);
         user.setPassword(password);
-        Log.e("TAG", user.toString());
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Log.e("TAG",s);
                 if(s.contains("ok")){
                     Gson gson = new Gson();
                     Message message = gson.fromJson(s, Message.class);
@@ -166,7 +157,7 @@ public class Denglu extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("username",userName);
+                params.put("username",loginId);
                 params.put("password", password);
                 return params;
             }

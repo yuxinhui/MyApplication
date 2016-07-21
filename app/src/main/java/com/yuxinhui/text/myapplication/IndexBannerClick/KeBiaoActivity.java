@@ -28,7 +28,8 @@ import com.google.gson.Gson;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoPackage.MyHScrollView;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.KeBiaoData;
+import com.yuxinhui.text.myapplication.Bean.KeBiaoData;
+import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
 import java.util.ArrayList;
 
@@ -39,8 +40,7 @@ import java.util.ArrayList;
  * 描述:课程表显示界面
  */
 public class KeBiaoActivity extends Activity{
-    //private String url= YuXinHuiApplication.getUrlBoot()+"course/select_app";
-    private String url="http://114.55.98.142/course/select_app";
+    private String url= YuXinHuiApplication.getUrlBoot()+"course/select_app";
     private ListView mListView1;
     private CurriculumAdapter mCurriculumAdapter;
     private RelativeLayout mHead;
@@ -55,7 +55,7 @@ public class KeBiaoActivity extends Activity{
         setContentView(R.layout.activity_curriculum);
         mHead= (RelativeLayout) findViewById(R.id.head);
         mHead.setFocusable(true);
-        mHead.setBackgroundColor(Color.parseColor("#00ff00"));
+        mHead.setBackgroundColor(Color.parseColor("#8e0e0a"));
         mHead.setClickable(true);
         mHead.setOnTouchListener(new ListViewAndHeadViewTouchLinstener());
 

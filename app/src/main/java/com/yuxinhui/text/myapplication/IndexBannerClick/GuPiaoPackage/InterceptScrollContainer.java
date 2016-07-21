@@ -2,7 +2,6 @@ package com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoPackage;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
@@ -23,7 +22,6 @@ public class InterceptScrollContainer extends LinearLayout{
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.i("gupiao","ScrollContainer onInterceptTouchEvent");
         return true;
     }
 }

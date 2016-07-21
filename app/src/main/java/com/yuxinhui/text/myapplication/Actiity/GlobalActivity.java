@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.yuxinhui.text.myapplication.Bean.GlobalCurrencyData;
 import com.yuxinhui.text.myapplication.R;
-import com.yuxinhui.text.myapplication.Utils.GlobalCurrencyData;
 import com.yuxinhui.text.myapplication.adapter.GlobalAdapter;
 
 import java.util.ArrayList;
@@ -63,16 +62,14 @@ public class GlobalActivity extends Fragment {
                     public void onResponse(String s) {
                         Gson gson=new Gson();
                         ArrayList<GlobalCurrencyData> datas=gson.fromJson(s,new TypeToken<ArrayList<GlobalCurrencyData>>(){}.getType());
-                        mGlobalCurrencyDatas.addAll(datas);
-                        mGlobalAdapter.notifyDataSetChanged();
-                        Log.e("全球外汇","加载成功");
+                        mGlobalAdapter.initList(datas);
                         progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(getActivity(),"失败。。。",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"全球外汇加载失败",Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
                     }
                 }

@@ -23,6 +23,7 @@
                 android:id="@+id/hugu_txt"
                 android:textColor="#ffffff"
                 android:text="沪股"
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -30,6 +31,7 @@
                 android:background="@color/white"
                 android:id="@+id/shengu_txt"
                 android:text="深股"
+                android:textSize="20sp"
                 android:layout_toRightOf="@id/hugu_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
