@@ -11,8 +11,8 @@
             android:src="@mipmap/fanhui"
             android:layout_marginLeft="20dp"
             android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp" />
+            android:layout_width="15dp"
+            android:layout_height="50dp" />
         <TextView
             android:textColor="#fff"
             android:textSize="25sp"

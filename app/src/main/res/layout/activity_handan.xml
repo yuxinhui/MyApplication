@@ -13,8 +13,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:src="@mipmap/fanhui"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp" />
+            android:layout_width="15dp"
+            android:layout_height="50dp" />
         <TextView
             android:id="@+id/huilv_biaoti_img"
             android:layout_centerInParent="true"

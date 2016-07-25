@@ -14,8 +14,8 @@
         >
         <ImageView
             android:id="@+id/msg_setting_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="15dp"
+            android:layout_height="50dp"
             android:src="@mipmap/fanhui"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
