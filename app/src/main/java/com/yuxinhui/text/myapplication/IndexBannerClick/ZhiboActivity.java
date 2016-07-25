@@ -272,6 +272,17 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         player.join(getApplicationContext(),initParam,this);
     }
 
+    @Override
+    protected void onStop() {
+        pausePlay();
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+        resume();
+        super.onRestart();
+    }
 
     @Override
     public void onJoin(int result) {

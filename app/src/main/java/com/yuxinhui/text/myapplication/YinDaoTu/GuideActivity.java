@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.yuxinhui.text.myapplication.MainActivity;
+import com.yuxinhui.text.myapplication.Actiity.SplashActivity;
 import com.yuxinhui.text.myapplication.R;
 
 import java.util.ArrayList;
@@ -79,7 +79,7 @@ public class GuideActivity extends Activity {
             setGuide();
             //跳转
             Intent mIntent=new Intent();
-            mIntent.setClass(GuideActivity.this,MainActivity.class);
+            mIntent.setClass(GuideActivity.this,SplashActivity.class);
             GuideActivity.this.startActivity(mIntent);
             GuideActivity.this.finish();
         }

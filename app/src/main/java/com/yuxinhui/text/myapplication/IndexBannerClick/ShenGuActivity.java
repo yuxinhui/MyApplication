@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.yuxinhui.text.myapplication.Actiity.GupiaoMessage;
 import com.yuxinhui.text.myapplication.IndexBannerClick.GuPiaoPackage.MyHScrollView;
 import com.yuxinhui.text.myapplication.MainActivity;
 import com.yuxinhui.text.myapplication.R;
@@ -69,7 +72,14 @@ public class ShenGuActivity extends AppCompatActivity{
         initData();
         mListView1= (ListView) findViewById(R.id.listView1);
         mListView1.setOnTouchListener(new ListViewAndHeadViewTouchLinstener());
-
+        mListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(ShenGuActivity.this, GupiaoMessage.class);
+                intent.putExtra("Symbol",mBeen.get(position).getSymbol());
+                startActivity(intent);
+            }
+        });
         mGuPiaoAdapter=new GuPiaoAdapter(mBeen,this);
         mListView1.setAdapter(mGuPiaoAdapter);
         initView();
@@ -96,7 +106,14 @@ public class ShenGuActivity extends AppCompatActivity{
             }
         });
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK){
+            ShenGuActivity.this.finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     //获取数据
     private void initData() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);

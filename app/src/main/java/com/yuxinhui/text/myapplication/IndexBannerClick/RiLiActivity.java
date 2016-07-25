@@ -138,8 +138,6 @@ public class RiLiActivity extends Activity {
                 super.onProgressChanged(view, progress);
             }
         });
-        ;
-
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {//捕捉返回键
@@ -150,7 +148,7 @@ public class RiLiActivity extends Activity {
             Intent intent = new Intent(RiLiActivity.this, MainActivity.class);
             startActivity(intent);
             RiLiActivity.this.finish();
-            return false;
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }

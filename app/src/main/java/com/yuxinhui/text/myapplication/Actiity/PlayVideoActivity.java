@@ -81,7 +81,8 @@ public class PlayVideoActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        player.stop();
+        if (isPlaying){
+        player.stop();}
         super.finish();
     }
 }

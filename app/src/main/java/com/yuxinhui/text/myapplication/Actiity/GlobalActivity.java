@@ -53,7 +53,6 @@ public class GlobalActivity extends Fragment {
 
     private void initGlobalData() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        final ProgressDialog progressDialog=ProgressDialog.show(getActivity(),"全球外汇","加载中》》》》》》");
         StringRequest request=new StringRequest(
                 Request.Method.GET,
                 urlGlobal,
@@ -63,14 +62,12 @@ public class GlobalActivity extends Fragment {
                         Gson gson=new Gson();
                         ArrayList<GlobalCurrencyData> datas=gson.fromJson(s,new TypeToken<ArrayList<GlobalCurrencyData>>(){}.getType());
                         mGlobalAdapter.initList(datas);
-                        progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         Toast.makeText(getActivity(),"全球外汇加载失败",Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
                     }
                 }
         );

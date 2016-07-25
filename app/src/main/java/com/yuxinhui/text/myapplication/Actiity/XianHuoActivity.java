@@ -1,6 +1,5 @@
 package com.yuxinhui.text.myapplication.Actiity;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,7 +50,6 @@ public class XianHuoActivity extends Fragment{
     }
     private void initXianHuoJin() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "现货黄金", "加载ing>>>>>>>>");
         StringRequest request = new StringRequest(
                 Request.Method.GET,
                 urlXianHuo,
@@ -62,14 +60,12 @@ public class XianHuoActivity extends Fragment{
                         ArrayList<XianHuoHuangJinData> datas = gson.fromJson(s, new TypeToken<ArrayList<XianHuoHuangJinData>>() {
                         }.getType());
                         mXianHuoHuangJinAdapter.initList(datas);
-                        progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         DialogUtils.createToasdt(getActivity(),"现货黄金加载失败");
-                        progressDialog.dismiss();
                     }
                 }
         );

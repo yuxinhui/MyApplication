@@ -114,16 +114,20 @@ public class ZhuCeXiangQing extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Gson gson = new Gson();
-                message = gson.fromJson(s, Message.class);
-                if(message.getStatus()=="ok"){
-                    YuXinHuiApplication.getInstace().setUser(message.getUser());
-
-                }else {
-                    DialogUtils.createToasdt(ZhuCeXiangQing.this,message.getMessage());
+                try{
+                    Gson gson = new Gson();
+                    message = gson.fromJson(s, Message.class);
+                    if(message.getStatus()=="ok"){
+                        YuXinHuiApplication.getInstace().setUser(message.getUser());
+                    }else {
+                        DialogUtils.createToasdt(ZhuCeXiangQing.this,message.getMessage());
+                    }
+                    Intent intent = new Intent(ZhuCeXiangQing.this, MainActivity.class);
+                    startActivity(intent);
+                }catch (Exception e){
+                    Intent intent = new Intent(ZhuCeXiangQing.this, MainActivity.class);
+                    startActivity(intent);
                 }
-                Intent intent = new Intent(ZhuCeXiangQing.this, MainActivity.class);
-                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override

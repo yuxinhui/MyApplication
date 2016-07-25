@@ -1,6 +1,5 @@
 package com.yuxinhui.text.myapplication.Actiity;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,7 +50,6 @@ public class LonDonActivity extends Fragment {
     }
     private void initLonDonData() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        final ProgressDialog dialog = ProgressDialog.show(getActivity(), "伦敦金属", "加载ing.........");
         StringRequest request = new StringRequest(Request.Method.GET,
                 urlLonDon,
                 new Response.Listener<String>() {
@@ -61,14 +59,12 @@ public class LonDonActivity extends Fragment {
                         ArrayList<LondonJinData> list = gson.fromJson(s, new TypeToken<ArrayList<LondonJinData>>() {
                         }.getType());
                         mLonDonJinAdapter.initList(list);
-                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         DialogUtils.createToasdt(getActivity(),"伦敦金加载失败");
-                        dialog.dismiss();
                     }
                 }
         );

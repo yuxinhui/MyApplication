@@ -1,6 +1,5 @@
 package com.yuxinhui.text.myapplication.Actiity;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,8 +17,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Bean.ComexData;
+import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.adapter.ComexAdapter;
 
 import java.util.ArrayList;
@@ -51,7 +50,6 @@ public class CmoexActivity extends Fragment {
     }
     private void initComexData() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        final ProgressDialog dialog = ProgressDialog.show(getActivity(), "COMEX", "加载ing.........");
         StringRequest request = new StringRequest(Request.Method.GET,
                 urlComex,
                 new Response.Listener<String>() {
@@ -62,14 +60,12 @@ public class CmoexActivity extends Fragment {
                         }.getType());
                         mComexAdapter.initList(list);
                         Log.e("COMEX", "加载成功");
-                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         Log.e("COMEX", "加载失败");
-                        dialog.dismiss();
                     }
                 }
         );

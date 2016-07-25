@@ -75,6 +75,11 @@ public class ShangHaiJinAdapter extends BaseAdapter {
             holder= (viewHodle) convertView.getTag();
         }
         ShangHaiJinData data = getItem(position);
+        /*try {
+            holder.name.setText(new String(data.getName().getBytes("ISO-8859-1"), "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }*/
         holder.name.setText(data.getName());
         holder.newPrice.setText(data.getNewPrice()+"");
         double v = data.getChangePercent() * 100;

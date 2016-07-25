@@ -7,8 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.yuxinhui.text.myapplication.MainActivity;
-import com.yuxinhui.text.myapplication.R;
+import com.yuxinhui.text.myapplication.Actiity.SplashActivity;
 
 /**
  * Created by Administrator on 2016/6/7.
@@ -48,7 +47,7 @@ public class YinDaoTuActivity extends Activity {
             switch (msg.what){
                 case SWITCH_MAINACTIVITY:
                     Intent intent=new Intent();
-                    intent.setClass(YinDaoTuActivity.this,MainActivity.class);
+                    intent.setClass(YinDaoTuActivity.this,SplashActivity.class);
                     YinDaoTuActivity.this.startActivity(intent);
                     YinDaoTuActivity.this.finish();
                     break;

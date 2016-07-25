@@ -51,7 +51,6 @@ public class ShanghaiActivity extends Fragment {
     }
     private void initShangHaiData() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        final ProgressDialog dialog = ProgressDialog.show(getActivity(), "上海金", "加载ing.........");
         StringRequest request = new StringRequest(Request.Method.GET,
                 urlShangHai,
                 new Response.Listener<String>() {
@@ -61,14 +60,12 @@ public class ShanghaiActivity extends Fragment {
                         ArrayList<ShangHaiJinData> list = gson.fromJson(s, new TypeToken<ArrayList<ShangHaiJinData>>() {
                         }.getType());
                         mShangHaiJinAdapter.initList(list);
-                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         DialogUtils.createToasdt(getActivity(),"上海金加载失败");
-                        dialog.dismiss();
                     }
                 }
         );

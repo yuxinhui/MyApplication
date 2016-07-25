@@ -1,6 +1,5 @@
 package com.yuxinhui.text.myapplication.Actiity;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,7 +50,6 @@ public class TianYinActivity extends Fragment {
     }
     private void initTianTongData() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        final ProgressDialog dialog = ProgressDialog.show(getActivity(), "天通银", "加载ing.........");
         StringRequest request = new StringRequest(Request.Method.GET,
                 urlTianTong,
                 new Response.Listener<String>() {
@@ -61,14 +59,12 @@ public class TianYinActivity extends Fragment {
                         ArrayList<TianTongYinData> list = gson.fromJson(s, new TypeToken<ArrayList<TianTongYinData>>() {
                         }.getType());
                         mTianTongYinAdapter.initList(list);
-                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         DialogUtils.createToasdt(getActivity(),"天通银加载失败");
-                        dialog.dismiss();
                     }
                 }
         );
