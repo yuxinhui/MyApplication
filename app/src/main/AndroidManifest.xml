@@ -55,7 +55,8 @@
         <activity android:name=".IndexBannerClick.HuiLvActivity" />
         <activity android:name=".IndexBannerClick.LaoShiActivity" />
         <activity android:name=".IndexBannerClick.ZhiboActivity"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".IndexBannerClick.AboutUsActivity" />
         <activity android:name=".IndexBannerClick.AdviceCommitActivity" />
         <activity android:name=".IndexBannerClick.VersionINfoActivity" />

@@ -14,24 +14,4 @@
 
         </android.support.v4.view.ViewPager>
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/guide_linearlayout2"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:id="@+id/guide_viewgroup"
-                android:layout_alignParentBottom="true"
-                android:gravity="center_horizontal"
-                android:layout_marginBottom="40dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </LinearLayout>
-        </RelativeLayout>
-    </LinearLayout>
 </FrameLayout>

@@ -1,43 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:keepScreenOn="true"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:background="@mipmap/daohang"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/zhibo_return_img"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:src="@mipmap/fanhui"
-            android:layout_width="15dp"
-            android:layout_height="50dp" />
-        <TextView
-            android:id="@+id/zhibo_biaoti_img"
-            android:layout_centerInParent="true"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:text="直播"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp" />
-    </RelativeLayout>
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="220dp"
+        >
         <com.gensee.view.GSVideoView
-            android:layout_width="wrap_content"
-            android:layout_height="250dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/zhibo_video"
             android:layout_gravity="center_horizontal" />
-        <ImageView
-            android:id="@+id/iv_backgroud"
+        <LinearLayout
+            android:id="@+id/layout_back"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/zhibobanner"
-            />
+            android:layout_height="30dp"
+            android:background="#7c000000"
+            android:visibility="visible">
+            <ImageView
+                android:id="@+id/zhibo_back"
+                android:layout_width="20dip"
+                android:layout_height="30dip"
+                android:layout_marginLeft="20dip"
+                android:src="@mipmap/fanhui"
+                />
+        </LinearLayout>
         <ImageView
             android:id="@+id/iv_player"
             android:layout_width="wrap_content"
@@ -45,50 +34,118 @@
             android:src="@mipmap/playicon"
             android:layout_gravity="center"
             />
+        <LinearLayout
+            android:id="@+id/layout_conterl"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:background="#7c000000"
+            >
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="音量"
+                android:gravity="center_vertical"
+                android:textColor="#FFF"
+                />
+            <SeekBar
+                android:id="@+id/sb_audio"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/textView" />
+
+            <ImageView
+                android:id="@+id/tv_fullscreen"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:src="@mipmap/icon_full_screen"
+                />
+        </LinearLayout>
     </FrameLayout>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
         android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="音量"
-            android:gravity="center_vertical"
-            />
-        <SeekBar
-            android:id="@+id/sb_audio"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+        <LinearLayout
             android:layout_weight="1"
-            />
-        <ImageView
-            android:id="@+id/tv_fullscreen"
-            android:layout_width="30dp"
+            android:id="@+id/chat_ll"
+            android:layout_width="0dp"
+            android:gravity="center"
             android:layout_height="30dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center_vertical"
-            android:src="@mipmap/icon_full_screen"
-            />
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/chat_img"
+                android:src="@mipmap/ic_broadcastroom_chat_pressed"
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:layout_height="30dp" />
+            <TextView
+                android:id="@+id/chat_txt"
+                android:text="聊天"
+                android:gravity="center"
+                android:textColor="#ed0a0a"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:id="@+id/intro_ll"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/intro_img"
+                android:src="@mipmap/ic_broadcastroom_intro_default"
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:layout_height="30dp" />
+            <TextView
+                android:id="@+id/intro_txt"
+                android:text="简介"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:id="@+id/video_ll"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/video_img"
+                android:src="@mipmap/ic_broadcastroom_video_default"
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:layout_height="30dp" />
+            <TextView
+                android:id="@+id/video_txt"
+                android:textSize="16sp"
+                android:text="在线人数"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp" />
+        </LinearLayout>
     </LinearLayout>
-    <RelativeLayout
-        android:background="@mipmap/background"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/zhibo_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:src="@mipmap/zhibocontent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/contentZhibo" />
-    </RelativeLayout>
+    </android.support.v4.view.ViewPager>
 </LinearLayout>

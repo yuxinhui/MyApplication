@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Bean.TeachData;
+import com.yuxinhui.text.myapplication.R;
 
 import java.util.ArrayList;
 
@@ -61,7 +61,6 @@ public class TeacherAdapter extends BaseAdapter {
             viewHodle= (ViewHodle) convertView.getTag();
         }
         TeachData.DataBean teachData= getItem(position);
-//        viewHodle.teacher_head.
         viewHodle.teacher_context.setText(teachData.getContent());
         return convertView;
     }

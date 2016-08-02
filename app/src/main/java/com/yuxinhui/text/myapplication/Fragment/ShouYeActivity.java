@@ -154,9 +154,42 @@ public class ShouYeActivity extends Fragment{
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return super.shouldOverrideUrlLoading(view, url);
             }//重写点击动作,用webview载入
+            /*@Override
+            public void onPageFinished(WebView view, String url) {
+                if (url != null && url.contains("http://www.jin10.com/jin10.com.html")) {
+                    String fun = "javascript:function getClass(parent,sClass)\n" +
+                            "        {\n" +
+                            "            var aEle=parent.getElementsByTagName('div');\n" +
+                            "            var aResult=[];\n" +
+                            "            var i=0;\n" +
+                            "            for(i<0;i<aEle.length;i++)\n" +
+                            "            {\n" +
+                            "                if(aEle[i].className==sClass)\n" +
+                            "                {\n" +
+                            "                    aResult.push(aEle[i]);\n" +
+                            "                }\n" +
+                            "            };\n" +
+                            "            return aResult;\n" +
+                            "        }";
+                    view.loadUrl(fun);
+                    String fun1="javascript:function hideOther()\n" +
+                            "{\n"+
+                            "document.getElementById('topbar').style.display='none';\n"+
+                            "getClass(document,'topbar-left')[0].style.display='none';\n"+
+                            "getClass(document,'set01')[0].style.display='none';\n"+
+                            "getClass(document,'set02')[0].style.display='none';\n"+
+                            "getClass(document,'set03')[0].style.display='none';\n"+
+                            "getClass(document,'set04')[0].style.display='none';\n"+
+                            "getClass(document,'topbar-right')[0].style.display='none';\n"+
+                            "document.getElementsByTagName('_blank')[0].style.display='none';\n"+
+                            "}";
+                    view.loadUrl(fun1);
+                    view.loadUrl("javascript:hideOther();");
+                }
+                super.onPageFinished(view, url);
+            }*/
         });
     }
-
     /**导航图片点击*/
     private void imageClick() {
         kaihu_image.setOnClickListener(new View.OnClickListener() {
@@ -239,7 +272,9 @@ public class ShouYeActivity extends Fragment{
                 QQBean qqBean = gson.fromJson(s, QQBean.class);
                 if(qqBean.getStatus().equals("ok")){
                     isGetQQ=true;
-                    qq = qqBean.getData().getQq();;
+                    qq = qqBean.getData().getQq();
+                    String url1 = "mqqwpa://im/chat?chat_type=wpa&uin="+qq;
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url1)));
                 }
                 DialogUtils.createToasdt(getActivity(),"获取"+qqBean.getMessage());
             }
@@ -250,21 +285,8 @@ public class ShouYeActivity extends Fragment{
             }
         });
         queue.add(request);
-        if(isGetQQ){
-            startQQ();
-        }
     }
 
-    public void startQQ(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String url1 = "mqqwpa://im/chat?chat_type=wpa&uin="+qq;
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url1)));
-            }
-        }).run();
-
-    }
 
     /**实例化图片控件*/
     private void initImage(View view) {

@@ -79,9 +79,6 @@ public class RiLiActivity extends Activity {
                 loadurl(view, url);//载入网页
                 return true;
             }//重写点击动作,用webview载入
-
-
-
             @Override
             public void onPageFinished(WebView view, String url) {
                 if (url != null && url.contains("http://m.jin10.com/rili")) {

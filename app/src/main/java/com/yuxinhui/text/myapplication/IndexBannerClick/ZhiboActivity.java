@@ -1,15 +1,24 @@
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gensee.common.ServiceType;
@@ -19,13 +28,21 @@ import com.gensee.net.AbsRtAction;
 import com.gensee.player.OnPlayListener;
 import com.gensee.player.Player;
 import com.gensee.view.GSVideoView;
-import com.yuxinhui.text.myapplication.MainActivity;
+import com.yuxinhui.text.myapplication.Fragment.zhibo.ZhiboChat;
+import com.yuxinhui.text.myapplication.Fragment.zhibo.ZhiboJianjie;
+import com.yuxinhui.text.myapplication.Fragment.zhibo.ZhiboVideo;
 import com.yuxinhui.text.myapplication.R;
+import com.yuxinhui.text.myapplication.Utils.ExampleClient;
+import com.yuxinhui.text.myapplication.YuXinHuiApplication;
+
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 /**直播视频的activity
  * Created by Administrator on 2016/5/31.
  */
-public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
+public class ZhiboActivity extends FragmentActivity implements OnPlayListener,View.OnClickListener{
 
     private final static int SCREEN_LAND = 0;
     private final static int SCREEN_PORT = 1;
@@ -33,37 +50,66 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     private GSVideoView mGSzhibo,mGSzhiboLand;//视频插件
     Player player = new Player();
     InitParam initParam = new InitParam();
-    ImageView mIvbackgroud,mIvplayer,mContentZhibo,mIvretrun,mivPlayLand;
-    boolean isPlayed = false;
-    ImageView mtvFullScreen,mivNormalScreen;
+    ImageView mIvplayer,mivPlayLand;
+    boolean isPlayed;
+    ImageView mtvFullScreen,mivNormalScreen,mivfinish;
+    View mLayoutBack;
+    View mLayoutConterl;
     SeekBar msbAudio,msbAudioLand;
     AudioManager am ;
     int streamVolume;
     int streamMaxVolume;
+    ExampleClient client;
+    boolean isShowLayout;
+    //直播下面的控件
+    private ImageButton chat_img,jianjie_img,video_img;
+    private TextView chat_txt,jianjie_txt,video_txt;
+    private ViewPager zhibo_viewpager;
+    private ZhiboVPAdapter zhiboVPAdapter;
+    private List<Fragment> mFragments;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_zhibo);
+        client = new ExampleClient(URI.create(YuXinHuiApplication.URL_BOOT1+"ws?id=" + YuXinHuiApplication.getInstace().getUser().getId()), this);
         am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         streamVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);//获取系统当前的媒体音量
         streamMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         screen_direction=SCREEN_PORT;
         initView();
+        initClickListener();
         setOnClick();
+        initVariable();
+        initplayer();
+        client.connect();
+        isPlayed=true;
+        isShowLayout = true;
+    }
+
+    private void initVariable() {
+        mFragments=new ArrayList<Fragment>();
+        mFragments.add(new ZhiboChat());
+        mFragments.add(new ZhiboJianjie());
+        mFragments.add(new ZhiboVideo());
+        zhiboVPAdapter=new ZhiboVPAdapter(getSupportFragmentManager(),mFragments);
+        zhibo_viewpager.setAdapter(zhiboVPAdapter);
     }
 
     //实例化控件
     private void initView() {
-        mIvbackgroud = (ImageView) findViewById(R.id.iv_backgroud);
+        mivfinish = (ImageView) findViewById(R.id.zhibo_back);
+        mLayoutConterl = findViewById(R.id.layout_conterl);
+        mLayoutBack = findViewById(R.id.layout_back);
         mGSzhibo = (GSVideoView)findViewById(R.id.zhibo_video);
-        mContentZhibo = (ImageView) findViewById(R.id.contentZhibo);
-        mIvretrun = (ImageView) findViewById(R.id.zhibo_return_img);
         mtvFullScreen = (ImageView) findViewById(R.id.tv_fullscreen);
         msbAudio = (SeekBar) findViewById(R.id.sb_audio);
         msbAudio.setMax(streamMaxVolume);
         msbAudio.setProgress(streamVolume);
         mIvplayer = (ImageView) findViewById(R.id.iv_player);
+        mIvplayer.setVisibility(View.GONE);
         player.setGSVideoView(mGSzhibo);
         initParam.setDomain("yxhcorp.gensee.com");
         initParam.setNumber("19367734");
@@ -73,8 +119,17 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
         initParam.setServiceType(ServiceType.WEBCAST);
         initParam.setLoginPwd("");
         initParam.setLoginAccount("");
+        //播放下面的控件
+        chat_img= (ImageButton) findViewById(R.id.chat_img);
+        jianjie_img= (ImageButton) findViewById(R.id.intro_img);
+        video_img= (ImageButton) findViewById(R.id.video_img);
+        chat_txt= (TextView) findViewById(R.id.chat_txt);
+        jianjie_txt= (TextView) findViewById(R.id.intro_txt);
+        video_txt= (TextView) findViewById(R.id.video_txt);
+        zhibo_viewpager= (ViewPager) findViewById(R.id.zhibo_vp);
+        //滑动监听
+        zhibo_viewpager.addOnPageChangeListener(new ZhiboOnPageChangeListener());
     }
-
     //结束这个activity
     private void finishactivity(){
         this.finish();
@@ -90,10 +145,11 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
             screen_direction = SCREEN_LAND;
             initLandView();
             setLandOnClick();
+            isShowLayout = true;
             if(isPlayed){
                 player.leave();
                 player.setGSVideoView(mGSzhiboLand);
-                initplayer(initParam);
+                initplayer();
                 mivPlayLand.setVisibility(View.GONE);
             }
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -101,37 +157,45 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             screen_direction = SCREEN_PORT;
             initView();
+            zhibo_viewpager.addOnPageChangeListener(new ZhiboOnPageChangeListener());
+            initClickListener();
+            zhiboVPAdapter=new ZhiboVPAdapter(getSupportFragmentManager(),mFragments);
+            zhibo_viewpager.setAdapter(zhiboVPAdapter);
             setOnClick();
+            isShowLayout = true;
             if(isPlayed){
-                mIvbackgroud.setVisibility(View.GONE);
                 mIvplayer.setVisibility(View.GONE);
                 player.leave();
                 player.setGSVideoView(mGSzhibo);
-                initplayer(initParam);
+                initplayer();
             }
         }
     }
-
-
     //设置横屏时的监听事件
     private void setLandOnClick() {
+        mivfinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ZhiboActivity.this.finish();
+            }
+        });
         mivPlayLand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initplayer(initParam);
+                initplayer();
             }
         });
         mGSzhiboLand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isPlayed){
-                    player.leave();
-                    mivPlayLand.setVisibility(View.VISIBLE);
+                if (isShowLayout) {
+                    mLayoutConterl.setVisibility(View.GONE);
+                    mLayoutBack.setVisibility(View.GONE);
                 }else {
-                    initplayer(initParam);
-                    mivPlayLand.setVisibility(View.GONE);
+                    mLayoutBack.setVisibility(View.VISIBLE);
+                    mLayoutConterl.setVisibility(View.VISIBLE);
                 }
-                isPlayed = !isPlayed;
+                isShowLayout = !isShowLayout;
             }
         });
         msbAudioLand.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -160,6 +224,9 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
 
     //初始化橫屏控件
     private void initLandView() {
+        mivfinish = (ImageView) findViewById(R.id.iv_finish_land);
+        mLayoutBack = findViewById(R.id.layoou_back_land);
+        mLayoutConterl = findViewById(R.id.layout_control_land);
         mGSzhiboLand = (GSVideoView) findViewById(R.id.zhibo_video_land);
         msbAudioLand = (SeekBar) findViewById(R.id.sb_audio_land);
         msbAudioLand.setMax(streamMaxVolume);
@@ -180,35 +247,31 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
 
     //设置每个控件的监听事件
     public void setOnClick(){
-        mIvretrun.setOnClickListener(new View.OnClickListener() {
+        mivfinish.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(ZhiboActivity.this, MainActivity.class);
-                startActivity(intent);
-                finishactivity();
+            public void onClick(View view) {
+                ZhiboActivity.this.finish();
             }
         });
         mIvplayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIvbackgroud.setVisibility(View.GONE);
                 mIvplayer.setVisibility(View.GONE);
                 isPlayed = true;
-                initplayer(initParam);
+                initplayer();
             }
         });
         mGSzhibo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isPlayed){
-                    mIvplayer.setVisibility(View.VISIBLE);
-                    pausePlay();
-                }else{
-                    mIvbackgroud.setVisibility(View.GONE);
-                    mIvplayer.setVisibility(View.GONE);
-                    resume();
+                if (isShowLayout) {
+                    mLayoutConterl.setVisibility(View.GONE);
+                    mLayoutBack.setVisibility(View.GONE);
+                }else {
+                    mLayoutBack.setVisibility(View.VISIBLE);
+                    mLayoutConterl.setVisibility(View.VISIBLE);
                 }
-                isPlayed = !isPlayed;
+                isShowLayout = !isShowLayout;
             }
         });
         msbAudio.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -234,6 +297,8 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
                 playbyFullscreen();
             }
         });
+        //聊天监听
+
     }
 
     //全屏播放的方法
@@ -268,22 +333,64 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     }
 
     //初始化播放器（开始播放）
-    private void initplayer(final InitParam initParam) {
+    private void initplayer() {
         player.join(getApplicationContext(),initParam,this);
     }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
 
+                break;
+            case MotionEvent.ACTION_MOVE:
+                WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+                int width = wm.getDefaultDisplay().getWidth();
+                int height = wm.getDefaultDisplay().getHeight();
+                float rawX = ev.getRawX();
+                float rawY = ev.getRawY();
+                float x = ev.getX();
+                float y = ev.getY();
+                if(rawX<width/2){
+                    if(rawY<y){
+                        streamVolume++;
+                        changeAudio(streamVolume);
+                    }else {
+                        streamVolume--;
+                        changeAudio(streamVolume);
+                    }
+                }else {
+                    if(rawY<y){
+
+                    }else {
+
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+
+                break;
+            case MotionEvent.ACTION_SCROLL:
+
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+    //停止播放
     @Override
     protected void onStop() {
-        pausePlay();
+        if (isPlayed) {
+            pausePlay();
+        }
         super.onStop();
     }
-
+    //重新开始
     @Override
     protected void onRestart() {
-        resume();
+        if (isPlayed) {
+            resume();
+        }
         super.onRestart();
     }
-
     @Override
     public void onJoin(int result) {
         String msg = null;
@@ -315,34 +422,27 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
                 break;
         }
-
     }
-
     @Override
     public void onUserJoin(UserInfo userInfo) {
 
     }
-
     @Override
     public void onUserLeave(UserInfo userInfo) {
 
     }
-
     @Override
     public void onUserUpdate(UserInfo userInfo) {
 
     }
-
     @Override
     public void onRosterTotal(int i) {
 
     }
-
     @Override
     public void onReconnecting() {
         onJoin(JOIN_CONNECTING);
     }
-
     @Override
     public void onLeave(int i) {
         String msg = "";
@@ -376,13 +476,10 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
             });
         }
     }
-
     @Override
     public void onCaching(boolean b) {
 
     }
-
-
     @Override
     public void onErr(int errCode) {
         String msg = null;
@@ -431,7 +528,6 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
             });
         }
     }
-
     @Override
     public void onDocSwitch(int i, String s) {
 
@@ -466,7 +562,6 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     public void onPageSize(int i, int i1, int i2) {
 
     }
-
 
     @Override
     public void onPublicMsg(long l, String s) {
@@ -506,5 +601,109 @@ public class ZhiboActivity extends AppCompatActivity implements OnPlayListener{
     @Override
     public void onMicNotify(int i) {
 
+    }
+    //设置图标点击监听器
+    public void initClickListener(){
+        chat_img.setOnClickListener(this);
+        jianjie_img.setOnClickListener(this);
+        video_img.setOnClickListener(this);
+        chat_txt.setOnClickListener(this);
+        jianjie_txt.setOnClickListener(this);
+        video_txt.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.chat_txt:
+            case R.id.chat_img:
+                setSelect(0);
+                break;
+            case R.id.intro_txt:
+            case R.id.intro_img:
+                setSelect(1);
+                break;
+            case R.id.video_txt:
+            case R.id.video_img:
+                setSelect(2);
+                break;
+        }
+    }
+    //设置将点击的那个图标为亮色,切换内容区域
+    public void setSelect(int i){
+        initTabImage();
+        switch (i){
+            case 0:
+                chat_txt.setTextColor(Color.RED);
+                chat_img.setImageResource(R.mipmap.ic_broadcastroom_chat_pressed);
+                break;
+            case 1:
+                jianjie_txt.setTextColor(Color.RED);
+                jianjie_img.setImageResource(R.mipmap.ic_broadcastroom_intro_pressed);
+                break;
+            case 2:
+                video_txt.setTextColor(Color.RED);
+                video_img.setImageResource(R.mipmap.ic_broadcastroom_video_pressed);
+                break;
+            default:
+                break;
+        }
+        zhibo_viewpager.setCurrentItem(i);
+    }
+    private class ZhiboVPAdapter extends FragmentPagerAdapter{
+        private List<Fragment> fragmentList;
+        public ZhiboVPAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+            super(fm);
+            this.fragmentList = fragmentList;
+        }
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+    }
+    //ViewPager的PageChangeListener(页面改变的监听器)
+    private class ZhiboOnPageChangeListener implements ViewPager.OnPageChangeListener {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+        //滑动时改变图片状态
+        @Override
+        public void onPageSelected(int position) {
+            int currentItem=zhibo_viewpager.getCurrentItem();
+            initTabImage();
+            switch (currentItem){
+                case 0:
+                    chat_txt.setTextColor(Color.RED);
+                    chat_img.setImageResource(R.mipmap.ic_broadcastroom_chat_pressed);
+                    break;
+                case 1:
+                    jianjie_txt.setTextColor(Color.RED);
+                    jianjie_img.setImageResource(R.mipmap.ic_broadcastroom_intro_pressed);
+                    break;
+                case 2:
+                    video_txt.setTextColor(Color.RED);
+                    video_img.setImageResource(R.mipmap.ic_broadcastroom_video_pressed);
+                    break;
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    }
+    //初始的图标状态(滑动和点击事件改变的时候都要初始化)
+    private void initTabImage() {
+        chat_txt.setTextColor(Color.DKGRAY);
+        jianjie_txt.setTextColor(Color.DKGRAY);
+        video_txt.setTextColor(Color.DKGRAY);
+        chat_img.setImageResource(R.mipmap.ic_broadcastroom_chat_default);
+        jianjie_img.setImageResource(R.mipmap.ic_broadcastroom_intro_default);
+        video_img.setImageResource(R.mipmap.ic_broadcastroom_video_default);
     }
 }

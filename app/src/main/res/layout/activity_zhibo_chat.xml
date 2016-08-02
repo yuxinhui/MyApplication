@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/chat_ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListView
+        android:layout_weight="1"
+        android:id="@+id/zhibo_chat_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:id="@+id/send_msg"
+        >
+        <ImageView
+            android:id="@+id/iv_select_emoji"
+            android:src="@mipmap/board_emoji"
+            android:layout_width="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="30dp" />
+        <ImageView
+            android:id="@+id/iv_select_pic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/addphotoimage"
+            android:layout_marginLeft="5dp"
+            />
+        <EditText
+            android:id="@+id/et_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="说些什么吧"
+            />
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:text="发送"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+</LinearLayout>

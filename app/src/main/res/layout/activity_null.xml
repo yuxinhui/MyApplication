@@ -4,12 +4,5 @@
     android:background="#6eecfdfd"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:text="已        经        到        头        了"
-        android:textSize="25dp"
-        android:gravity="center"
-        android:textColor="#fc0f0f"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </LinearLayout>

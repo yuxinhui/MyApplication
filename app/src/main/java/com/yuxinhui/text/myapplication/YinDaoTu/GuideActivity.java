@@ -30,14 +30,12 @@ public class GuideActivity extends Activity {
     private ImageView[] imageViews;
     //包裹滑动图片与小圆点的linearlayout
     private ViewGroup viewPics;
-    private ViewGroup viewPoints;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //将分页显示的view装入数组
         LayoutInflater inflater=getLayoutInflater();
         pagerViews=new ArrayList<View>();
-        pagerViews.add(inflater.inflate(R.layout.yindaotu_pager1,null));
         pagerViews.add(inflater.inflate(R.layout.yindaotu_pager2,null));
         pagerViews.add(inflater.inflate(R.layout.yindaotu_pager3,null));
         pagerViews.add(inflater.inflate(R.layout.yindaotu_pager4,null));
@@ -47,25 +45,7 @@ public class GuideActivity extends Activity {
         //从制定的.xml文件中加载视图
         viewPics= (ViewGroup) inflater.inflate(R.layout.activity_guide, null);
         //实例化小圆点的linearlayout和viewgroup
-        viewPoints= (ViewGroup) viewPics.findViewById(R.id.guide_viewgroup);
         viewPager= (ViewPager) viewPics.findViewById(R.id.guide_pagers);
-        //添加小圆点图片
-        for (int i=0;i<pagerViews.size();i++){
-            imageView=new ImageView(GuideActivity.this);
-            //设置小圆点imageview参数
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(20,20));
-            imageView.setPadding(20,0,20,0);
-            //将小圆点添加到数组中
-            imageViews[i]=imageView;
-            //默认选中的是第一张图片，此时第一个小圆点是选中状态，其他不是
-            if (i==0){
-                imageViews[i].setBackgroundResource(R.mipmap.yindao_quan);
-            }else {
-                imageViews[i].setBackgroundResource(R.mipmap.yindao_quan1);
-            }
-            //将imageviews小圆点添加到视图组
-            viewPoints.addView(imageViews[i]);
-        }
         //显示滑动图片的视图
         setContentView(viewPics);
         //设置viewpager的适配器和监听事件
@@ -115,7 +95,7 @@ public class GuideActivity extends Activity {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             container.addView(pagerViews.get(position));
-            if (position==4){
+            if (position==3){
                 ImageButton btn= (ImageButton) container.findViewById(R.id.guide_close_btn);
                 btn.setOnClickListener(Button_onClickListener);
             }
@@ -156,13 +136,7 @@ public class GuideActivity extends Activity {
 
         @Override
         public void onPageSelected(int position) {
-            for (int i=0;i<imageViews.length;i++){
-                imageViews[position].setBackgroundResource(R.mipmap.yindao_quan);
-                //不是当前选中的page，其小圆点设置为未选中的状态
-                if (i!=position){
-                    imageViews[position].setBackgroundResource(R.mipmap.yindao_quan1);
-                }
-            }
+
         }
 
         @Override

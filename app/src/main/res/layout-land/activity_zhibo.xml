@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:keepScreenOn="true"
     android:layout_height="match_parent">
     <com.gensee.view.GSVideoView
         android:layout_weight="1"
@@ -9,6 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+    <LinearLayout
+        android:id="@+id/layoou_back_land"
+        android:layout_width="match_parent"
+        android:layout_height="30dip"
+        android:background="#7c000000">
+        <ImageView
+            android:id="@+id/iv_finish_land"
+            android:layout_width="20dip"
+            android:layout_height="30dip"
+            android:layout_marginLeft="20dip"
+            android:src="@mipmap/fanhui"
+            />
+    </LinearLayout>
     <ImageView
         android:id="@+id/iv_player_land"
         android:layout_width="wrap_content"
@@ -16,18 +30,19 @@
         android:src="@mipmap/playicon"
         android:layout_gravity="center"
         />
-
     <LinearLayout
+        android:id="@+id/layout_control_land"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFF">
+        android:layout_height="30dip"
+        android:background="#7c000000">
         <TextView
             android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="音量"
             android:gravity="center_vertical"
+            android:textColor="#fff"
             />
         <SeekBar
             android:id="@+id/sb_audio_land"
@@ -47,7 +62,6 @@
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:src="@mipmap/icon_nomal_screen"
-            />
+            android:src="@mipmap/icon_narrow"/>
     </LinearLayout>
 </FrameLayout>
