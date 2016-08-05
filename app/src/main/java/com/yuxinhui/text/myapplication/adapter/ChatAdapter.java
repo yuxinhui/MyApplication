@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.yuxinhui.text.myapplication.Bean.ShowMessaage;
 import com.yuxinhui.text.myapplication.R;
+import com.yuxinhui.text.myapplication.Utils.ChatEmojiParser;
 import com.yuxinhui.text.myapplication.Utils.NetUtil;
 import com.yuxinhui.text.myapplication.Utils.RequestManager;
 import com.yuxinhui.text.myapplication.Utils.ZhiboImgSizeUtil;
@@ -91,7 +92,7 @@ public class ChatAdapter extends BaseAdapter {
         if(message.getType()==ShowMessaage.MESSAGE_TYPE_SEND_IMAGE){
             holder.tvContent.setVisibility(View.GONE);
             holder.netPic.setVisibility(View.VISIBLE);
-            if(message.getContent().contains(YuXinHuiApplication.URL_BOOT1)){
+            if(message.getContent().contains(YuXinHuiApplication.URL_BOOT)){
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -133,15 +134,18 @@ public class ChatAdapter extends BaseAdapter {
             }
             clickToShowBigImage(holder.netPic,message);
         }else {
+            holder.tvContent.setVisibility(View.VISIBLE);
+            holder.tvContent.setTag(message.getContent());
+            String unicode = ChatEmojiParser.getInstance(context).parseEmoji(message.getContent());
+            holder.tvContent.loadData(message.getContent(),unicode,"UTF-8");
             holder.tvContent.loadDataWithBaseURL(null,message.getContent(),"text/html","utf-8",null);
         }
         return view;
     }
-
     class ViewHolder{
         TextView tvUserName,tvTime;
         NetworkImageView ivLevel;
-        WebView tvContent;
+        public WebView tvContent;
         ImageView netPic;
     }
 
@@ -171,10 +175,13 @@ public class ChatAdapter extends BaseAdapter {
     /**
      * 销毁图片文件
      */
-    /*private void destoryBimap() {
-        if (photo != null && !photo.isRecycled()) {
-            photo.recycle();
-            photo = null;
+    private void destoryBimap(Bitmap bit) {
+        if (bit != null && !bit.isRecycled()) {
+            bit.recycle();
+            bit = null;
         }
-    }*/
+    }
+    public void setDataSet(List<ShowMessaage> data) {
+        this.list=data;
+    }
 }

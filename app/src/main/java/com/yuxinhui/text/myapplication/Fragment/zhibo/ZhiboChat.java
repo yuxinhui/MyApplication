@@ -1,5 +1,6 @@
 package com.yuxinhui.text.myapplication.Fragment.zhibo;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,10 +12,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,7 +39,9 @@ import com.yuxinhui.text.myapplication.Bean.User;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.DialogUtils;
 import com.yuxinhui.text.myapplication.Utils.NetUtil;
+import com.yuxinhui.text.myapplication.Utils.ParseEmojiMsgUtil;
 import com.yuxinhui.text.myapplication.Utils.RequestManager;
+import com.yuxinhui.text.myapplication.Utils.SelectFaceHelper;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 import com.yuxinhui.text.myapplication.adapter.ChatAdapter;
 
@@ -59,6 +65,9 @@ public class ZhiboChat extends Fragment {
     private String content;
     private MsgBroadcastReciever mReciever;
 
+    private SelectFaceHelper mFaceHelper;
+    private View addFaceToolView;
+    private boolean isVisbilityFace;
     // 从图库选择图片
     public static final int REQUEST_CODE_LOCAL = 2;
     @Nullable
@@ -89,7 +98,8 @@ public class ZhiboChat extends Fragment {
                     return;
                 }
                 ShowMessaage message = new ShowMessaage();
-                message.setContent(content);
+                String msgStr = ParseEmojiMsgUtil.convertToMsg(medChat.getText(), getActivity());// 这里不要直接用medChat.getText().toString();
+                message.setContent(msgStr);
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss ");
                 Date curdate = new Date(System.currentTimeMillis());
                 String time = format.format(curdate);
@@ -97,11 +107,65 @@ public class ZhiboChat extends Fragment {
                 message.setUsername(YuXinHuiApplication.getInstace().getUser().getNickname());
                 getLevelUrl(YuXinHuiApplication.getInstace().getUser().getId(),message);
                 medChat.setText(null);
-                sendMessage(content);
+                sendMessage(msgStr);
+            }
+        });
+        mivEmoji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null == mFaceHelper) {
+                    mFaceHelper = new SelectFaceHelper(getActivity(), addFaceToolView);
+                    mFaceHelper.setFaceOpreateListener(new SelectFaceHelper.OnFaceOprateListener() {
+                        @Override
+                        public void onFaceSelected(SpannableString spanEmojiStr) {
+                            if (null != spanEmojiStr) {
+                                medChat.append(spanEmojiStr);
+                            }
+                        }
+                        @Override
+                        public void onFaceDeleted() {
+                            int selection = medChat.getSelectionStart();
+                            String text = medChat.getText().toString();
+                            if (selection > 0) {
+                                String text2 = text.substring(selection - 1);
+                                if ("]".equals(text2)) {
+                                    int start = text.lastIndexOf("[");
+                                    int end = selection;
+                                    medChat.getText().delete(start, end);
+                                    return;
+                                }
+                                medChat.getText().delete(selection - 1, selection);
+                            }
+                        }
+                    });
+                }
+                if (isVisbilityFace) {
+                    isVisbilityFace = false;
+                    addFaceToolView.setVisibility(View.GONE);
+                } else {
+                    isVisbilityFace = true;
+                    addFaceToolView.setVisibility(View.VISIBLE);
+                    hideInputManager(getActivity());
+                }
             }
         });
     }
-
+    // 隐藏软键盘
+    public void hideInputManager(Context ct) {
+        try {
+            ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(((Activity) ct)
+                    .getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch (Exception e) {
+            Log.e("TAG", "hideInputManager Catch error,skip it!", e);
+        }
+    }
+    public void onBackPressed() {
+        if (isVisbilityFace) {// 好吧,隐藏表情菜单再退出
+            isVisbilityFace = false;
+            addFaceToolView.setVisibility(View.GONE);
+            return;
+        }
+    }
     private void initView(final View view) {
         listView = (ListView) view.findViewById(R.id.zhibo_chat_lv);
         mivEmoji = (ImageView) view.findViewById(R.id.iv_select_emoji);
@@ -111,6 +175,15 @@ public class ZhiboChat extends Fragment {
         RequestManager.init(getActivity());
         mAdapter=new ChatAdapter(getContext(),getActivity(),mList);
         listView.setAdapter(mAdapter);
+        addFaceToolView = (View) view.findViewById(R.id.add_tool);
+        medChat.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                isVisbilityFace = false;
+                addFaceToolView.setVisibility(View.GONE);
+                return false;
+            }
+        });
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -166,7 +239,7 @@ public class ZhiboChat extends Fragment {
     //往服务器发送文字信息
     private void sendMessage(String msg) {
         User user = YuXinHuiApplication.getInstace().getUser();
-        String url = YuXinHuiApplication.URL_BOOT1+"msg/app_toReview?sid="+user.getId()+"&sname="+user.getNickname()+"&stype="+user.getType()+"&content="+msg+"&gid="+ user.getGid()+"&checked=0";
+        String url = YuXinHuiApplication.URL_BOOT +"msg/app_toReview?sid="+user.getId()+"&sname="+user.getNickname()+"&stype="+user.getType()+"&content="+msg+"&gid="+ user.getGid()+"&checked=0";
         Log.e("TAG", url);
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -191,7 +264,7 @@ public class ZhiboChat extends Fragment {
             showMessage.setUsername(chatMessage.getSname());
             showMessage.setContent(chatMessage.getContent());
             showMessage.setTime(chatMessage.getTime());
-            if (chatMessage.getContent().contains(YuXinHuiApplication.URL_BOOT1)){
+            if (chatMessage.getContent().contains(YuXinHuiApplication.URL_BOOT)){
                 showMessage.setType(ShowMessaage.MESSAGE_TYPE_SEND_IMAGE);
             }
             getLevelUrl(chatMessage.getSid(),showMessage);
@@ -199,7 +272,7 @@ public class ZhiboChat extends Fragment {
     }
     //获取用户等级
     public void getLevelUrl(String sid,final ShowMessaage message){
-        String url = YuXinHuiApplication.URL_BOOT1+"app_dispLevel?id="+sid;
+        String url = YuXinHuiApplication.URL_BOOT+"app_dispLevel?id="+sid;
         Log.e("level", url);
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -207,7 +280,7 @@ public class ZhiboChat extends Fragment {
             public void onResponse(String s) {
                 Gson g = new Gson();
                 LevelMessage levelMessage = g.fromJson(s, LevelMessage.class);
-                message.setLevelUrl(levelMessage.getData());
+                message.setLevelUrl(YuXinHuiApplication.URL_BOOT +levelMessage.getData());
                 mList.add(message);
                 mAdapter.notifyDataSetChanged();
             }

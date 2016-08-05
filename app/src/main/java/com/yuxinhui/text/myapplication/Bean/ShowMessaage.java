@@ -8,12 +8,13 @@ public class ShowMessaage {
     String levelUrl;
     String username;
     String time;
-    String content;
+    public String content;
 
     public static final int MESSAGE_TYPE_SEND_IMAGE = 3;
+    public static final int MESSAGE_TYPE_SEND_EMOJI = 4;
     public static final int MESSAGE_TYPE_COUNT = 6;
     private int type;
-
+    private boolean isSend;
     public ShowMessaage() {
     }
 
@@ -61,6 +62,14 @@ public class ShowMessaage {
         this.type = type;
     }
 
+    public boolean isSend() {
+        return isSend;
+    }
+
+    public void setSend(boolean send) {
+        isSend = send;
+    }
+
     @Override
     public String toString() {
         return "ShowMessaage{" +
@@ -69,9 +78,5 @@ public class ShowMessaage {
                 ", time='" + time + '\'' +
                 ", content='" + content + '\'' +
                 '}';
-    }
-    //获取txt类型的消息对象
-    public static ShowMessaage createImageMessage(int type, String imagePath) {
-        return new ShowMessaage(type, imagePath);
     }
 }

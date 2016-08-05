@@ -77,7 +77,7 @@ public class ShouYeActivity extends Fragment{
         imageClick();
         initView(view);
 
-        imageIds=new int[]{R.mipmap.banner,R.mipmap.banner02,R.mipmap.banner03};
+        imageIds=new int[]{R.mipmap.banner, R.mipmap.banner02, R.mipmap.banner03};
         main_ll_dots= (LinearLayout) view.findViewById(R.id.main_ll_dots);
         initDot();
         main_vp= (ViewPager) view.findViewById(R.id.main_vp);

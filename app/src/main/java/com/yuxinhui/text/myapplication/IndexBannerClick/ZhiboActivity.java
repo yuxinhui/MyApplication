@@ -13,7 +13,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -33,6 +32,7 @@ import com.yuxinhui.text.myapplication.Fragment.zhibo.ZhiboJianjie;
 import com.yuxinhui.text.myapplication.Fragment.zhibo.ZhiboVideo;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.ExampleClient;
+import com.yuxinhui.text.myapplication.Utils.NetUtil;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
 
 import java.net.URI;
@@ -71,10 +71,10 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_zhibo);
-        client = new ExampleClient(URI.create(YuXinHuiApplication.URL_BOOT1+"ws?id=" + YuXinHuiApplication.getInstace().getUser().getId()), this);
+        client = new ExampleClient(URI.create(YuXinHuiApplication.URL_BOOT +"ws?id=" + YuXinHuiApplication.getInstace().getUser().getId()), this);
         am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         streamVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);//获取系统当前的媒体音量
         streamMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -83,10 +83,33 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
         initClickListener();
         setOnClick();
         initVariable();
-        initplayer();
+        //initplayer();
         client.connect();
-        isPlayed=true;
+        //isPlayed=true;
         isShowLayout = true;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String k = NetUtil.getK();
+                initInitParam(k);
+                initplayer();
+                isPlayed=true;
+            }
+        }).start();
+    }
+
+    private void initInitParam(String k) {
+        initParam.setDomain("longding999.gensee.com");
+        /*initParam.setNumber("19367734");*/
+        initParam.setNumber("05719166");
+        /*initParam.setLiveId("dd020436921d43a79dcf6965415179f8");*/
+        initParam.setLiveId("7578c6014df74874aff1ef2951a0839d");
+        initParam.setJoinPwd("");
+        initParam.setNickName("android");
+        initParam.setServiceType(ServiceType.WEBCAST);
+        initParam.setLoginPwd("");
+        initParam.setLoginAccount("");
+        initParam.setK(k);
     }
 
     private void initVariable() {
@@ -111,14 +134,7 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
         mIvplayer = (ImageView) findViewById(R.id.iv_player);
         mIvplayer.setVisibility(View.GONE);
         player.setGSVideoView(mGSzhibo);
-        initParam.setDomain("yxhcorp.gensee.com");
-        initParam.setNumber("19367734");
-        initParam.setLiveId("dd020436921d43a79dcf6965415179f8");
-        initParam.setJoinPwd("");
-        initParam.setNickName("android");
-        initParam.setServiceType(ServiceType.WEBCAST);
-        initParam.setLoginPwd("");
-        initParam.setLoginAccount("");
+
         //播放下面的控件
         chat_img= (ImageButton) findViewById(R.id.chat_img);
         jianjie_img= (ImageButton) findViewById(R.id.intro_img);
@@ -140,6 +156,7 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             this.setContentView(R.layout.activity_zhibo);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             screen_direction = SCREEN_LAND;
@@ -153,6 +170,7 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
                 mivPlayLand.setVisibility(View.GONE);
             }
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             this.setContentView(R.layout.activity_zhibo);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             screen_direction = SCREEN_PORT;

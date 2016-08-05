@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <drawable name="transparent_background">#00000000</drawable>
     <color name="colorPrimary">#f9030b</color>
     <color name="colorPrimaryDark">#f9030b</color>
     <color name="colorAccent">#FF4081</color>

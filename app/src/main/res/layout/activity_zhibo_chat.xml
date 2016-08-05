@@ -46,4 +46,12 @@
             android:textSize="18sp"
             />
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <include
+                android:id="@+id/add_tool"
+                layout="@layout/send_msg_tool"
+                android:visibility="gone"/>
+    </RelativeLayout>
 </LinearLayout>

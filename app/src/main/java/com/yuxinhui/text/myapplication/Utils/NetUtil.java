@@ -20,7 +20,9 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,7 +47,7 @@ public final class NetUtil{
 	public static boolean uploadAvatar(Context context,String fileurl) throws Exception {
 		HttpClient client = new DefaultHttpClient();
 		User user = YuXinHuiApplication.getInstace().getUser();
-		String url=YuXinHuiApplication.URL_BOOT1+"msg/app_upPic?sid=" + user.getId() + "&sname=" + user.getNickname() + "&stype=" + user.getType() + "&gid=" + user.getGid() + "&checked=0";
+		String url=YuXinHuiApplication.URL_BOOT +"msg/app_upPic?sid=" + user.getId() + "&sname=" + user.getNickname() + "&stype=" + user.getType() + "&gid=" + user.getGid() + "&checked=0";
 		Log.e("haha",url);
 		HttpPost post = new HttpPost(url);
 		try {
@@ -110,7 +112,7 @@ public final class NetUtil{
 		try
 		{
 			User user = YuXinHuiApplication.getInstace().getUser();
-			String actionUrl = YuXinHuiApplication.URL_BOOT1+"msg/app_upPic?sid=" + user.getId() + "&sname=" + user.getNickname() + "&stype=" + user.getType() + "&gid=" + user.getGid() + "&checked=0";
+			String actionUrl = YuXinHuiApplication.URL_BOOT +"msg/app_upPic?sid=" + user.getId() + "&sname=" + user.getNickname() + "&stype=" + user.getType() + "&gid=" + user.getGid() + "&checked=0";
 			URL url =new URL(actionUrl);
 			HttpURLConnection con=(HttpURLConnection)url.openConnection();
           /* 允许Input、Output，不使用Cache */
@@ -250,5 +252,28 @@ public final class NetUtil{
 			e.printStackTrace();
 		}
 		return res;
+	}
+	public static String  getK() {
+		String K = null;
+		try {
+			HttpClient client = new DefaultHttpClient();
+			HttpGet get = new HttpGet("http://apiktoken.longding999.com/api/KToken");
+			HttpResponse response = client.execute(get);
+			HttpEntity entity = response.getEntity();
+			InputStream content = entity.getContent();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			int ch = 0;
+			byte[] buffer = new byte[1024*8];
+			while ((ch=content.read(buffer))!= -1){
+				baos.write(buffer,0,ch);
+			}
+			baos.flush();
+			K = baos.toString(HTTP.UTF_8);
+			Log.e("XML", K);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.e("Exception",e.toString());
+		}
+		return K;
 	}
 }
