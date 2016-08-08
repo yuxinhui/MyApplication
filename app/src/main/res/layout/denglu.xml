@@ -94,6 +94,7 @@
             android:id="@+id/wangjiMM_text"
             android:layout_marginLeft="55dp"
             android:text="忘记密码"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView

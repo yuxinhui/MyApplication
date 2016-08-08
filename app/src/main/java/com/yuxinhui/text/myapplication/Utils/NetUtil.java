@@ -268,7 +268,8 @@ public final class NetUtil{
 				baos.write(buffer,0,ch);
 			}
 			baos.flush();
-			K = baos.toString(HTTP.UTF_8);
+			String s = baos.toString(HTTP.UTF_8);
+			K=s.substring(1,s.length()-1);
 			Log.e("XML", K);
 		} catch (Exception e) {
 			e.printStackTrace();

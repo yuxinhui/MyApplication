@@ -1,21 +1,29 @@
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.AudioManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +39,7 @@ import com.yuxinhui.text.myapplication.Fragment.zhibo.ZhiboChat;
 import com.yuxinhui.text.myapplication.Fragment.zhibo.ZhiboJianjie;
 import com.yuxinhui.text.myapplication.Fragment.zhibo.ZhiboVideo;
 import com.yuxinhui.text.myapplication.R;
+import com.yuxinhui.text.myapplication.Utils.DialogUtils;
 import com.yuxinhui.text.myapplication.Utils.ExampleClient;
 import com.yuxinhui.text.myapplication.Utils.NetUtil;
 import com.yuxinhui.text.myapplication.YuXinHuiApplication;
@@ -39,85 +48,126 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-/**直播视频的activity
+/**
+ * 直播视频的activity
  * Created by Administrator on 2016/5/31.
  */
-public class ZhiboActivity extends FragmentActivity implements OnPlayListener,View.OnClickListener{
+public class ZhiboActivity extends FragmentActivity implements OnPlayListener, View.OnClickListener {
 
     private final static int SCREEN_LAND = 0;
     private final static int SCREEN_PORT = 1;
     private int screen_direction;
-    private GSVideoView mGSzhibo,mGSzhiboLand;//视频插件
+    private GSVideoView mGSzhibo, mGSzhiboLand;//视频插件
     Player player = new Player();
     InitParam initParam = new InitParam();
-    ImageView mIvplayer,mivPlayLand;
+    ImageView mIvplayer, mivPlayLand;
     boolean isPlayed;
-    ImageView mtvFullScreen,mivNormalScreen,mivfinish;
+    ImageView mtvFullScreen, mivNormalScreen, mivfinish;
     View mLayoutBack;
     View mLayoutConterl;
-    SeekBar msbAudio,msbAudioLand;
-    AudioManager am ;
+    SeekBar msbAudio, msbAudioLand;
+    AudioManager am;
     int streamVolume;
     int streamMaxVolume;
     ExampleClient client;
     boolean isShowLayout;
     //直播下面的控件
-    private ImageButton chat_img,jianjie_img,video_img;
-    private TextView chat_txt,jianjie_txt,video_txt;
+    private ImageButton chat_img, jianjie_img, video_img;
+    private TextView chat_txt, jianjie_txt, video_txt;
     private ViewPager zhibo_viewpager;
     private ZhiboVPAdapter zhiboVPAdapter;
     private List<Fragment> mFragments;
+    public static int STOPTAG;
+    public String kk;
+
+    private RelativeLayout loading_rl;
+    private ProgressBar loading_large_img;
+
+    interface HANDlER {
+        int USERINCREASE = 1;
+        int USERDECREASE = 2;
+        int USERUPDATE = 3;
+        int SUCCESSJOIN = 4;
+        int SUCCESSLEAVE = 5;
+        int CACHING = 6;
+        int CACHING_END = 7;
+        int RECONNECTING = 8;
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Log.e("msg",msg.toString());
+            switch (msg.what) {
+                case HANDlER.USERINCREASE:
+                    break;
+                case HANDlER.USERDECREASE:
+                    break;
+                case HANDlER.USERUPDATE:
+                    break;
+                case HANDlER.SUCCESSJOIN:
+                    loading_rl.setVisibility(View.GONE);
+                    loading_large_img.setVisibility(View.GONE);
+                    break;
+                case HANDlER.SUCCESSLEAVE:
+                    break;
+                case HANDlER.CACHING:
+                    loading_rl.setVisibility(View.VISIBLE);
+                    loading_large_img.setVisibility(View.VISIBLE);
+                    break;
+                case HANDlER.CACHING_END:
+                    break;
+                case HANDlER.RECONNECTING:
+                    break;
+                default:
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_zhibo);
-        client = new ExampleClient(URI.create(YuXinHuiApplication.URL_BOOT +"ws?id=" + YuXinHuiApplication.getInstace().getUser().getId()), this);
+        checkWifi();
+        client = new ExampleClient(URI.create(YuXinHuiApplication.URL_BOOT + "ws?id=" + YuXinHuiApplication.getInstace().getUser().getId()), this);
         am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         streamVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);//获取系统当前的媒体音量
         streamMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        screen_direction=SCREEN_PORT;
+        screen_direction = SCREEN_PORT;
         initView();
         initClickListener();
         setOnClick();
         initVariable();
-        //initplayer();
         client.connect();
-        //isPlayed=true;
         isShowLayout = true;
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String k = NetUtil.getK();
-                initInitParam(k);
+                kk = NetUtil.getK();
+                initParam(kk);
                 initplayer();
-                isPlayed=true;
+                isPlayed = true;
             }
         }).start();
     }
 
-    private void initInitParam(String k) {
+    public void initParam(String s) {
         initParam.setDomain("longding999.gensee.com");
-        /*initParam.setNumber("19367734");*/
         initParam.setNumber("05719166");
-        /*initParam.setLiveId("dd020436921d43a79dcf6965415179f8");*/
-        initParam.setLiveId("7578c6014df74874aff1ef2951a0839d");
-        initParam.setJoinPwd("");
         initParam.setNickName("android");
+        initParam.setK(s);
         initParam.setServiceType(ServiceType.WEBCAST);
-        initParam.setLoginPwd("");
-        initParam.setLoginAccount("");
-        initParam.setK(k);
     }
 
     private void initVariable() {
-        mFragments=new ArrayList<Fragment>();
+        mFragments = new ArrayList<Fragment>();
         mFragments.add(new ZhiboChat());
         mFragments.add(new ZhiboJianjie());
         mFragments.add(new ZhiboVideo());
-        zhiboVPAdapter=new ZhiboVPAdapter(getSupportFragmentManager(),mFragments);
+        zhiboVPAdapter = new ZhiboVPAdapter(getSupportFragmentManager(), mFragments);
         zhibo_viewpager.setAdapter(zhiboVPAdapter);
     }
 
@@ -126,7 +176,7 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
         mivfinish = (ImageView) findViewById(R.id.zhibo_back);
         mLayoutConterl = findViewById(R.id.layout_conterl);
         mLayoutBack = findViewById(R.id.layout_back);
-        mGSzhibo = (GSVideoView)findViewById(R.id.zhibo_video);
+        mGSzhibo = (GSVideoView) findViewById(R.id.zhibo_video);
         mtvFullScreen = (ImageView) findViewById(R.id.tv_fullscreen);
         msbAudio = (SeekBar) findViewById(R.id.sb_audio);
         msbAudio.setMax(streamMaxVolume);
@@ -136,18 +186,23 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
         player.setGSVideoView(mGSzhibo);
 
         //播放下面的控件
-        chat_img= (ImageButton) findViewById(R.id.chat_img);
-        jianjie_img= (ImageButton) findViewById(R.id.intro_img);
-        video_img= (ImageButton) findViewById(R.id.video_img);
-        chat_txt= (TextView) findViewById(R.id.chat_txt);
-        jianjie_txt= (TextView) findViewById(R.id.intro_txt);
-        video_txt= (TextView) findViewById(R.id.video_txt);
-        zhibo_viewpager= (ViewPager) findViewById(R.id.zhibo_vp);
+        chat_img = (ImageButton) findViewById(R.id.chat_img);
+        jianjie_img = (ImageButton) findViewById(R.id.intro_img);
+        video_img = (ImageButton) findViewById(R.id.video_img);
+        chat_txt = (TextView) findViewById(R.id.chat_txt);
+        jianjie_txt = (TextView) findViewById(R.id.intro_txt);
+        video_txt = (TextView) findViewById(R.id.video_txt);
+        zhibo_viewpager = (ViewPager) findViewById(R.id.zhibo_vp);
         //滑动监听
         zhibo_viewpager.addOnPageChangeListener(new ZhiboOnPageChangeListener());
+
+        //刚进去加载布局
+        loading_rl = (RelativeLayout) findViewById(R.id.loading_rl);
+        loading_large_img= (ProgressBar) findViewById(R.id.loading_large_img);
     }
+
     //结束这个activity
-    private void finishactivity(){
+    private void finishactivity() {
         this.finish();
     }
 
@@ -163,7 +218,7 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
             initLandView();
             setLandOnClick();
             isShowLayout = true;
-            if(isPlayed){
+            if (isPlayed) {
                 player.leave();
                 player.setGSVideoView(mGSzhiboLand);
                 initplayer();
@@ -177,11 +232,11 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
             initView();
             zhibo_viewpager.addOnPageChangeListener(new ZhiboOnPageChangeListener());
             initClickListener();
-            zhiboVPAdapter=new ZhiboVPAdapter(getSupportFragmentManager(),mFragments);
+            zhiboVPAdapter = new ZhiboVPAdapter(getSupportFragmentManager(), mFragments);
             zhibo_viewpager.setAdapter(zhiboVPAdapter);
             setOnClick();
             isShowLayout = true;
-            if(isPlayed){
+            if (isPlayed) {
                 mIvplayer.setVisibility(View.GONE);
                 player.leave();
                 player.setGSVideoView(mGSzhibo);
@@ -189,6 +244,7 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
             }
         }
     }
+
     //设置横屏时的监听事件
     private void setLandOnClick() {
         mivfinish.setOnClickListener(new View.OnClickListener() {
@@ -209,7 +265,7 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
                 if (isShowLayout) {
                     mLayoutConterl.setVisibility(View.GONE);
                     mLayoutBack.setVisibility(View.GONE);
-                }else {
+                } else {
                     mLayoutBack.setVisibility(View.VISIBLE);
                     mLayoutConterl.setVisibility(View.VISIBLE);
                 }
@@ -255,16 +311,16 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
 
     @Override
     public void finish() {
-        if(screen_direction==SCREEN_LAND){
+        if (screen_direction == SCREEN_LAND) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }else{
+        } else {
             player.leave();
             super.finish();
         }
     }
 
     //设置每个控件的监听事件
-    public void setOnClick(){
+    public void setOnClick() {
         mivfinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -285,7 +341,7 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
                 if (isShowLayout) {
                     mLayoutConterl.setVisibility(View.GONE);
                     mLayoutBack.setVisibility(View.GONE);
-                }else {
+                } else {
                     mLayoutBack.setVisibility(View.VISIBLE);
                     mLayoutConterl.setVisibility(View.VISIBLE);
                 }
@@ -325,11 +381,11 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
     }
 
     //改变系统音量大小的方法
-    public void changeAudio(final int i){
+    public void changeAudio(final int i) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                am.setStreamVolume(AudioManager.STREAM_MUSIC,i,0);
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0);
             }
         });
 
@@ -346,14 +402,15 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
     //恢复视频播放
     private void resume() {
         if (player != null) {
-            player.join(getApplicationContext(),initParam,this);
+            player.join(getApplicationContext(), initParam, this);
         }
     }
 
     //初始化播放器（开始播放）
     private void initplayer() {
-        player.join(getApplicationContext(),initParam,this);
+        player.join(getApplicationContext(), initParam, this);
     }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
@@ -368,18 +425,18 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
                 float rawY = ev.getRawY();
                 float x = ev.getX();
                 float y = ev.getY();
-                if(rawX<width/2){
-                    if(rawY<y){
+                if (rawX < width / 2) {
+                    if (rawY < y) {
                         streamVolume++;
                         changeAudio(streamVolume);
-                    }else {
+                    } else {
                         streamVolume--;
                         changeAudio(streamVolume);
                     }
-                }else {
-                    if(rawY<y){
+                } else {
+                    if (rawY < y) {
 
-                    }else {
+                    } else {
 
                     }
                 }
@@ -393,14 +450,18 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
         }
         return super.dispatchTouchEvent(ev);
     }
+
     //停止播放
     @Override
     protected void onStop() {
-        if (isPlayed) {
-            pausePlay();
+        if (STOPTAG == ZhiboChat.START_SELECT) {
+            if (isPlayed) {
+                pausePlay();
+            }
         }
         super.onStop();
     }
+
     //重新开始
     @Override
     protected void onRestart() {
@@ -409,12 +470,16 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
         }
         super.onRestart();
     }
+
     @Override
     public void onJoin(int result) {
         String msg = null;
         switch (result) {
             case JOIN_OK:
                 msg = "加入成功";
+                Message message = new Message();
+                message.what = HANDlER.SUCCESSJOIN;
+                mHandler.sendMessage(message);
                 break;
             case JOIN_CONNECTING:
                 msg = "正在加入";
@@ -441,30 +506,38 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
                 break;
         }
     }
+
     @Override
     public void onUserJoin(UserInfo userInfo) {
 
     }
+
     @Override
     public void onUserLeave(UserInfo userInfo) {
 
     }
+
     @Override
     public void onUserUpdate(UserInfo userInfo) {
 
     }
+
     @Override
     public void onRosterTotal(int i) {
 
     }
+
     @Override
     public void onReconnecting() {
-        onJoin(JOIN_CONNECTING);
+        Message message = new Message();
+        message.what = HANDlER.RECONNECTING;
+        mHandler.sendMessage(message);
     }
+
     @Override
     public void onLeave(int i) {
         String msg = "";
-        switch (i){
+        switch (i) {
             case LEAVE_NORMAL:
                 msg = "leave nomal";
                 break;
@@ -484,20 +557,26 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
                 msg = "因为异地登录退出";
                 break;
         }
-        if (msg !=null) {
+        if (msg != null) {
             final String finalMsg = msg;
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(ZhiboActivity.this, finalMsg,Toast.LENGTH_LONG).show();
+                    Toast.makeText(ZhiboActivity.this, finalMsg, Toast.LENGTH_LONG).show();
                 }
             });
         }
     }
+
     @Override
     public void onCaching(boolean b) {
+        Message msg = new Message();
+        msg.what = b ? HANDlER.CACHING
+                : HANDlER.CACHING_END;
+        mHandler.sendMessage(msg);
 
     }
+
     @Override
     public void onErr(int errCode) {
         String msg = null;
@@ -541,11 +620,12 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(ZhiboActivity.this, finalMsg,Toast.LENGTH_LONG).show();
+                    Toast.makeText(ZhiboActivity.this, finalMsg, Toast.LENGTH_LONG).show();
                 }
             });
         }
     }
+
     @Override
     public void onDocSwitch(int i, String s) {
 
@@ -620,8 +700,9 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
     public void onMicNotify(int i) {
 
     }
+
     //设置图标点击监听器
-    public void initClickListener(){
+    public void initClickListener() {
         chat_img.setOnClickListener(this);
         jianjie_img.setOnClickListener(this);
         video_img.setOnClickListener(this);
@@ -629,9 +710,10 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
         jianjie_txt.setOnClickListener(this);
         video_txt.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.chat_txt:
             case R.id.chat_img:
                 setSelect(0);
@@ -646,10 +728,11 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
                 break;
         }
     }
+
     //设置将点击的那个图标为亮色,切换内容区域
-    public void setSelect(int i){
+    public void setSelect(int i) {
         initTabImage();
-        switch (i){
+        switch (i) {
             case 0:
                 chat_txt.setTextColor(Color.RED);
                 chat_img.setImageResource(R.mipmap.ic_broadcastroom_chat_pressed);
@@ -667,12 +750,15 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
         }
         zhibo_viewpager.setCurrentItem(i);
     }
-    private class ZhiboVPAdapter extends FragmentPagerAdapter{
+
+    private class ZhiboVPAdapter extends FragmentPagerAdapter {
         private List<Fragment> fragmentList;
+
         public ZhiboVPAdapter(FragmentManager fm, List<Fragment> fragmentList) {
             super(fm);
             this.fragmentList = fragmentList;
         }
+
         @Override
         public Fragment getItem(int position) {
             return fragmentList.get(position);
@@ -683,18 +769,20 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
             return fragmentList.size();
         }
     }
+
     //ViewPager的PageChangeListener(页面改变的监听器)
     private class ZhiboOnPageChangeListener implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
         }
+
         //滑动时改变图片状态
         @Override
         public void onPageSelected(int position) {
-            int currentItem=zhibo_viewpager.getCurrentItem();
+            int currentItem = zhibo_viewpager.getCurrentItem();
             initTabImage();
-            switch (currentItem){
+            switch (currentItem) {
                 case 0:
                     chat_txt.setTextColor(Color.RED);
                     chat_img.setImageResource(R.mipmap.ic_broadcastroom_chat_pressed);
@@ -715,6 +803,7 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
 
         }
     }
+
     //初始的图标状态(滑动和点击事件改变的时候都要初始化)
     private void initTabImage() {
         chat_txt.setTextColor(Color.DKGRAY);
@@ -723,5 +812,35 @@ public class ZhiboActivity extends FragmentActivity implements OnPlayListener,Vi
         chat_img.setImageResource(R.mipmap.ic_broadcastroom_chat_default);
         jianjie_img.setImageResource(R.mipmap.ic_broadcastroom_intro_default);
         video_img.setImageResource(R.mipmap.ic_broadcastroom_video_default);
+    }
+
+    private boolean checkWifi() {
+        boolean isWifiConnect = true;
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        //[java]view plain copy print ?
+        //check the networkInfos numbers
+        NetworkInfo[] networkInfos = cm.getAllNetworkInfo();
+        for (int i = 0; i < networkInfos.length; i++) {
+            if (networkInfos[i].getState() == NetworkInfo.State.CONNECTED) {
+                if (networkInfos[i].getType() == cm.TYPE_MOBILE) {
+                    DialogUtils.createAlertDialog(this, null, "当前使用非wifi，继续使用将会产生流量\n是否继续", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    isWifiConnect = false;
+                }
+                if (networkInfos[i].getType() == cm.TYPE_WIFI) {
+                    isWifiConnect = true;
+                }
+            }
+        }
+        return isWifiConnect;
     }
 }

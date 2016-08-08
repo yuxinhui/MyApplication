@@ -11,7 +11,7 @@ import java.util.List;
  * Created by "于志渊"
  * 时间:"11:42"
  * 包名:com.yuxinhui.text.myapplication.Utils
- * 描述:
+ * 描述:emoji布局控件viewpager适配器
  */
 public class ChatEmojiViewPagerAdapter extends PagerAdapter {
     private List<View> pageViews;

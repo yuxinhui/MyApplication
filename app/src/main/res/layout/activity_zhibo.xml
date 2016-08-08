@@ -8,6 +8,25 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         >
+        <RelativeLayout
+            android:id="@+id/loading_rl"
+            android:background="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:id="@+id/loading_large_img"
+                style="@style/video_progressbar_style"
+                android:layout_centerInParent="true"
+                android:layout_width="60dp"
+                android:layout_height="60dp" />
+            <TextView
+                android:text="正在加载......"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/loading_large_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
         <com.gensee.view.GSVideoView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -36,6 +36,7 @@ import com.yuxinhui.text.myapplication.Bean.ChatMessage;
 import com.yuxinhui.text.myapplication.Bean.LevelMessage;
 import com.yuxinhui.text.myapplication.Bean.ShowMessaage;
 import com.yuxinhui.text.myapplication.Bean.User;
+import com.yuxinhui.text.myapplication.IndexBannerClick.ZhiboActivity;
 import com.yuxinhui.text.myapplication.R;
 import com.yuxinhui.text.myapplication.Utils.DialogUtils;
 import com.yuxinhui.text.myapplication.Utils.NetUtil;
@@ -70,6 +71,8 @@ public class ZhiboChat extends Fragment {
     private boolean isVisbilityFace;
     // 从图库选择图片
     public static final int REQUEST_CODE_LOCAL = 2;
+
+    public static final int START_SELECT=0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -220,6 +223,7 @@ public class ZhiboChat extends Fragment {
     }
     //从图库获取图片
     public void selectImageFromLocal(){
+        ZhiboActivity.STOPTAG=START_SELECT;
         Intent intent;
         if (Build.VERSION.SDK_INT < 19) {
             intent = new Intent(Intent.ACTION_GET_CONTENT);

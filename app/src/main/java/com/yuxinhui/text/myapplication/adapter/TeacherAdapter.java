@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.yuxinhui.text.myapplication.Bean.TeachData;
 import com.yuxinhui.text.myapplication.R;
+import com.yuxinhui.text.myapplication.Utils.RequestManager;
 
 import java.util.ArrayList;
 
@@ -50,22 +52,28 @@ public class TeacherAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHodle viewHodle;
+        final ViewHodle viewHodle;
         if (convertView==null){
             viewHodle=new ViewHodle();
             LayoutInflater inflater=LayoutInflater.from(mContext);
             convertView=inflater.inflate(R.layout.teacher_item,null);
             viewHodle.teacher_context= (TextView) convertView.findViewById(R.id.teacher_context);
+            viewHodle.teacher_name= (TextView) convertView.findViewById(R.id.teacher_name);
+            viewHodle.teacher_head= (NetworkImageView) convertView.findViewById(R.id.teacher_head);
             convertView.setTag(viewHodle);
         }else {
             viewHodle= (ViewHodle) convertView.getTag();
         }
-        TeachData.DataBean teachData= getItem(position);
+        final TeachData.DataBean teachData= getItem(position);
+        viewHodle.teacher_name.setText(teachData.getAnalystName());
         viewHodle.teacher_context.setText(teachData.getContent());
+        RequestManager.init(mContext);
+        viewHodle.teacher_head.setImageUrl(teachData.getPic(), RequestManager.getImageLoader());
         return convertView;
     }
     /**存放控件*/
     public class ViewHodle{
-        public TextView teacher_context;
+        public TextView teacher_context,teacher_name;
+        NetworkImageView teacher_head;
     }
 }

@@ -61,7 +61,6 @@ public class ExampleClient extends WebSocketClient {
     @Override
     public void onMessage(ByteBuffer bytes) {
         Log.e("Receive:", "数据信息已接收到");
-        DialogUtils.createAlertDialog(context,"接收到服务端信息","是否显示",null);
     }
 
     @Override

@@ -10,14 +10,9 @@ import android.widget.Toast;
  */
 
 public class DialogUtils {
-    public static void createAlertDialog(Context context,String title,String msg,DialogInterface.OnClickListener onClickListener){
+    public static void createAlertDialog(Context context,String title,String msg,DialogInterface.OnClickListener onClickListener,DialogInterface.OnClickListener clickListener){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(title).setMessage(msg).setPositiveButton("确定",onClickListener).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).create().show();
+        builder.setTitle(title).setMessage(msg).setPositiveButton("确定",onClickListener).setNegativeButton("取消", clickListener).create().show();
     }
 
     public static void createToasdt(Context context,String msg){

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.yuxinhui.text.myapplication.Actiity.SplashActivity;
 import com.yuxinhui.text.myapplication.R;
@@ -25,9 +24,6 @@ public class GuideActivity extends Activity {
     private ViewPager viewPager;
     //分页显示的view数组
     private ArrayList<View> pagerViews;
-    private ImageView imageView;
-    //小圆点的图片用数组显示
-    private ImageView[] imageViews;
     //包裹滑动图片与小圆点的linearlayout
     private ViewGroup viewPics;
     @Override
@@ -40,8 +36,7 @@ public class GuideActivity extends Activity {
         pagerViews.add(inflater.inflate(R.layout.yindaotu_pager3,null));
         pagerViews.add(inflater.inflate(R.layout.yindaotu_pager4,null));
         pagerViews.add(inflater.inflate(R.layout.yindaotu_pager5,null));
-        //创建imageview数组，其中的大小是要显示图片的数量
-        imageViews=new ImageView[pagerViews.size()];
+
         //从制定的.xml文件中加载视图
         viewPics= (ViewGroup) inflater.inflate(R.layout.activity_guide, null);
         //实例化小圆点的linearlayout和viewgroup

@@ -56,6 +56,7 @@ public class LaoShiActivity extends AppCompatActivity{
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
+                        Log.e("laoshiurl",url);
                         Gson gson=new Gson();
                         teachData = gson.fromJson(s, TeachData.class);
                         ArrayList<TeachData.DataBean> list = (ArrayList<TeachData.DataBean>) teachData.getData();

@@ -116,7 +116,7 @@ public class Zhuce extends AppCompatActivity {
             public void onClick(View v) {
                 Intent shouye = new Intent(Zhuce.this, MainActivity.class);
                 startActivity(shouye);
-                return;
+                finish();
             }
         });
         zhuce_img.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +136,11 @@ public class Zhuce extends AppCompatActivity {
                 if (TextUtils.isEmpty(password)) {
                     zhuce_mima_text.requestFocus();
                     zhuce_mima_text.setError("密码不能为空");
+                    return;
+                }
+                if (password.length()<6) {
+                    zhuce_mima_text.requestFocus();
+                    zhuce_mima_text.setError("密码不能少于6位");
                     return;
                 }
                 if (metVadateCode.getText().toString().equals("重新获取验证码")) {

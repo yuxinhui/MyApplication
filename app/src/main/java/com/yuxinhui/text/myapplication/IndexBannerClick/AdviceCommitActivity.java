@@ -1,5 +1,6 @@
 package com.yuxinhui.text.myapplication.IndexBannerClick;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,7 +34,12 @@ public class AdviceCommitActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 metAdvice.setText("");
-                DialogUtils.createAlertDialog(AdviceCommitActivity.this,"意见提交","您的建议已经提交",null);
+                DialogUtils.createAlertDialog(AdviceCommitActivity.this, "意见提交", "您的建议已经提交", null, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
             }
         });
     }

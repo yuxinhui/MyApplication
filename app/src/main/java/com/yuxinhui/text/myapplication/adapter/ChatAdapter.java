@@ -133,11 +133,13 @@ public class ChatAdapter extends BaseAdapter {
                 holder.netPic.setImageBitmap(bitmap1);
             }
             clickToShowBigImage(holder.netPic,message);
-        }else {
-            holder.tvContent.setVisibility(View.VISIBLE);
+        }else if (message.getType()==ShowMessaage.MESSAGE_TYPE_SEND_EMOJI) {
+            holder.tvContent.setVisibility(View.GONE);
             holder.tvContent.setTag(message.getContent());
             String unicode = ChatEmojiParser.getInstance(context).parseEmoji(message.getContent());
+            //SpannableString spannableString = ParseEmojiMsgUtil.getExpressionString(context, unicode);
             holder.tvContent.loadData(message.getContent(),unicode,"UTF-8");
+        }else {
             holder.tvContent.loadDataWithBaseURL(null,message.getContent(),"text/html","utf-8",null);
         }
         return view;

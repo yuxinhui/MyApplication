@@ -73,6 +73,7 @@ public class Denglu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Denglu.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         zhuce_text.setOnClickListener(new View.OnClickListener() {
@@ -82,13 +83,13 @@ public class Denglu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        wangjiMM_text.setOnClickListener(new View.OnClickListener() {
+        /*wangjiMM_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 startActivity(intent);
             }
-        });
+        });*/
         denglu_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

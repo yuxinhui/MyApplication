@@ -202,8 +202,13 @@ public class ShouYeActivity extends Fragment{
         zhibo1_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIntent=new Intent(getActivity(), ZhiboActivity.class);
-                getActivity().startActivity(mIntent);
+                if (YuXinHuiApplication.getInstace().isLogin()) {
+                    mIntent=new Intent(getActivity(), ZhiboActivity.class);
+                    getActivity().startActivity(mIntent);
+                }else {
+                    Intent intent = new Intent(getActivity(), Denglu.class);
+                    startActivity(intent);
+                }
             }
         });
         laoshi_image.setOnClickListener(new View.OnClickListener() {
