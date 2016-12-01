@@ -50,6 +50,7 @@
                 android:layout_centerVertical="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:id="@+id/hangqing_image"
                     android:layout_gravity="center_horizontal"
@@ -57,6 +58,7 @@
                     android:layout_height="28dp"
                     android:src="@mipmap/hangqing_u02"
                     android:scaleType="fitXY"/>
+
                 <TextView
                     android:id="@+id/hangqing_txt"
                     android:layout_gravity="center_horizontal"

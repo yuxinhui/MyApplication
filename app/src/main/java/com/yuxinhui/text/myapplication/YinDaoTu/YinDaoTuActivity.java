@@ -18,9 +18,9 @@ public class YinDaoTuActivity extends Activity {
         super.onCreate(savedInstanceState);
         boolean mFirst = isFirstEnter(YinDaoTuActivity.this, YinDaoTuActivity.this.getClass().getName());
         if (mFirst){
-            handler.sendEmptyMessageAtTime(SWITCH_GUIDEACTIVITY,3000);
+            handler.sendEmptyMessageAtTime(SWITCH_GUIDEACTIVITY,2000);
         }else {
-            handler.sendEmptyMessageAtTime(SWITCH_MAINACTIVITY,3000);
+            handler.sendEmptyMessageAtTime(SWITCH_MAINACTIVITY,2000);
         }
     }
     // 判断应用是否初次加载，读取SharedPreferences中的guide_activity字段

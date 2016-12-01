@@ -64,7 +64,7 @@ public class ShouYeActivity extends Fragment{
         @Override
         public void handleMessage(Message msg) {
             main_vp.setCurrentItem(main_vp.getCurrentItem()+1,true);
-            handler.sendEmptyMessageDelayed(0,5000);
+            handler.sendEmptyMessageDelayed(0,3000);
         }
     };
     @Override
@@ -84,7 +84,7 @@ public class ShouYeActivity extends Fragment{
         main_vp.setAdapter(new MyPagerAdapter());
         main_vp.setCurrentItem(imageIds.length*10000);
         updateDescAndDot();
-        handler.sendEmptyMessageDelayed(0,5000);
+        handler.sendEmptyMessageDelayed(0,3000);
         main_vp.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -94,10 +94,10 @@ public class ShouYeActivity extends Fragment{
                         handler.removeCallbacksAndMessages(null);
                         break;
                     case MotionEvent.ACTION_CANCEL:
-                        handler.sendEmptyMessageDelayed(0,5000);
+                        handler.sendEmptyMessageDelayed(0,3000);
                         break;
                     case MotionEvent.ACTION_UP:
-                        handler.sendEmptyMessageDelayed(0,5000);
+                        handler.sendEmptyMessageDelayed(0,3000);
                         break;
                 }
                 return false;
